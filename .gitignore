@@ -24,6 +24,10 @@ target/
 *.iws
 *.iml
 *.ipr
+mvnw
+mvnw.*
+.gitignore
+.mvn
 
 ### NetBeans ###
 nbproject/private/
