@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.LongAdder;
  */
 public class OneDayLimit {
 
-    public LoadingCache<Long, LongAdder> counter =
+    private LoadingCache<Long, LongAdder> counter =
             CacheBuilder.newBuilder().expireAfterWrite(2, TimeUnit.SECONDS)
                     .build(new CacheLoader<Long, LongAdder>() {
                         @Override
@@ -28,14 +28,14 @@ public class OneDayLimit {
                             return new LongAdder();
                         }
                     });
-    public static long permit = 50;
+    private static long permit = 50;
 
     public ResponseEntity getData() throws ExecutionException {
         long currentTime = System.currentTimeMillis() / 1000;
         LongAdder longAdder = counter.get(currentTime);
         longAdder.increment();
         if (longAdder.sum() > permit) {
-            return ResponseEntity.of(new Optional<>("访问速度过快"));
+            return ResponseEntity.of(Optional.of("访问速度过快"));
         }
         // 业务处理
         return ResponseEntity.ok().build();
