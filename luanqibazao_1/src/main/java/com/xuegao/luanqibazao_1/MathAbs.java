@@ -18,7 +18,6 @@ public class MathAbs {
         // 其实是因为最大正数为2147483647，而最小负数为-2147483648，对最小负数加绝对值后，已经超过了最大正正数所表达的范围。
 
         // 可以使用long来处理
-
         System.out.println("Integer.MAX_VALUE = " + Integer.MIN_VALUE);
         // -2147483648
         int abs1 = Math.abs(Integer.MIN_VALUE);
