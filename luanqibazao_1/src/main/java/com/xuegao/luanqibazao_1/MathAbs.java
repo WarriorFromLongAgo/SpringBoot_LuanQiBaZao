@@ -4,7 +4,7 @@ package com.xuegao.luanqibazao_1;
  * <br/> @PackageName：com.xuegao.luanqibazao_1
  * <br/> @ClassName：
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：花名：xuegao
  * <br/> @date：2020/6/15 11:23
  */
 public class MathAbs {
