@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.xuegao</groupId>
-    <artifactId>nio_project</artifactId>
+    <artifactId>nio_client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>nio_project</name>
+    <name>nio_client</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
