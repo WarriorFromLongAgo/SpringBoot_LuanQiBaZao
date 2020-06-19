@@ -31,7 +31,7 @@ public class AudioUtils {
      * @param target 目标存放地址
      */
     public static void amrToMp3(File source, File target) {
-        convert(source, target, "mp3");
+        convert(source, target, "mp3"); 
     }
 
     /**s
