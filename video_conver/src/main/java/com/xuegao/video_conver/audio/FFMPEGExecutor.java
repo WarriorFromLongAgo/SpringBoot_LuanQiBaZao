@@ -32,7 +32,7 @@ import java.util.Arrays;
  *
  * @author Carlo Pelliccia
  */
-class FFMPEGExecutor {
+public class FFMPEGExecutor {
     private static final Logger log = LoggerFactory.getLogger(FFMPEGExecutor.class);
     /**
      * The path of the ffmpeg executable.
@@ -101,7 +101,9 @@ class FFMPEGExecutor {
             cmd[i + 1] = (String) args.get(i);
         }
         Runtime runtime = Runtime.getRuntime();
+        log.info("=====================================");
         log.info("exec cmd: {}", Arrays.toString(cmd));
+        log.info("=====================================");
         ffmpeg = runtime.exec(cmd);
         ffmpegKiller = new ProcessKiller(ffmpeg);
         runtime.addShutdownHook(ffmpegKiller);

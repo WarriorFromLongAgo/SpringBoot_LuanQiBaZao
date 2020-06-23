@@ -69,7 +69,7 @@ public class VideoAttributes implements Serializable {
 	 * 
 	 * @return The codec name for the encoding process.
 	 */
-	String getCodec() {
+	public String getCodec() {
 		return codec;
 	}
 
@@ -95,7 +95,7 @@ public class VideoAttributes implements Serializable {
 	 * 
 	 * @return The the forced tag/fourcc value for the video stream.
 	 */
-	String getTag() {
+	public String getTag() {
 		return tag;
 	}
 
@@ -114,7 +114,7 @@ public class VideoAttributes implements Serializable {
 	 * 
 	 * @return The bitrate value for the encoding process.
 	 */
-	Integer getBitRate() {
+	public Integer getBitRate() {
 		return bitRate;
 	}
 
@@ -134,7 +134,7 @@ public class VideoAttributes implements Serializable {
 	 * 
 	 * @return The frame rate value for the encoding process.
 	 */
-	Integer getFrameRate() {
+	public Integer getFrameRate() {
 		return frameRate;
 	}
 
@@ -154,7 +154,7 @@ public class VideoAttributes implements Serializable {
 	 * 
 	 * @return The video size for the encoding process.
 	 */
-	VideoSize getSize() {
+	public VideoSize getSize() {
 		return size;
 	}
 

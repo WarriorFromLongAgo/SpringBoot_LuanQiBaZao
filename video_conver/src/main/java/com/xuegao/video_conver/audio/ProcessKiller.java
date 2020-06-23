@@ -24,7 +24,7 @@ package com.xuegao.video_conver.audio;
  * 
  * @author Carlo Pelliccia
  */
-class ProcessKiller extends Thread {
+public class ProcessKiller extends Thread {
 
 	/**
 	 * The process to kill.

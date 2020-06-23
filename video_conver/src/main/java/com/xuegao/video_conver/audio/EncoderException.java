@@ -35,7 +35,7 @@ public class EncoderException extends Exception {
 		super(message);
 	}
 
-	EncoderException(Throwable cause) {
+	public EncoderException(Throwable cause) {
 		super(cause);
 	}
 
