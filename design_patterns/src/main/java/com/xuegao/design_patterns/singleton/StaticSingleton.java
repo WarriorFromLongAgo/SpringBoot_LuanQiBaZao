@@ -7,9 +7,14 @@ import java.io.Serializable;
  * <br/> @PackageName：com.xuegao.design_patterns.singleton
  * <br/> @ClassName：StaticSingleton
  * <br/> @Description：静态内部类的单例
+ * <br/> @Description：
+ * <br/> @Description：不会像饿汉式那样，马上加载，只有真正调用getInstance()，才会加载内部类，且加载时是线程安全的
+ * <br/> @Description：兼备了并发高效调用 和 延迟加载的目的
+ * <br/> @Description：
  * <br/> @author：花名：xuegao
  * <br/> @date：2020/6/23 19:28
  */
+@SuppressWarnings("all")
 public class StaticSingleton implements Serializable {
 
     private static final long serialVersionUID = 1384237620961892788L;
@@ -21,7 +26,7 @@ public class StaticSingleton implements Serializable {
     }
 
     private static class SingletonInstance {
-        private static StaticSingleton instance = new StaticSingleton();
+        private static final StaticSingleton instance = new StaticSingleton();
     }
 
     public StaticSingleton getInstance() {
