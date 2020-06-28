@@ -1,6 +1,5 @@
 package com.xuegao.to_mysql.service.impl;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.base.Stopwatch;
 import com.xuegao.to_mysql.dao.IBetchMysqlMapper;
@@ -10,7 +9,6 @@ import com.xuegao.to_mysql.utils.IdUtil;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +30,6 @@ public class BetchMysqlServiceImpl extends ServiceImpl<IBetchMysqlMapper, TUserI
 
     @Autowired
     private SqlSessionFactory sqlSessionFactory;
-
-    @Autowired
-    private SqlSessionTemplate sqlSessionTemplate;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
