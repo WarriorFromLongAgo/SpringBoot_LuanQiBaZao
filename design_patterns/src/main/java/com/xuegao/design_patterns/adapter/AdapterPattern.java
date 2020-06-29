@@ -24,10 +24,9 @@ interface Avi {
     void playAvi();
 }
 
-
-interface Rvmb {
-    void playRvmb();
-}
+// interface Rvmb {
+//     void playRvmb();
+// }
 
 class VideoPlayer implements Mp4 {
 
@@ -36,7 +35,6 @@ class VideoPlayer implements Mp4 {
         System.out.println("播放Mp4格式的视频文件.");
     }
 }
-
 
 class FormatFactory extends VideoPlayer implements Avi {
     @Override

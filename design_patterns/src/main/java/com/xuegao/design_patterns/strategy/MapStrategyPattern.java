@@ -22,6 +22,12 @@ public class MapStrategyPattern {
     @PostConstruct
     public void checkResultDispatcherMuitInit() {
         checkResultDispatcherMuti.put("key_订单1", order -> String.format("对%s执行业务逻辑1", order));
+        checkResultDispatcherMuti.put("key_订单1", new Function<String, String>() {
+            @Override
+            public String apply(String order) {
+                return String.format("对%s执行业务逻辑1", order);
+            }
+        });
         checkResultDispatcherMuti.put("key_订单1_订单2", order -> String.format("对%s执行业务逻辑2", order));
         checkResultDispatcherMuti.put("key_订单1_订单2_订单3", order -> String.format("对%s执行业务逻辑3", order));
     }
