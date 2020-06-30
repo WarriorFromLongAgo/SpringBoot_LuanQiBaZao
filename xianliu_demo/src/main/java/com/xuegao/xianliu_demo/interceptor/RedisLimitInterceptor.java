@@ -1,4 +1,4 @@
-package com.xuegao.xianliu_demo.mvc;
+package com.xuegao.xianliu_demo.interceptor;
 
 import com.xuegao.xianliu_demo.annotation.RedisLimit;
 import com.xuegao.xianliu_demo.utils.IpUtils;
@@ -18,7 +18,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <br/> @PackageName：com.xuegao.xianliu_demo.mvc
+ * <br/> @PackageName：com.xuegao.xianliu_demo.interceptor
  * <br/> @ClassName：
  * <br/> @Description：
  * <br/> @author：花名：xuegao
