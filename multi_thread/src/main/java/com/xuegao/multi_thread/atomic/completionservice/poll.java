@@ -9,6 +9,6 @@ package com.xuegao.multi_thread.atomic.completionservice;
  */
 public class poll {
     public static void main(String[] args) {
-        
+
     }
 }
