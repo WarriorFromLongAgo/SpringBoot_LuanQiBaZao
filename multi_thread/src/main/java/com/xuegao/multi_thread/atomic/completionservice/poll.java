@@ -8,4 +8,7 @@ package com.xuegao.multi_thread.atomic.completionservice;
  * <br/> @date：2020/7/1 10:11
  */
 public class poll {
+    public static void main(String[] args) {
+        
+    }
 }
