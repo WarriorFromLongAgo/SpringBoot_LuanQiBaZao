@@ -19,11 +19,13 @@ target/
 .settings
 .springBeans
 
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+*.jar
 mvnw
 mvnw.*
 .gitignore
