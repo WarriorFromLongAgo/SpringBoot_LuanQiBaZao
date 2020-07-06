@@ -33,7 +33,8 @@ public class WrappedResponse<T> implements Serializable {
     }
 
     public WrappedResponse(String message) {
-        this.message = message;
+        this.code = HttpCode.SUCCESS.getHttpCode();
+        this.message = HttpCode.SUCCESS.getMessage();
     }
 
     public WrappedResponse(String message, T data) {
@@ -79,9 +80,9 @@ public class WrappedResponse<T> implements Serializable {
         return new WrappedResponse<>();
     }
 
-    public static <T> WrappedResponse<T> success(String message) {
-        return new WrappedResponse<>(message);
-    }
+    // public static <T> WrappedResponse<T> success(String message) {
+    //     return new WrappedResponse<>(message);
+    // }
 
     public static <T> WrappedResponse<T> success(T data) {
         return new WrappedResponse<>(data);
