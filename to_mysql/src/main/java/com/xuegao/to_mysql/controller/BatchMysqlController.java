@@ -28,7 +28,6 @@ public class BatchMysqlController {
 
     @RequestMapping(value = "/betch", method = RequestMethod.POST)
     public WrappedResponse<Integer> betchInsertUserInfoController() {
-
         Integer integer = betchMysqlService.betchInsertUserInfoService();
 
         return WrappedResponse.success(integer);
