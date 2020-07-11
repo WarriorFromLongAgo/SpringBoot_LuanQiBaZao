@@ -29,9 +29,9 @@
     </developers>
 
     <groupId>com.xuegao</groupId>
-    <artifactId>video_conver</artifactId>
+    <artifactId>video_office_audio</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>video_conver</name>
+    <name>video_office_audio</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
