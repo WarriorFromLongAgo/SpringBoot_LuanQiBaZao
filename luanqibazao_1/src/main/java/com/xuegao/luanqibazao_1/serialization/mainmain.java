@@ -1,6 +1,6 @@
 package com.xuegao.luanqibazao_1.serialization;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.xuegao.luanqibazao_1.domain.UserInfo;
@@ -11,9 +11,7 @@ import org.springframework.beans.BeanUtils;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.serialization
@@ -24,17 +22,25 @@ import java.util.function.Consumer;
  */
 public class mainmain {
 
-    // UserVo{id='null', name='null', age=null, address='null', sex='null'}
-    // 集合大小参数验证1000000Apache的BeanUtils耗时：427ms
+    // UserInfo{id='327cb8ec-f688-497c-994a-495d60c8a55f', name='327cb8ec-f688-497c-994a-495d60c8a55f', age=0, address='327cb8ec-f688-497c-994a-495d60c8a55f', sex='327cb8ec-f688-497c-994a-495d60c8a55f'}
+    // UserVo{id='327cb8ec-f688-497c-994a-495d60c8a55f', name='327cb8ec-f688-497c-994a-495d60c8a55f', age=0, address='327cb8ec-f688-497c-994a-495d60c8a55f', sex='327cb8ec-f688-497c-994a-495d60c8a55f'}
+    // 集合大小参数验证1000000Apache的BeanUtils耗时：559ms
 
-    // UserVo{id='b5e0ae58-b213-43a4-a95c-ec9aad8c3f24', name='b5e0ae58-b213-43a4-a95c-ec9aad8c3f24', age=0, address='b5e0ae58-b213-43a4-a95c-ec9aad8c3f24', sex='b5e0ae58-b213-43a4-a95c-ec9aad8c3f24'}
-    // 集合大小参数验证1000000Spring的BeanUtils耗时：404ms
+    // UserInfo{id='04782ea5-dbc1-4dfb-a06d-9c474a0e87cf', name='04782ea5-dbc1-4dfb-a06d-9c474a0e87cf', age=0, address='04782ea5-dbc1-4dfb-a06d-9c474a0e87cf', sex='04782ea5-dbc1-4dfb-a06d-9c474a0e87cf'}
+    // UserVo{id='04782ea5-dbc1-4dfb-a06d-9c474a0e87cf', name='04782ea5-dbc1-4dfb-a06d-9c474a0e87cf', age=0, address='04782ea5-dbc1-4dfb-a06d-9c474a0e87cf', sex='04782ea5-dbc1-4dfb-a06d-9c474a0e87cf'}
+    // 集合大小参数验证1000000Spring的BeanUtils耗时：571ms
 
-    // UserVo{id='695b3581-4f92-4a15-9817-462e538a101c', name='695b3581-4f92-4a15-9817-462e538a101c', age=0, address='695b3581-4f92-4a15-9817-462e538a101c', sex='695b3581-4f92-4a15-9817-462e538a101c'}
-    // 集合大小参数验证1000000mapStruct耗时：18ms
+    // UserInfo{id='a653ace2-3c3c-4bc5-ac23-0a19171e9798', name='a653ace2-3c3c-4bc5-ac23-0a19171e9798', age=0, address='a653ace2-3c3c-4bc5-ac23-0a19171e9798', sex='a653ace2-3c3c-4bc5-ac23-0a19171e9798'}
+    // UserVo{id='a653ace2-3c3c-4bc5-ac23-0a19171e9798', name='a653ace2-3c3c-4bc5-ac23-0a19171e9798', age=0, address='a653ace2-3c3c-4bc5-ac23-0a19171e9798', sex='a653ace2-3c3c-4bc5-ac23-0a19171e9798'}
+    // 集合大小参数验证1000000 mapStruct 耗时：90ms
 
-    // UserVo{id='d8b48051-6033-4a64-a32d-54c82eeca1ab', name='d8b48051-6033-4a64-a32d-54c82eeca1ab', age=0, address='d8b48051-6033-4a64-a32d-54c82eeca1ab', sex='d8b48051-6033-4a64-a32d-54c82eeca1ab'}
-    // 集合大小参数验证 1000000 testFastJson 耗时：2962 ms
+    // UserInfo{id='d703eaa5-8b37-4223-a809-3744193ff4c0', name='d703eaa5-8b37-4223-a809-3744193ff4c0', age=0, address='d703eaa5-8b37-4223-a809-3744193ff4c0', sex='d703eaa5-8b37-4223-a809-3744193ff4c0'}
+    // UserVo{id='d703eaa5-8b37-4223-a809-3744193ff4c0', name='d703eaa5-8b37-4223-a809-3744193ff4c0', age=0, address='d703eaa5-8b37-4223-a809-3744193ff4c0', sex='d703eaa5-8b37-4223-a809-3744193ff4c0'}
+    // 集合大小参数验证 1000000 testFastJson 耗时：4350 ms
+
+    // UserInfo{id='bd6f06b2-f5be-47c7-bc9d-544da08bafa6', name='bd6f06b2-f5be-47c7-bc9d-544da08bafa6', age=0, address='bd6f06b2-f5be-47c7-bc9d-544da08bafa6', sex='bd6f06b2-f5be-47c7-bc9d-544da08bafa6'}
+    // UserVo{id='bd6f06b2-f5be-47c7-bc9d-544da08bafa6', name='bd6f06b2-f5be-47c7-bc9d-544da08bafa6', age=0, address='bd6f06b2-f5be-47c7-bc9d-544da08bafa6', sex='bd6f06b2-f5be-47c7-bc9d-544da08bafa6'}
+    // 集合大小参数验证 1000000 testHutool 耗时：3291 ms
 
     public static void main(String[] args) {
         //这里拿100w数据做数据初始化
@@ -47,7 +53,9 @@ public class mainmain {
         // testBeanUtils(userList);
         // testSpringBeanUtils(userList);
         // testMapStruct(userList);
-        testFastJson(userList);
+        // testFastJson(userList);
+        // testHutool(userList);
+        testsout();
     }
 
     /**
@@ -61,7 +69,7 @@ public class mainmain {
         userList.forEach(item -> {
             UserVo userVo = new UserVo();
             try {
-                BeanUtils.copyProperties(userVo, item);
+                BeanUtils.copyProperties(item, userVo);
                 userVos.add(userVo);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -119,6 +127,22 @@ public class mainmain {
         System.out.println(userVos.get(0));
         System.out.println("集合大小参数验证 " + userVos.size() + " testFastJson 耗时：" + (end - start) + " ms");
 
+    }
+
+    public static void testHutool(List<UserInfo> userList) {
+
+        long start = System.currentTimeMillis();
+        List<UserVo> userVos = Convert.convert(new cn.hutool.core.lang.TypeReference<List<UserVo>>() {
+        }, userList);
+
+        long end = System.currentTimeMillis();
+        System.out.println(userVos.get(0));
+        System.out.println("集合大小参数验证 " + userVos.size() + " testHutool 耗时：" + (end - start) + " ms");
+
+    }
+
+    public static void testsout() {
+        System.out.println("-----------------------------------");
     }
 
 }
