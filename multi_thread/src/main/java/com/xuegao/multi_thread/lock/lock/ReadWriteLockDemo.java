@@ -2,7 +2,6 @@ package com.xuegao.multi_thread.lock.lock;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**

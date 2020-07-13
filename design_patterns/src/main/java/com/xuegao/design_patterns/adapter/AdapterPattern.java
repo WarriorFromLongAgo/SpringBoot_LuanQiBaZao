@@ -24,9 +24,9 @@ interface Avi {
     void playAvi();
 }
 
-// interface Rvmb {
-//     void playRvmb();
-// }
+interface Rvmb {
+    void playRvmb();
+}
 
 class VideoPlayer implements Mp4 {
 
