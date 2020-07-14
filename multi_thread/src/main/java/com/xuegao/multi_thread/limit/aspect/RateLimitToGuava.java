@@ -48,6 +48,7 @@ public class RateLimitToGuava {
     public Object around(ProceedingJoinPoint joinPoint) {
         boolean flag = rateLimiter.tryAcquire();
         Object obj = null;
+        System.out.println("0000000000000000000000000000000000000");
         try {
             if (flag) {
                 obj = joinPoint.proceed();
