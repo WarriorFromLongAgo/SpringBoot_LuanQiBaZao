@@ -1,7 +1,5 @@
 package com.xuegao.multi_thread.limit.controller;
 
-import com.xuegao.multi_thread.limit.annotation.RateLimit;
-import com.xuegao.multi_thread.limit.annotation.RedisLimit;
 import com.xuegao.multi_thread.limit.service.GuavaRateLimiterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,14 +22,14 @@ public class LimitController {
     @Autowired
     private GuavaRateLimiterService guavaRateLimiterService;
 
-    @RateLimit
+    // @Rate
     @RequestMapping("/rate_limit")
     public String rateLimit() {
         guavaRateLimiterService.sout();
         return "rateLimit";
     }
 
-    @RedisLimit(limit = 4, sec = 10)
+    // @RedisLimit(limit = 4, sec = 10)
     @RequestMapping("/redis_limit")
     public String redisLimit() {
         return "redisLimit";
