@@ -27,6 +27,7 @@ public class LimitController {
     @RateLimit
     @RequestMapping("/rate_limit")
     public String rateLimit() {
+        guavaRateLimiterService.sout();
         return "rateLimit";
     }
 
