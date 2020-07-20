@@ -1,17 +1,20 @@
 package com.xuegao.to_mysql.constant.comment;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xuegao.to_mysql.constant.enums.HttpCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
+/**
+ * <br/> @PackageName：com.cherrys.schooldemo.constant.common
+ * <br/> @ClassName：WrappedResponse
+ * <br/> @Description：
+ * <br/> @author：cherrys
+ * <br/> @date：2020/7/14 10:58
+ */
 @ApiModel(value = "包装响应")
 public class WrappedResponse<T> implements Serializable {
-
-    @ApiModelProperty(value = "请求是否成功")
-    private Boolean successful;
 
     @ApiModelProperty(value = "状态码")
     private Integer code;
@@ -26,15 +29,13 @@ public class WrappedResponse<T> implements Serializable {
     }
 
     private WrappedResponse(T data) {
-        this.successful = true;
-        this.code = HttpCode.SUCCESS.getHttpCode();
-        this.message = HttpCode.SUCCESS.getMessage();
+        this.code = HttpCode.SUCCESS_200.getHttpCode();
+        this.message = HttpCode.SUCCESS_200.getMessage();
         this.data = data;
     }
 
     public WrappedResponse(String message) {
-        this.code = HttpCode.SUCCESS.getHttpCode();
-        this.message = HttpCode.SUCCESS.getMessage();
+        this.message = message;
     }
 
     public WrappedResponse(String message, T data) {
@@ -54,22 +55,21 @@ public class WrappedResponse<T> implements Serializable {
     }
 
     public WrappedResponse(Boolean successful, Integer code, String message, T data) {
-        this.successful = successful;
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public static WrappedResponse fail() {
-        return fail(HttpCode.SYSTEM_ERROR.getHttpCode(), HttpCode.SYSTEM_ERROR.getMessage(), null);
+    public static <T> WrappedResponse<T> fail() {
+        return fail(HttpCode.SERVER_ERROR.getHttpCode(), HttpCode.SERVER_ERROR.getMessage(), null);
     }
 
     public static <T> WrappedResponse<T> fail(String message) {
-        return new WrappedResponse<>(message);
+        return fail(HttpCode.SERVER_ERROR.getHttpCode(), message, null);
     }
 
-    public static <T> WrappedResponse<T> fail(Integer code, String message) {
-        return new WrappedResponse<>(code, message);
+    public static <T> WrappedResponse<T> fail(T data) {
+        return fail(HttpCode.SERVER_ERROR.getHttpCode(), HttpCode.SERVER_ERROR.getMessage(), data);
     }
 
     public static <T> WrappedResponse<T> fail(Integer code, String message, T data) {
@@ -77,29 +77,19 @@ public class WrappedResponse<T> implements Serializable {
     }
 
     public static <T> WrappedResponse<T> success() {
-        return new WrappedResponse<>();
+        return success(HttpCode.SUCCESS_200.getHttpCode(), HttpCode.SUCCESS_200.getMessage(), null);
     }
 
-    // public static <T> WrappedResponse<T> success(String message) {
-    //     return new WrappedResponse<>(message);
-    // }
+    public static <T> WrappedResponse<T> success(String message) {
+        return success(HttpCode.SUCCESS_200.getHttpCode(), message, null);
+    }
 
     public static <T> WrappedResponse<T> success(T data) {
-        return new WrappedResponse<>(data);
+        return success(HttpCode.SUCCESS_200.getHttpCode(), HttpCode.SUCCESS_200.getMessage(), data);
     }
 
-    @JsonIgnore
-    public boolean isSuccess() {
-//        Integer的 127 和 128 是两个对象，常量和变量
-        return this.code.equals(HttpCode.SUCCESS.getHttpCode());
-    }
-
-    public Boolean getSuccessful() {
-        return successful;
-    }
-
-    public void setSuccessful(Boolean successful) {
-        this.successful = successful;
+    public static <T> WrappedResponse<T> success(Integer code, String message, T data) {
+        return new WrappedResponse<>(code, message, data);
     }
 
     public Integer getCode() {
