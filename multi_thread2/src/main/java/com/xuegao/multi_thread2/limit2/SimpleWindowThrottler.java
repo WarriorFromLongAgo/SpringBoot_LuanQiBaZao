@@ -4,7 +4,7 @@ package com.xuegao.multi_thread2.limit2;
  * <br/> @PackageName：com.xuegao.multi_thread.limit2
  * <br/> @ClassName：SimpleWindowThrottler
  * <br/> @Description：单机流控
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/12 13:22
  */
 public class SimpleWindowThrottler {

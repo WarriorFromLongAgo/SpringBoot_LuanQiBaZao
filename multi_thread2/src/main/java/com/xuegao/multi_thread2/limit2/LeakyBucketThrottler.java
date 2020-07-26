@@ -4,7 +4,7 @@ package com.xuegao.multi_thread2.limit2;
  * <br/> @PackageName：com.xuegao.multi_thread.limit2
  * <br/> @ClassName：LeakyBucketThrottler
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/12 13:25
  */
 public class LeakyBucketThrottler {

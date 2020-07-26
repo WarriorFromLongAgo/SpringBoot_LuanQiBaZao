@@ -4,7 +4,7 @@ package com.xuegao.design_patterns.chain;
  * <br/> @PackageName：com.xuegao.design_patterns.chain
  * <br/> @ClassName：ChainOfResponsibility
  * <br/> @Description：责任链设计模式
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/6/26 18:38
  */
 public class ChainOfResponsibility {

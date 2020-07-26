@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.LongAdder;
  * <br/> @PackageName：com.xuegao.multi_thread.limit2
  * <br/> @ClassName：SimpleWindowThrottler2
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/12 13:23
  */
 public class SimpleWindowThrottler2 {

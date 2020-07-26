@@ -4,7 +4,7 @@ package com.xuegao.design_patterns.template;
  * <br/> @PackageName：com.xuegao.design_patterns.template
  * <br/> @ClassName：TemplateMethod
  * <br/> @Description：模板方法
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/6/26 18:35
  */
 public class TemplateMethod {

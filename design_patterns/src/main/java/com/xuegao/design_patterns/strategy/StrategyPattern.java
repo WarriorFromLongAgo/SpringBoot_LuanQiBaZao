@@ -4,7 +4,7 @@ package com.xuegao.design_patterns.strategy;
  * <br/> @PackageName：com.xuegao.design_patterns.strategy
  * <br/> @ClassName：StrategyPattern
  * <br/> @Description：策略设计模式
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/6/26 17:41
  */
 public class StrategyPattern {

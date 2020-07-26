@@ -13,7 +13,7 @@ import java.util.List;
  * <br/> @PackageName：com.xuegao.video_conver.execl
  * <br/> @ClassName：hutoolExecl
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/11 2:18
  */
 public class hutoolExecl {

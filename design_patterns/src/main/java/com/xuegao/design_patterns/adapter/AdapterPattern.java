@@ -4,7 +4,7 @@ package com.xuegao.design_patterns.adapter;
  * <br/> @PackageName：com.xuegao.design_patterns.adapter
  * <br/> @ClassName：AdapterPattern
  * <br/> @Description：适配器设计模式
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/6/26 18:43
  */
 public class AdapterPattern {
