@@ -6,7 +6,7 @@ import java.util.concurrent.Exchanger;
  * <br/> @PackageName：com.xuegao.multi_thread2.atomic.exchanger
  * <br/> @ClassName：ExchangerTest
  * <br/> @Description：
- * <br/> @author：80004960
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/24 10:58
  */
 public class ExchangerTest {

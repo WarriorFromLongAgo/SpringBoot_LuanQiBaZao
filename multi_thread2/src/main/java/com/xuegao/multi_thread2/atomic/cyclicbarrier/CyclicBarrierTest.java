@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
  * <br/> @PackageName：com.xuegao.multi_thread2.atomic.cyclicbarrier
  * <br/> @ClassName：CyclicBarrierTest
  * <br/> @Description：
- * <br/> @author：80004960
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/24 11:05
  */
 public class CyclicBarrierTest {

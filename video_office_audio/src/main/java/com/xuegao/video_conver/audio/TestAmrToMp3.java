@@ -14,7 +14,7 @@ public class TestAmrToMp3 {
     public static void main(String[] args) {
         // Windows 10
         System.out.println(System.getProperty("os.name"));
-        // C:\Users\80004960\AppData\Local\Temp\
+        // C:\Users\xuegao\AppData\Local\Temp\
         System.out.println(System.getProperty("java.io.tmpdir"));
 
     }
