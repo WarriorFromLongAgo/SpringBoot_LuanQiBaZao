@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import org.apache.poi.hslf.model.*;
 import org.apache.poi.hslf.usermodel.*;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
-import org.openxmlformats.schemas.presentationml.x2006.main.CTPresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,10 +13,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * <br/> @PackageName：com.xuegao.video_conver.ppt

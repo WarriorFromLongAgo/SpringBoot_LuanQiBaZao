@@ -2,7 +2,6 @@ package com.xuegao.video_conver.ppt;
 
 import com.google.common.collect.Lists;
 import org.apache.poi.sl.usermodel.Slide;
-import org.apache.poi.sl.draw.DrawFactory;
 import org.apache.poi.sl.usermodel.Shape;
 import org.apache.poi.hslf.model.HeadersFooters;
 import org.apache.poi.hslf.record.*;
@@ -254,8 +253,8 @@ public class poi3_17 {
             System.out.println("titleMasters = " + titleMasters);
             System.out.println("=======================================");
 
-            HSLFSlideShowImpl slideShowImpl = hslfSlideShow.getSlideShowImpl();
-            System.out.println("slideShowImpl = " + slideShowImpl);
+            // HSLFSlideShowImpl slideShowImpl = hslfSlideShow.getSlideShowImpl();
+            // System.out.println("slideShowImpl = " + slideShowImpl);
             System.out.println("=======================================");
 
             List<HSLFSlideMaster> slideMasters = hslfSlideShow.getSlideMasters();
