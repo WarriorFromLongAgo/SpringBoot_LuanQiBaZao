@@ -36,7 +36,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <poi.version>3.14</poi.version>
+        <poi.version>3.16</poi.version>
     </properties>
 
     <dependencies>
@@ -64,25 +64,30 @@
             <artifactId>hutool-all</artifactId>
             <version>5.3.8</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml-schemas</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>org.apache.poi</groupId>-->
+        <!--    <artifactId>poi-ooxml-schemas</artifactId>-->
+        <!--    <version>${poi.version}</version>-->
+        <!--</dependency>-->
         <!--        execl 相关-->
 
         <!--ppt相关-->
         <dependency>
             <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${poi.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad -->
-        <!--<dependency>-->
-        <!--    <groupId>org.apache.poi</groupId>-->
-        <!--    <artifactId>poi-scratchpad</artifactId>-->
-        <!--    <version>${poi.version}</version>-->
-        <!--</dependency>-->
+         <!--https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
@@ -100,11 +105,6 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>29.0-jre</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-scratchpad</artifactId>
-            <version>3.14</version>
         </dependency>
 
     </dependencies>

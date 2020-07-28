@@ -3,10 +3,7 @@ package com.xuegao.video_conver.ppt;
 import com.google.common.collect.Lists;
 import org.apache.poi.hslf.model.*;
 import org.apache.poi.hslf.usermodel.*;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.openxml4j.opc.PackagePart;
-import org.apache.poi.openxml4j.opc.PackageRelationship;
-import org.apache.poi.xslf.usermodel.*;
+import org.apache.poi.xslf.usermodel.XSLFSlide;
 import org.openxmlformats.schemas.presentationml.x2006.main.CTPresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,26 +31,31 @@ public class PptToImage {
 
     public static void main(String[] args) {
         File pptxFile = new File("d:\\user\\80004960\\桌面\\pptx.pptx");
-        File pptFile = new File("d:\\user\\80004960\\桌面\\ppt.ppt");
-        String newFile = "F:\\file";
+        // File pptFile = new File("d:\\user\\80004960\\桌面\\ppt.ppt");
+        File pptFile = new File("d:\\user\\80004960\\桌面\\MySQL体系结构.ppt");
+        String newFile = "F:\\file\\";
 
         // 文字未出来
         // List<String> strings = pptConvertPng(pptFile, newFile);
         // List<String> strings = pptConvertPng2(pptFile, newFile);
-        // List<String> strings = pptConvertPng4(pptFile, newFile);
+        // List<String> strings = pptConvertPng3(pptFile, newFile);
         pptConvertPng5(pptFile, newFile);
         // strings.parallelStream().forEach(System.out::println);
+        // boolean b = doPPTtoImage(pptFile, newFile);
+
 
         // List<String> strings1 = pptxConvertPng(pptxFile, newFile);
         // strings1.parallelStream().forEach(System.out::println);
     }
 
+
+    // 3.14
     private static void setHSLFTxtFontFamily(HSLFShape shape) {
         HSLFTextShape txtshape = (HSLFTextShape) shape;
         for (HSLFTextParagraph textPara : txtshape.getTextParagraphs()) {
             List<HSLFTextRun> textRunList = textPara.getTextRuns();
             for (HSLFTextRun textRun : textRunList) {
-                textRun.setFontFamily("宋体");
+                textRun.setFontFamily("微软雅黑");
             }
         }
     }
@@ -63,6 +65,7 @@ public class PptToImage {
             new File(filePath).mkdirs();
         }
     }
+
     public static boolean isExists(String filePath) {
         if (new File(filePath).exists()) {
             return true;
@@ -70,12 +73,16 @@ public class PptToImage {
         return false;
     }
 
+
+    // 3.14
+    //
     private static <T> FileOutputStream drawImage(String outputFile, int size, Dimension pgsize,
                                                   XSLFSlide xslfSlide, HSLFSlide hslfSlide) throws FileNotFoundException, IOException {
         FileOutputStream out = null;
         BufferedImage img = new BufferedImage(pgsize.width, pgsize.height, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = img.createGraphics();
         graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width, pgsize.height));
+        graphics.setPaint(Color.white);
         if (null != xslfSlide) {
             xslfSlide.getSlideShow();
             // render
@@ -89,11 +96,17 @@ public class PptToImage {
         // save the output
         mksFile(outputFile);
         out = new FileOutputStream(outputFile + File.separator + size + ".png");
-        javax.imageio.ImageIO.write(img, "png", out);
+        ImageIO.write(img, "png", out);
         return out;
+
+        // ImageIO.write(img, "jpg", outputStream);
+        // ppt.write(outputStream);
+        // System.out.println("Image successfully created");
     }
 
-    private static int pptConvertPng5(File file, String outputFile)  {
+
+    // 3.14
+    private static int pptConvertPng5(File file, String outputFile) {
 
         List<String> newFileList = Lists.newArrayList();
         FileInputStream inputStream = null;
@@ -124,6 +137,7 @@ public class PptToImage {
                     }
                 }
                 outputStream = drawImage(outputFile, i, pageSize, null, slideList.get(i));
+                hslfSlideShow.write(outputStream);
 
                 HeadersFooters header = slideList.get(i).getHeadersFooters();
                 if (header.isFooterVisible()) {
@@ -142,7 +156,7 @@ public class PptToImage {
             }
 
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return 0;
     }
@@ -229,66 +243,6 @@ public class PptToImage {
     }
 
 
-    // public static List<String> pptConvertPng3(File file, String outputFolder) {
-    //     List<String> newFileList = Lists.newArrayList();
-    //     FileInputStream inputStream = null;
-    //     FileOutputStream outputStream = null;
-    //     HSLFSlideShow SlideShow = null;
-    //
-    //     try {
-    //         inputStream = new FileInputStream(file);
-    //         SlideShow ppt = new SlideShow(new HSLFSlideShow(inputStream));
-    //         Slide[] slideArr = ppt.getSlides();
-    //         Dimension pageSize = ppt.getPageSize();
-    //         inputStream.close();
-    //
-    //         for (int i = 0; i < slideArr.length; i++) {
-    //
-    //             TextRun[] truns = slideArr[i].getTextRuns();
-    //             for (int k = 0; k < truns.length; k++) {
-    //                 RichTextRun[] rtruns = truns[k].getRichTextRuns();
-    //                 for (int l = 0; l < rtruns.length; l++) {
-    //                     rtruns[l].setFontIndex(1);
-    //                     rtruns[l].setFontName("宋体");
-    //                 }
-    //             }
-    //
-    //
-    //             BufferedImage img = new BufferedImage(pageSize.width, pageSize.height, BufferedImage.TYPE_INT_RGB);
-    //             Graphics2D graphics = img.createGraphics();
-    //             // clear the drawing area
-    //             graphics.setPaint(Color.white);
-    //             graphics.fill(new Rectangle2D.Float(0, 0, pageSize.width, pageSize.height));
-    //             // render
-    //             slideArr[i].draw(graphics);
-    //             // save the output
-    //             FileOutputStream out = new FileOutputStream("slide-" + i + ".png");
-    //             ImageIO.write(img, "png", out);
-    //             out.close();
-    //         }
-    //
-    //         // BufferedImage img;
-    //         // for (int i = 0; i < slideArr.length; i++) {
-    //         //     img = new BufferedImage(pageSize.width, pageSize.height, BufferedImage.TYPE_INT_RGB);
-    //         //     Graphics2D graphics = img.createGraphics();
-    //         //     graphics.setPaint(Color.white);
-    //         //     graphics.fill(new Rectangle2D.Float(0, 0, pageSize.width, pageSize.height));
-    //         //     slideArr[i].draw(graphics);
-    //         //     //creating an image file as output
-    //         //     outputStream = new FileOutputStream(i + "ppt_image.jpg");
-    //         //     ImageIO.write(img, "jpg", outputStream);
-    //         //     ppt.write(outputStream);
-    //         //     System.out.println("Image successfully created");
-    //         // }
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-    //
-    //
-    //     return newFileList;
-    // }
-
-
     // public static List<String> pptConvertPng2(File file, String outputFolder) {
     //     // TODO 校验输入文件是否存在 以及是否为PPT
     //     List<String> newFileList = Lists.newArrayList();
@@ -346,51 +300,97 @@ public class PptToImage {
     //     return newFileList;
     // }
 
-    // public static List<String> pptConvertPng(File file, String outputFolder) {
-    //     // TODO 校验输入文件是否存在 以及是否为PPT
-    //     List<String> newFileList = Lists.newArrayList();
-    //     FileInputStream inputStream = null;
-    //     FileOutputStream outputStream = null;
-    //     try {
-    //         inputStream = new FileInputStream(file);
-    //         SlideShow slideShow = new SlideShow(inputStream);
-    //         Slide[] slideArr = slideShow.getSlides();
-    //         Dimension pageSize = slideShow.getPageSize();
-    //         inputStream.close();
-    //
-    //         BufferedImage img;
-    //         for (int i = 0; i < slideArr.length; i++) {
-    //             img = new BufferedImage(pageSize.width, pageSize.height, BufferedImage.TYPE_INT_RGB);
-    //             Graphics2D graphics = img.createGraphics();
-    //             graphics.setPaint(Color.white);
-    //             graphics.fill(new Rectangle2D.Float(0, 0, pageSize.width, pageSize.height));
-    //             slideArr[i].draw(graphics);
-    //             //creating an image file as output
-    //             outputStream = new FileOutputStream(i + "ppt_image.jpg");
-    //             ImageIO.write(img, "jpg", outputStream);
-    //             slideShow.write(outputStream);
-    //             System.out.println("Image successfully created");
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     } finally {
-    //         if (inputStream != null) {
-    //             try {
-    //                 inputStream.close();
-    //             } catch (IOException e) {
-    //                 e.printStackTrace();
-    //             }
-    //         }
-    //         if (outputStream != null) {
-    //             try {
-    //                 outputStream.close();
-    //             } catch (IOException e) {
-    //                 e.printStackTrace();
-    //             }
-    //         }
-    //     }
-    //     return newFileList;
-    // }
+
+//     public static boolean doPPTtoImage(File file, String output) {
+//         try {
+//             FileInputStream is = new FileInputStream(file);
+//             SlideShow ppt = new SlideShow(is);
+//             is.close();
+//             Dimension pgsize = ppt.getPageSize();
+//             org.apache.poi.hslf.model.Slide[] slide = ppt.getSlides();
+//             for (int i = 0; i < slide.length; i++) {
+//                 TextRun[] truns = slide[i].getTextRuns();
+//                 for (int k = 0; k < truns.length; k++) {
+//                     RichTextRun[] rtruns = truns[k].getRichTextRuns();
+//                     for (int l = 0; l < rtruns.length; l++) {
+//                         rtruns[l].setFontIndex(1);
+//                         rtruns[l].setFontName("宋体");
+//                     }
+//                 }
+//                 BufferedImage img = new BufferedImage(pgsize.width, pgsize.height,
+//                         BufferedImage.TYPE_INT_RGB);
+//                 Graphics2D graphics = img.createGraphics();
+//                 graphics.setPaint(Color.BLUE);
+//                 graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width, pgsize.height));
+//                 slide[i].draw(graphics);
+//                 // 这里设置图片的存放路径和图片的格式(jpeg,png,bmp等等),注意生成文件路径
+//                 File path = new File(output);
+//                 if (!path.exists()) {
+//                     path.mkdir();
+//                 }
+//                 // 可测试多种图片格式
+// //                    FileOutputStream out = new FileOutputStream(path + "/" + (i + 1) + ".jpg");
+// //                    javax.imageio.ImageIO.write(img, "jpeg", out);
+//                 FileOutputStream out = new FileOutputStream(path + "/" + (i + 1) + ".jpg");
+//                 javax.imageio.ImageIO.write(img, "png", out);
+//                 out.close();
+//             }
+//             System.out.println("success!!");
+//             return true;
+//         } catch (FileNotFoundException e) {
+//             System.out.println(e);
+//         } catch (IOException e) {
+//
+//         }
+//         return false;
+//     }
+//
+//
+//     public static List<String> pptConvertPng(File file, String outputFolder) {
+//         // TODO 校验输入文件是否存在 以及是否为PPT
+//         List<String> newFileList = Lists.newArrayList();
+//         FileInputStream inputStream = null;
+//         FileOutputStream outputStream = null;
+//         try {
+//             inputStream = new FileInputStream(file);
+//             SlideShow slideShow = new SlideShow(inputStream);
+//             Slide[] slideArr = slideShow.getSlides();
+//             Dimension pageSize = slideShow.getPageSize();
+//             inputStream.close();
+//
+//             BufferedImage img;
+//             for (int i = 0; i < slideArr.length; i++) {
+//                 img = new BufferedImage(pageSize.width, pageSize.height, BufferedImage.TYPE_INT_RGB);
+//                 Graphics2D graphics = img.createGraphics();
+//                 graphics.setPaint(Color.white);
+//                 graphics.fill(new Rectangle2D.Float(0, 0, pageSize.width, pageSize.height));
+//                 slideArr[i].draw(graphics);
+//                 //creating an image file as output
+//                 outputStream = new FileOutputStream(i + "ppt_image.jpg");
+//                 ImageIO.write(img, "jpg", outputStream);
+//                 slideShow.write(outputStream);
+//                 System.out.println("Image successfully created");
+//             }
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//         } finally {
+//             if (inputStream != null) {
+//                 try {
+//                     inputStream.close();
+//                 } catch (IOException e) {
+//                     e.printStackTrace();
+//                 }
+//             }
+//             if (outputStream != null) {
+//                 try {
+//                     outputStream.close();
+//                 } catch (IOException e) {
+//                     e.printStackTrace();
+//                 }
+//             }
+//         }
+//         return newFileList;
+//     }
 
     // public static List<String> pptxConvertPng(File file, String outputFolder) {
     //     // TODO 校验输入文件是否存在 以及是否为PPT
