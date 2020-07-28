@@ -6,7 +6,7 @@ import java.util.Objects;
  * <br/> @PackageName：com.fff.if_else.demo2.test1
  * <br/> @ClassName：TestFactory
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/4/5 17:33
  */
 public class TestFactory {

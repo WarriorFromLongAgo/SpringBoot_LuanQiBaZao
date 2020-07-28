@@ -6,7 +6,7 @@ import java.util.Date;
  * <br/> @PackageName：com.xuegao.video_conver.domain
  * <br/> @ClassName：UserInfo
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/11 2:21
  */
 public class UserInfo {

@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  * <br/> @PackageName：com.fff.springbootapiseedtest.constant.json
  * <br/> @ClassName：LongJsonSerializer
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/4/6 21:48
  */
 public class LongJsonSerializer extends JsonSerializer<Long> {

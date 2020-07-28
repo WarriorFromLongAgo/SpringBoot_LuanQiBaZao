@@ -4,7 +4,7 @@ package com.xuegao.design_patterns.factory;
  * <br/> @PackageName：com.xuegao.design_patterns.factory
  * <br/> @ClassName：AbstractFactory
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/6/26 17:30
  */
 public class FactoryMethod {

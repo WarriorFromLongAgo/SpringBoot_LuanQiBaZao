@@ -4,7 +4,7 @@ package com.xuegao.design_patterns.bridging;
  * <br/> @PackageName：com.xuegao.design_patterns.bridging
  * <br/> @ClassName：BridgingPattern
  * <br/> @Description：桥接设计模式
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/6/26 18:51
  */
 public class BridgingPattern {

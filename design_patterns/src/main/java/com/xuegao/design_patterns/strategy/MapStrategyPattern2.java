@@ -9,7 +9,7 @@ import java.util.function.Function;
  * <br/> @PackageName：com.xuegao.design_patterns.strategy
  * <br/> @ClassName：MapStrategyPattern2
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/6/26 19:17
  */
 public class MapStrategyPattern2 {
