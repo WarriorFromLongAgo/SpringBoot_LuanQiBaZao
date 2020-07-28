@@ -10,7 +10,7 @@ import java.util.function.Supplier;
  * <br/> @PackageName：com.xuegao.multi_thread2.atomic.completablefuture
  * <br/> @ClassName：test2
  * <br/> @Description：
- * <br/> @author：80004960
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/22 19:52
  */
 public class test2 {

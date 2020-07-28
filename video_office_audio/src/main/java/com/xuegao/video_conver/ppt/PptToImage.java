@@ -19,7 +19,7 @@ import java.util.List;
  * <br/> @PackageName：com.xuegao.video_conver.ppt
  * <br/> @ClassName：PptToImage
  * <br/> @Description：
- * <br/> @author：80004960
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/27 17:09
  */
 public class PptToImage {

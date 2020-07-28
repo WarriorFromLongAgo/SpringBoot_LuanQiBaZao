@@ -26,7 +26,7 @@ import java.util.List;
  * <br/> @PackageName：com.xuegao.video_conver.ppt
  * <br/> @ClassName：poi3_17
  * <br/> @Description：
- * <br/> @author：80004960
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/28 11:43
  */
 public class poi3_17 {
