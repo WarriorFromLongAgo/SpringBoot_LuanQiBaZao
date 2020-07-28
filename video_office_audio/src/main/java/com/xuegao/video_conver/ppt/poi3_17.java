@@ -15,6 +15,7 @@ import org.apache.poi.xslf.usermodel.XSLFTextShape;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -53,9 +54,17 @@ public class poi3_17 {
     }
 
     public static ByteArrayOutputStream gainBufferdImageStream(Integer width, Integer height, Slide slide) {
-        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        int imageWidth = (int) Math.ceil(width * 2);
+        int imageHeight = (int) Math.ceil(height * 2);
+        BufferedImage img = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
+
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.setToScale(2, 2);
         Graphics2D graphics = img.createGraphics();
-        DrawFactory.getInstance(graphics).fixFonts(graphics);
+        graphics.setPaint(Color.WHITE);
+        // DrawFactory.getInstance(graphics).fixFonts(graphics);
+        graphics.fill(new Rectangle2D.Float(0, 0, width, height));
+        graphics.setTransform(affineTransform);
         // default rendering options
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
