@@ -20,10 +20,10 @@ import java.util.Map;
  * <br/> @date：2020/7/30 16:18
  */
 public class MapToBean {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
         List<UserInfo> userInfoList = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 10; i < 11; i++) {
             UserInfo userInfo = new UserInfo();
             userInfo.setId(i + "");
             userInfo.setName(i + "");
@@ -33,6 +33,13 @@ public class MapToBean {
             userInfoList.add(userInfo);
         }
         System.out.println(userInfoList.size());
+
+        Map<String, String> map = beanToMap(userInfoList.get(0));
+        map.forEach((key, value) -> System.out.println(key + "===" + value));
+
+        Map<String, String> mapT = beanToMapT(userInfoList.get(0));
+        mapT.forEach((key, value) -> System.out.println(key + "===" + value));
+
         // List<Map<String, String>> mapList = mapKeyset(userInfoList);
         // mapList.get(0).forEach((key, value) -> System.out.println(key + "===" + value));
 
@@ -42,8 +49,8 @@ public class MapToBean {
         // List<Map<String, String>> mapList = apacheBeanUtils2(userInfoList);
         // mapList.get(0).forEach((key, value) -> System.out.println(key + "===" + value));
 
-        List<Map<String, String>> mapList = fastJson(userInfoList);
-        mapList.get(0).forEach((key, value) -> System.out.println(key + "===" + value));
+        // List<Map<String, String>> mapList = fastJson(userInfoList);
+        // mapList.get(0).forEach((key, value) -> System.out.println(key + "===" + value));
     }
 
     // 80-100w ns
@@ -138,5 +145,30 @@ public class MapToBean {
         System.out.println("stopWatch.getLastTaskInfo():" + stopWatch.getLastTaskInfo());
         System.out.println("stopWatch.getTaskCount():" + stopWatch.getTaskCount());
         return mapList;
+    }
+
+    // 反射获取对象 name 和 value，返回map
+    private static Map<String, String> beanToMap(Object object) throws IllegalAccessException {
+        Map<String, String> map = new HashMap<String, String>();
+        Field[] declaredFields = object.getClass().getDeclaredFields();
+        for (Field field : declaredFields) {
+            field.setAccessible(true);
+            map.put(field.getName(), String.valueOf(field.get(object)));
+        }
+        return map;
+    }
+
+    // 反射获取对象 name 和 value，返回map
+    private static <T> Map<String, String> beanToMapT(T t) throws IllegalAccessException {
+        Map<String, String> map = new HashMap<String, String>();
+        Field[] declaredFields = t.getClass().getDeclaredFields();
+        for (Field field : declaredFields) {
+            field.setAccessible(true);
+            if ("serialVersionUID".equals(field.getName())) {
+                continue;
+            }
+            map.put(field.getName(), String.valueOf(field.get(t)));
+        }
+        return map;
     }
 }
