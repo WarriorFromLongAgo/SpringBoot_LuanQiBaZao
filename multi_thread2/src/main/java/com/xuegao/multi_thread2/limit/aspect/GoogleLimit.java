@@ -17,10 +17,9 @@ import java.util.concurrent.atomic.LongAdder;
  * <br/> @author：花名：xuegao
  * <br/> @date：2020/6/15 13:53
  */
-public class OneDayLimit {
+public class GoogleLimit {
 
-    private LoadingCache<Long, LongAdder> counter =
-            CacheBuilder.newBuilder().expireAfterWrite(2, TimeUnit.SECONDS)
+    private static LoadingCache<Long, LongAdder> counter = CacheBuilder.newBuilder().expireAfterWrite(2, TimeUnit.SECONDS)
                     .build(new CacheLoader<Long, LongAdder>() {
                         @Override
                         public LongAdder load(Long aLong) {
