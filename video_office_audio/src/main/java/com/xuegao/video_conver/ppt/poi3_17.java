@@ -39,7 +39,7 @@ public class poi3_17 {
         pptConvertPng5(pptFile, newFile);
     }
 
-    public static void checkTargetAddress(String targetAddress) {
+    public static void checkTargetAddress(String targetAddress) throws IOException {
         if (!targetAddress.endsWith(File.separator)) {
             targetAddress = targetAddress + File.separator;
         }
