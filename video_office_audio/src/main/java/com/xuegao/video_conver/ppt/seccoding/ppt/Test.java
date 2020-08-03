@@ -7,7 +7,7 @@ public class Test {
     public static void main(String[] args) {
         Converter converter = new Converter("F:\\file\\");
         Converter.Result result = converter.convert(
-                new File("d:\\user\\80004960\\桌面\\MySQL体系结构.ppt"), "Output Path Dir", "png"
+                new File("d:\\user\\xuegao\\桌面\\MySQL体系结构.ppt"), "Output Path Dir", "png"
         );
 
         System.out.println(result.getFileName());
