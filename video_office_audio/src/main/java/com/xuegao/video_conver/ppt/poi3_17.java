@@ -36,10 +36,14 @@ public class poi3_17 {
         File pptFile = new File("d:\\user\\80004960\\桌面\\MySQL体系结构.ppt");
         String newFile = "F:\\file\\";
         // pptConvertPng3(pptFile, newFile);
-        pptConvertPng5(pptFile, newFile);
+        long l = System.currentTimeMillis();
+        // pptConvertPng5(pptFile, newFile);
+        pptConvertPng33(pptFile, newFile);
+        long l1 = System.currentTimeMillis();
+        System.out.println("总共 = " + (l1 - l));
     }
 
-    public static void checkTargetAddress(String targetAddress) throws IOException {
+    public static void checkTargetAddress(String targetAddress) {
         if (!targetAddress.endsWith(File.separator)) {
             targetAddress = targetAddress + File.separator;
         }
@@ -53,23 +57,26 @@ public class poi3_17 {
     }
 
     public static ByteArrayOutputStream gainBufferdImageStream(Integer width, Integer height, Slide slide) {
-        int imageWidth = (int) Math.ceil(width * 2);
-        int imageHeight = (int) Math.ceil(height * 2);
+        // int imageWidth = (int) Math.ceil(width * 2);
+        int imageWidth = width;
+        // int imageHeight = (int) Math.ceil(height * 2);
+        int imageHeight = height;
         BufferedImage img = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
 
-        AffineTransform affineTransform = new AffineTransform();
-        affineTransform.setToScale(2, 2);
+        // AffineTransform affineTransform = new AffineTransform();
+        // affineTransform.setToScale(2, 2);
         Graphics2D graphics = img.createGraphics();
         graphics.setPaint(Color.WHITE);
         // DrawFactory.getInstance(graphics).fixFonts(graphics);
         graphics.fill(new Rectangle2D.Float(0, 0, width, height));
-        graphics.setTransform(affineTransform);
+        // graphics.setTransform(affineTransform);
         // default rendering options
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         graphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         graphics.scale(1, 1);
+
 
         // draw stuff
         slide.draw(graphics);
@@ -85,33 +92,31 @@ public class poi3_17 {
         return bs;
     }
 
-    public static void handlePptPageDetail(List<Shape> shapeList) {
-        for (Shape shape : shapeList) {
-            if (shape instanceof XSLFTextShape) {
-                XSLFTextShape txtshape = (XSLFTextShape) shape;
-                for (XSLFTextParagraph textPara : txtshape.getTextParagraphs()) {
-                    List<XSLFTextRun> textRunList = textPara.getTextRuns();
-                    for (XSLFTextRun textRun : textRunList) {
-                        textRun.setFontFamily("宋体");
-                    }
-                }
-            } else if (shape instanceof HSLFTextShape) {
-                HSLFTextShape hslfTextShape = (HSLFTextShape) shape;
-                for (HSLFTextParagraph textParagraph : hslfTextShape.getTextParagraphs()) {
-                    List<HSLFTextRun> textRuns = textParagraph.getTextRuns();
-                    for (HSLFTextRun hslfTextRun : textRuns) {
-                        hslfTextRun.setFontFamily("宋体");
-                    }
-                }
-            }
-        }
-    }
+    // public static void handlePptPageDetail(List<Shape> shapeList) {
+    //     for (Shape shape : shapeList) {
+    //         if (shape instanceof XSLFTextShape) {
+    //             XSLFTextShape txtshape = (XSLFTextShape) shape;
+    //             for (XSLFTextParagraph textPara : txtshape.getTextParagraphs()) {
+    //                 List<XSLFTextRun> textRunList = textPara.getTextRuns();
+    //                 for (XSLFTextRun textRun : textRunList) {
+    //                     textRun.setFontFamily("宋体");
+    //                 }
+    //             }
+    //         } else if (shape instanceof HSLFTextShape) {
+    //             HSLFTextShape hslfTextShape = (HSLFTextShape) shape;
+    //             for (HSLFTextParagraph textParagraph : hslfTextShape.getTextParagraphs()) {
+    //                 List<HSLFTextRun> textRuns = textParagraph.getTextRuns();
+    //                 for (HSLFTextRun hslfTextRun : textRuns) {
+    //                     hslfTextRun.setFontFamily("宋体");
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     // 3.14
     private static int pptConvertPng5(File file, String outputFile) throws IOException {
         checkTargetAddress(file.getAbsolutePath());
-        String pptAddress = file.getAbsolutePath();
-        String pptDetailPair = "PPT";
 
         InputStream inputStream = new FileInputStream(file);
         SlideShow slideShow = new HSLFSlideShow(inputStream);
@@ -119,8 +124,8 @@ public class poi3_17 {
 
         Dimension pageSize = slideShow.getPageSize();
         List<Slide> slideList = slideShow.getSlides();
-
         for (Slide slide : slideList) {
+            long l = System.currentTimeMillis();
             List shapes = slide.getShapes();
             for (int i = 0; i < shapes.size(); i++) {
                 Shape shape = (Shape) shapes.get(i);
@@ -143,13 +148,13 @@ public class poi3_17 {
                 }
             }
 
-            ByteArrayOutputStream byteArrayOutputStream = gainBufferdImageStream(
-                    (int) pageSize.getWidth(),
-                    (int) pageSize.getHeight(),
-                    slide);
+            ByteArrayOutputStream byteArrayOutputStream =
+                    gainBufferdImageStream((int) pageSize.getWidth(), (int) pageSize.getHeight(), slide);
 
             picStreamList.add(byteArrayOutputStream);
+
         }
+
 
         for (ByteArrayOutputStream picStream : picStreamList) {
             BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(picStream.toByteArray()));
@@ -168,8 +173,6 @@ public class poi3_17 {
     public static List<String> pptConvertPng33(File file, String outputFolder) {
         List<String> newFileList = Lists.newArrayList();
         FileInputStream inputStream = null;
-        FileOutputStream outputStream = null;
-        HSLFSlideShow SlideShow = null;
 
         try {
             inputStream = new FileInputStream(file);
@@ -178,17 +181,40 @@ public class poi3_17 {
             List<HSLFSlide> slideList = hslfSlideShow.getSlides();
             inputStream.close();
 
-            int i = 0;
+            int j = 0;
             for (HSLFSlide hslfSlide : slideList) {
+
+                List shapes = hslfSlide.getShapes();
+                for (int i = 0; i < shapes.size(); i++) {
+                    Shape shape = (Shape) shapes.get(i);
+                    if (shape instanceof XSLFTextShape) {
+                        XSLFTextShape txtshape = (XSLFTextShape) shape;
+                        for (XSLFTextParagraph textPara : txtshape.getTextParagraphs()) {
+                            List<XSLFTextRun> textRunList = textPara.getTextRuns();
+                            for (XSLFTextRun textRun : textRunList) {
+                                textRun.setFontFamily("宋体");
+                            }
+                        }
+                    } else if (shape instanceof HSLFTextShape) {
+                        HSLFTextShape hslfTextShape = (HSLFTextShape) shape;
+                        for (HSLFTextParagraph textParagraph : hslfTextShape.getTextParagraphs()) {
+                            List<HSLFTextRun> textRuns = textParagraph.getTextRuns();
+                            for (HSLFTextRun hslfTextRun : textRuns) {
+                                hslfTextRun.setFontFamily("宋体");
+                            }
+                        }
+                    }
+                }
+
                 BufferedImage img = new BufferedImage(pageSize.width, pageSize.height, BufferedImage.TYPE_INT_RGB);
                 Graphics2D graphics = img.createGraphics();
                 graphics.setPaint(Color.white);
                 graphics.fill(new Rectangle2D.Float(0, 0, pageSize.width, pageSize.height));
                 hslfSlide.draw(graphics);
-                FileOutputStream out = new FileOutputStream("slide-3.17-" + i + ".png");
+                FileOutputStream out = new FileOutputStream("slide-3.17-" + j + ".png");
                 ImageIO.write(img, "png", out);
+
                 out.close();
-                i++;
             }
         } catch (IOException e) {
             e.printStackTrace();

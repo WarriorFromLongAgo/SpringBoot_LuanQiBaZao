@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * <br/> @PackageName：com.xuegao.multi_thread.lock.lock
  * <br/> @ClassName：ReadWriteLockDemo
- * <br/> @Description：
+ * <br/> @Description：读线程完全是并行的，写会阻塞读
  * <br/> @author：花名：xuegao
  * <br/> @date：2020/7/10 12:49
  */
@@ -19,8 +19,6 @@ public class ReadWriteLockDemo {
             new Thread(() -> {
                 mycache.put("hresh" + index);
             }, String.valueOf(i)).start();
-        }
-        for (int i = 0; i < 5; i++) {
             new Thread(() -> {
                 mycache.get();
             }, String.valueOf(i)).start();

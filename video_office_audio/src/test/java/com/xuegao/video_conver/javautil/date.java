@@ -31,7 +31,7 @@ public class date {
     public static void before() {
         Date date1 = new Date(2020, 1, 1, 10, 10, 10);
         Date date2 = new Date(2020, 2, 1, 10, 10, 10);
-        System.out.println(" 2020-1-1 after 2020-2-1 ");
+        System.out.println(" 2020-1-1 before 2020-2-1 ");
         if (date1.before(date2)) {
             System.out.println(" date1.before(date2) = " + true);
         } else {

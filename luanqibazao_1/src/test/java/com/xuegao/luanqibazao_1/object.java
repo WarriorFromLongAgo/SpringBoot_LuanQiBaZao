@@ -1,6 +1,5 @@
 package com.xuegao.luanqibazao_1;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -25,5 +24,11 @@ public class object {
         boolean contains = COURSES_STATUS_LIST.contains(b);
         System.out.println(contains);
 
+        String sq = "11";
+        String sq2 = "11";
+        if (!sq.equals(sq2) || !(true)) {
+            throw new RuntimeException("aksjdkasjd0");
+        }
+        System.out.println("yiqiezhengc");
     }
 }

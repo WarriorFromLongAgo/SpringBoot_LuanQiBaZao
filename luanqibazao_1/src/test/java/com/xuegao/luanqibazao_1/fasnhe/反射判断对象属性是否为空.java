@@ -2,7 +2,6 @@ package com.xuegao.luanqibazao_1.fasnhe;
 
 import com.xuegao.luanqibazao_1.domain.UserInfo;
 
-import java.lang.reflect.Field;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.fasnhe

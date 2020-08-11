@@ -3,7 +3,7 @@ package com.xuegao.video_conver.ppt;
 import com.google.common.collect.Lists;
 import org.apache.poi.hslf.model.*;
 import org.apache.poi.hslf.usermodel.*;
-import org.apache.poi.xslf.usermodel.XSLFSlide;
+import org.apache.poi.xslf.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,8 @@ public class PptToImage {
     private static final Logger log = LoggerFactory.getLogger(PptToImage.class);
 
     public static void main(String[] args) {
-        File pptxFile = new File("d:\\user\\80004960\\桌面\\pptx.pptx");
+        // File pptxFile = new File("d:\\user\\80004960\\桌面\\pptx.pptx");
+        File pptxFile = new File("d:\\user\\80004960\\桌面\\Flink入门.pptx");
         // File pptFile = new File("d:\\user\\80004960\\桌面\\ppt.ppt");
         File pptFile = new File("d:\\user\\80004960\\桌面\\MySQL体系结构.ppt");
         String newFile = "F:\\file\\";
@@ -35,12 +36,22 @@ public class PptToImage {
         // List<String> strings = pptConvertPng(pptFile, newFile);
         // List<String> strings = pptConvertPng2(pptFile, newFile);
         // List<String> strings = pptConvertPng3(pptFile, newFile);
-        pptConvertPng5(pptFile, newFile);
+        // pptConvertPng5(pptFile, newFile);
         // strings.parallelStream().forEach(System.out::println);
         // boolean b = doPPTtoImage(pptFile, newFile);
+        //
+        long l = System.currentTimeMillis();
+        List<String> strings1 = pptxConvertPng(pptxFile, newFile);
+        long l1 = System.currentTimeMillis();
+        System.out.println("总共 = " + (l1 - l));
+        strings1.parallelStream().forEach(System.out::println);
 
-
-        // List<String> strings1 = pptxConvertPng(pptxFile, newFile);
+        // File newFileFile = new File(newFile);
+        // List<String> strings1 = new ArrayList<>();
+        // long l = System.currentTimeMillis();
+        // boolean b = doPPT2007toImage(pptxFile, newFileFile, strings1);
+        // long l1 = System.currentTimeMillis();
+        // System.out.println("总共 = " + (l1 - l));
         // strings1.parallelStream().forEach(System.out::println);
     }
 
@@ -388,54 +399,55 @@ public class PptToImage {
 //         return newFileList;
 //     }
 
-    // public static List<String> pptxConvertPng(File file, String outputFolder) {
-    //     // TODO 校验输入文件是否存在 以及是否为PPT
-    //     List<String> newFileList = Lists.newArrayList();
-    //     FileInputStream inputStream = null;
-    //     FileOutputStream outputStream = null;
-    //     try {
-    //         File outPut = createDirIfNotExist(outputFolder);
-    //
-    //         inputStream = new FileInputStream(file);
-    //         XMLSlideShow pptx = new XMLSlideShow(inputStream);
-    //         Dimension pageSize = pptx.getPageSize();
-    //         XSLFSlide[] slideArr = pptx.getSlides();
-    //
-    //         inputStream.close();
-    //
-    //         BufferedImage img;
-    //         for (int i = 0; i < slideArr.length; i++) {
-    //             img = new BufferedImage(pageSize.width, pageSize.height, BufferedImage.TYPE_INT_RGB);
-    //             Graphics2D graphics = img.createGraphics();
-    //             graphics.setPaint(Color.white);
-    //             graphics.fill(new Rectangle2D.Float(0, 0, pageSize.width, pageSize.height));
-    //             slideArr[i].draw(graphics);
-    //             //creating an image file as output
-    //             outputStream = new FileOutputStream(i + "pptx_image.jpg");
-    //             ImageIO.write(img, "jpg", outputStream);
-    //             pptx.write(outputStream);
-    //             System.out.println("Image successfully created");
-    //         }
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     } finally {
-    //         if (inputStream != null) {
-    //             try {
-    //                 inputStream.close();
-    //             } catch (IOException e) {
-    //                 e.printStackTrace();
-    //             }
-    //         }
-    //         if (outputStream != null) {
-    //             try {
-    //                 outputStream.close();
-    //             } catch (IOException e) {
-    //                 e.printStackTrace();
-    //             }
-    //         }
-    //     }
-    //     return newFileList;
-    // }
+    public static List<String> pptxConvertPng(File file, String outputFolder) {
+        // TODO 校验输入文件是否存在 以及是否为PPT
+        List<String> newFileList = Lists.newArrayList();
+        FileInputStream inputStream = null;
+        FileOutputStream outputStream = null;
+        try {
+            File outPut = createDirIfNotExist(outputFolder);
+
+            inputStream = new FileInputStream(file);
+            XMLSlideShow pptx = new XMLSlideShow(inputStream);
+            Dimension pageSize = pptx.getPageSize();
+            List<XSLFSlide> slideList = pptx.getSlides();
+
+            inputStream.close();
+
+            BufferedImage img;
+            for (int i = 0; i < slideList.size(); i++) {
+                XSLFSlide slide = slideList.get(i);
+                img = new BufferedImage(pageSize.width, pageSize.height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D graphics = img.createGraphics();
+                graphics.setPaint(Color.white);
+                graphics.fill(new Rectangle2D.Float(0, 0, pageSize.width, pageSize.height));
+                slide.draw(graphics);
+                //creating an image file as output
+                outputStream = new FileOutputStream(i + "pptx_image.jpg");
+                ImageIO.write(img, "jpg", outputStream);
+                pptx.write(outputStream);
+                // System.out.println("Image successfully created");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return newFileList;
+    }
 
     /**
      * 检查是否为ppt文件
@@ -560,95 +572,93 @@ public class PptToImage {
     // }
     //
     //
-    // /**
-    //  * ppt2007文档的转换 后缀为.pptx
-    //  * @param pptFile PPT文件
-    //  * @param imgFile 图片将要保存的路径目录（不是文件）
-    //  * @param list 存放文件名的 list
-    //  * @return
-    //  */
-    // public static boolean doPPT2007toImage(File pptFile, File imgFile, List<String> list) {
-    //
-    //
-    //     FileInputStream is = null ;
-    //
-    //
-    //     try {
-    //
-    //         is = new FileInputStream(pptFile);
-    //
-    //         XMLSlideShow xmlSlideShow = new XMLSlideShow(is);
-    //
-    //         is.close();
-    //
-    //         // 获取大小
-    //         Dimension pgsize = xmlSlideShow.getPageSize();
-    //
-    //         // 获取幻灯片
-    //         java.util.List<XSLFSlide> slides = xmlSlideShow.getSlides();
-    //
-    //         for (int i = 0 ; i < slides.length ; i++) {
-    //
-    //
-    //             // 解决乱码问题
-    //             XSLFShape[] shapes = slides[i].getShapes();
-    //             for (XSLFShape shape : shapes) {
-    //
-    //                 if (shape instanceof XSLFTextShape) {
-    //                     XSLFTextShape sh = (XSLFTextShape) shape;
-    //                     List<XSLFTextParagraph> textParagraphs = sh.getTextParagraphs();
-    //
-    //                     for (XSLFTextParagraph xslfTextParagraph : textParagraphs) {
-    //                         List<XSLFTextRun> textRuns = xslfTextParagraph.getTextRuns();
-    //                         for (XSLFTextRun xslfTextRun : textRuns) {
-    //                             xslfTextRun.setFontFamily("宋体");
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //
-    //
-    //             //根据幻灯片大小生成图片
-    //             BufferedImage img = new BufferedImage(pgsize.width,pgsize.height, BufferedImage.TYPE_INT_RGB);
-    //             Graphics2D graphics = img.createGraphics();
-    //
-    //             graphics.setPaint(Color.white);
-    //             graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width,pgsize.height));
-    //
-    //             // 最核心的代码
-    //             slides[i].draw(graphics);
-    //
-    //             //图片将要存放的路径
-    //             String absolutePath = imgFile.getAbsolutePath()+"/"+ (i + 1) + ".jpeg";
-    //             File jpegFile = new File(absolutePath);
-    //             // 图片路径存放
-    //             list.add((i + 1) + ".jpeg");
-    //
-    //             //如果图片存在，则不再生成
-    //             if (jpegFile.exists()) {
-    //                 continue;
-    //             }
-    //             // 这里设置图片的存放路径和图片的格式(jpeg,png,bmp等等),注意生成文件路径
-    //             FileOutputStream out = new FileOutputStream(jpegFile);
-    //
-    //             // 写入到图片中去
-    //             ImageIO.write(img, "jpeg", out);
-    //
-    //             out.close();
-    //
-    //         }
-    //
-    //
-    //         log.error("PPT转换成图片 成功！");
-    //
-    //         return true;
-    //
-    //     } catch (Exception e) {
-    //         log.error("PPT转换成图片 发生异常！", e);
-    //     }
-    //
-    //
-    //     return false;
-    //
-    // }
+
+    /**
+     * ppt2007文档的转换 后缀为.pptx
+     *
+     * @param pptFile PPT文件
+     * @param imgFile 图片将要保存的路径目录（不是文件）
+     * @param list    存放文件名的 list
+     * @return
+     */
+    public static boolean doPPT2007toImage(File pptFile, File imgFile, List<String> list) {
+
+
+        FileInputStream is = null;
+
+
+        try {
+
+            is = new FileInputStream(pptFile);
+
+            XMLSlideShow xmlSlideShow = new XMLSlideShow(is);
+
+            is.close();
+
+            // 获取大小
+            Dimension pgsize = xmlSlideShow.getPageSize();
+
+            // 获取幻灯片
+            java.util.List<XSLFSlide> slides = xmlSlideShow.getSlides();
+
+            for (int i = 0; i < slides.size(); i++) {
+
+                XSLFSlide slide = slides.get(i);
+                // 解决乱码问题
+                List<XSLFShape> shapes = slide.getShapes();
+                for (XSLFShape shape : shapes) {
+
+                    if (shape instanceof XSLFTextShape) {
+                        XSLFTextShape sh = (XSLFTextShape) shape;
+                        List<XSLFTextParagraph> textParagraphs = sh.getTextParagraphs();
+
+                        for (XSLFTextParagraph xslfTextParagraph : textParagraphs) {
+                            List<XSLFTextRun> textRuns = xslfTextParagraph.getTextRuns();
+                            for (XSLFTextRun xslfTextRun : textRuns) {
+                                xslfTextRun.setFontFamily("宋体");
+                            }
+                        }
+                    }
+                }
+
+
+                //根据幻灯片大小生成图片
+                BufferedImage img = new BufferedImage(pgsize.width, pgsize.height, BufferedImage.TYPE_INT_RGB);
+                Graphics2D graphics = img.createGraphics();
+
+                graphics.setPaint(Color.white);
+                graphics.fill(new Rectangle2D.Float(0, 0, pgsize.width, pgsize.height));
+
+                // 最核心的代码
+                slide.draw(graphics);
+
+                //图片将要存放的路径
+                String absolutePath = imgFile.getAbsolutePath() + "/" + (i + 1) + ".jpeg";
+                File jpegFile = new File(absolutePath);
+                // 图片路径存放
+                list.add((i + 1) + ".jpeg");
+
+                //如果图片存在，则不再生成
+                if (jpegFile.exists()) {
+                    continue;
+                }
+                // 这里设置图片的存放路径和图片的格式(jpeg,png,bmp等等),注意生成文件路径
+                FileOutputStream out = new FileOutputStream(jpegFile);
+
+                // 写入到图片中去
+                ImageIO.write(img, "jpeg", out);
+
+                out.close();
+
+            }
+            log.error("PPT转换成图片 成功！");
+            return true;
+        } catch (Exception e) {
+            log.error("PPT转换成图片 发生异常！", e);
+        }
+
+
+        return false;
+
+    }
 }
