@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.Enumeration;
 
 /**
@@ -24,11 +25,12 @@ public class KmsJettyDeal {
     public static void main(String[] args) throws InterruptedException {
 
         // 压缩包所在，也就是 idea 的编译目录
-        String zipfilePath = "G:\\kms-80004960\\kms-mserver\\target\\kms-mserver.war";
+        String zipfilePath = "G:\\kms-80004964\\kms-mserver\\target\\kms-mserver.war";
         // Jboss default 目录
         String unZipfilePath = "E:\\IDE\\jboss-as\\server\\default\\deploy\\kms-mserver.war";
 
         kmsJetty(zipfilePath, unZipfilePath);
+        System.out.println(LocalDateTime.now());
     }
 
     /**
