@@ -14,5 +14,10 @@ public class Sql打印 {
 
         double seconds = a / 1000.0;
         System.out.println(seconds);
+
+        String str = "train.homework/001/597/216/872/916/097bd3e3-5670-47e1-b333-ba7c028d962f.mp4";
+        String substring = str.substring(0, str.lastIndexOf("/") + 1);
+        System.out.println(substring);
+
     }
 }
