@@ -72,8 +72,9 @@ public class KmsJettyDeal {
 
     private static Boolean deleteAllFile(File deleteFile) {
         if (null != deleteFile) {
-            if (!deleteFile.exists())
+            if (!deleteFile.exists()) {
                 return true;
+            }
             if (deleteFile.isFile()) {
                 // 删除文件
                 boolean result = deleteFile.delete();
@@ -85,8 +86,8 @@ public class KmsJettyDeal {
             }
             File[] files = deleteFile.listFiles();
             if (null != files) {
-                for (int i = 0; i < files.length; i++) {
-                    deleteAllFile(files[i]);
+                for (File file : files) {
+                    deleteAllFile(file);
                 }
             }
             boolean delete = deleteFile.delete();
