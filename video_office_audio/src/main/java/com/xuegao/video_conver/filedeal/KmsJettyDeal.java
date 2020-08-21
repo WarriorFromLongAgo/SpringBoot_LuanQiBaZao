@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.filedeal;
+package com.xuegao.video_conver.filedeal;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Enumeration;
 
 /**
- * <br/> @PackageName：com.xuegao.luanqibazao_1.filedeal
+ * <br/> @PackageName：com.xuegao.video_conver.filedeal
  * <br/> @ClassName：KmsJettyDeal
  * <br/> @Description：
  * <br/> @author：80004960
@@ -25,7 +25,7 @@ public class KmsJettyDeal {
     public static void main(String[] args) throws InterruptedException {
 
         // 压缩包所在，也就是 idea 的编译目录
-        String zipfilePath = "G:\\kms-80004964\\kms-mserver\\target\\kms-mserver.war";
+        String zipfilePath = "G:\\kms-80004960\\kms-mserver\\target\\kms-mserver.war";
         // Jboss default 目录
         String unZipfilePath = "E:\\IDE\\jboss-as\\server\\default\\deploy\\kms-mserver.war";
 

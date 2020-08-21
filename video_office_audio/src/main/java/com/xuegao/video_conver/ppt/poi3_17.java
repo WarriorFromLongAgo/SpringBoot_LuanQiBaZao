@@ -1,6 +1,7 @@
 package com.xuegao.video_conver.ppt;
 
 import com.google.common.collect.Lists;
+import org.apache.poi.sl.draw.DrawFactory;
 import org.apache.poi.sl.usermodel.Slide;
 import org.apache.poi.sl.usermodel.Shape;
 import org.apache.poi.hslf.model.HeadersFooters;
@@ -37,8 +38,8 @@ public class poi3_17 {
         String newFile = "F:\\file\\";
         // pptConvertPng3(pptFile, newFile);
         long l = System.currentTimeMillis();
-        // pptConvertPng5(pptFile, newFile);
-        pptConvertPng33(pptFile, newFile);
+        pptConvertPng5(pptFile, newFile);
+        // pptConvertPng33(pptFile, newFile);
         long l1 = System.currentTimeMillis();
         System.out.println("总共 = " + (l1 - l));
     }
@@ -57,19 +58,19 @@ public class poi3_17 {
     }
 
     public static ByteArrayOutputStream gainBufferdImageStream(Integer width, Integer height, Slide slide) {
-        // int imageWidth = (int) Math.ceil(width * 2);
-        int imageWidth = width;
-        // int imageHeight = (int) Math.ceil(height * 2);
-        int imageHeight = height;
+        int imageWidth = (int) Math.ceil(width * 2);
+        // int imageWidth = width;
+        int imageHeight = (int) Math.ceil(height * 2);
+        // int imageHeight = height;
         BufferedImage img = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
 
-        // AffineTransform affineTransform = new AffineTransform();
-        // affineTransform.setToScale(2, 2);
+        AffineTransform affineTransform = new AffineTransform();
+        affineTransform.setToScale(2, 2);
         Graphics2D graphics = img.createGraphics();
         graphics.setPaint(Color.WHITE);
-        // DrawFactory.getInstance(graphics).fixFonts(graphics);
+        DrawFactory.getInstance(graphics).fixFonts(graphics);
         graphics.fill(new Rectangle2D.Float(0, 0, width, height));
-        // graphics.setTransform(affineTransform);
+        graphics.setTransform(affineTransform);
         // default rendering options
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);

@@ -1,4 +1,5 @@
-package com.xuegao.luanqibazao_1.filedeal;
+package com.xuegao.video_conver.filedeal;
+
 
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
@@ -6,14 +7,15 @@ import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.archivers.jar.JarArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.apache.commons.compress.utils.IOUtils;
 
 import java.io.*;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 
 /**
- * <br/> @PackageName：com.xuegao.luanqibazao_1.filedeal
+ * <br/> @PackageName：com.xuegao.video_conver.filedeal
  * <br/> @ClassName：WarDeal
  * <br/> @Description：
  * <br/> @author：80004960
@@ -35,15 +37,24 @@ public class WarDeal {
 
 
         // File zipfile = new File("E:\\adadaa\\kms-mserver.war");
-        String zipfilePath = "E:\\adadaa\\kms-mserver.war";
+        // String zipfilePath = "E:\\adadaa\\kms-mserver.war";
         // File unZipfile = new File("E:\\adasdadsadad\\kms-mserver.war\\");
-        String unZipfilePath = "E:\\adasdadsadad\\kms-mserver.war\\";
+        // String unZipfilePath = "E:\\adasdadsadad\\kms-mserver.war\\";
 
         // unzip(zipfilePath, unZipfilePath);
 
-        Boolean aBoolean = deleteAllFile(new File(unZipfilePath));
-        Thread.sleep(5000);
-        unzip2(zipfilePath, unZipfilePath);
+        // Boolean aBoolean = deleteAllFile(new File(unZipfilePath));
+        // Thread.sleep(5000);
+        // unzip2(zipfilePath, unZipfilePath);
+
+
+        File source = new File("d:\\user\\80004960\\桌面\\深入理解Java虚拟机.PPT");
+        String target = "F:\\file\\";
+        copy(source, target);
+        // copy2(source, target);
+        // copy3(source, target);
+        // copy4(source, target);
+        // copy5(source, target);
     }
 
     public static Boolean kmsJetty(File targetFile, File jboosDefaultDeployFile) {
@@ -82,6 +93,88 @@ public class WarDeal {
         }
         return true;
     }
+
+    public static void copy(File source, String target) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(source));
+        BufferedWriter bufferedWriter = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(target + source.getName()), System.getProperty("file.encoding")));
+
+        //一致，防止中文乱码
+        //循环按行读取文件
+
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            System.out.println(line);
+            bufferedWriter.write(line); //按行写入内容
+            bufferedWriter.newLine(); //换行
+            bufferedWriter.flush();   //避免文件太大刷新不及时
+        }
+        String encoding = new OutputStreamWriter(new FileOutputStream(target + source.getName()), System.getProperty("file.encoding")).getEncoding();
+        System.out.println(encoding);
+    }
+
+    public static void copy2(File source, String target) throws IOException {
+        InputStream inputStream = new FileInputStream(source);
+        byte[] buffer = new byte[1024];
+        int len;
+        FileOutputStream outputStream = new FileOutputStream(target + source.getName());
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream,
+                System.getProperty("file.encoding"));
+
+        while ((len = inputStream.read(buffer)) > 0) {
+            outputStreamWriter.write(new String(buffer, StandardCharsets.UTF_8), 0, len);
+            outputStreamWriter.flush();
+        }
+    }
+
+    public static void copy3(File source, String target) throws IOException {
+        // 可以使用
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(source));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(target + source.getName()));
+        int b;
+        while ((b = bis.read()) != -1) {
+            bos.write(b);
+        }
+        bis.close();
+        bos.close();
+    }
+
+    public static void copy4(File source, String target) throws IOException {
+        // 可以使用
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(source));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(target + source.getName()));
+
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = bis.read(buffer)) != -1) {
+            bos.write(buffer, 0, len);
+        }
+        bis.close();
+        bos.close();
+    }
+
+    public static void copy5(File source, String target) throws IOException {
+        // 可以使用
+        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(source));
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(target + source.getName()));
+
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = bis.read(buffer)) != -1) {
+            String s1 = new String(buffer, 0, len, StandardCharsets.UTF_8);
+            String s2 = new String(buffer, 0, len);
+            System.out.println(s1);
+            System.out.println(s2);
+            bos.write(buffer, 0, len);
+        }
+        bis.close();
+        bos.close();
+    }
+
+    public static void copy6(File source, String target) throws IOException {
+
+    }
+
 
     private static Boolean deleteFile(File deleteFile) {
         if (null != deleteFile) {

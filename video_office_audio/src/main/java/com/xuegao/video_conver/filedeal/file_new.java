@@ -1,10 +1,10 @@
-package com.xuegao.luanqibazao_1.filedeal;
+package com.xuegao.video_conver.filedeal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <br/> @PackageName：com.xuegao.luanqibazao_1.filedeal
+ * <br/> @PackageName：com.xuegao.video_conver.filedeal
  * <br/> @ClassName：file_new
  * <br/> @Description：
  * <br/> @author：80004960
