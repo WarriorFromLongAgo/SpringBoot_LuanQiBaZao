@@ -14,7 +14,7 @@ import java.util.concurrent.Semaphore;
 @NotThreadSafe
 public class ConcurrencyTest_1 {
 
-    private final static Logger log = LoggerFactory.getLogger(ConcurrencyTest.class);
+    private final static Logger log = LoggerFactory.getLogger(ConcurrencyTest_1.class);
 
     // 请求总数
     public static int clientTotal = 5000;
