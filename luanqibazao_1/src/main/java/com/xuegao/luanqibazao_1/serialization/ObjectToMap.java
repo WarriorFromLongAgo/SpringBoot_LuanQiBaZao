@@ -4,14 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.xuegao.luanqibazao_1.domain.UserInfo;
-import com.xuegao.luanqibazao_1.domain.UserVo;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.serialization

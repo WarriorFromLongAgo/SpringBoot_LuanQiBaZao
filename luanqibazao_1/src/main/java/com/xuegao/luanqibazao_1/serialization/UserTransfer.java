@@ -1,7 +1,7 @@
 package com.xuegao.luanqibazao_1.serialization;
 
 import com.xuegao.luanqibazao_1.domain.UserInfo;
-import com.xuegao.luanqibazao_1.domain.UserVo;
+import com.xuegao.luanqibazao_1.domain.UserVO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -17,5 +17,5 @@ import java.util.List;
 public interface UserTransfer {
 
     // entity转vo
-    List<UserVo> entityToVo(List<UserInfo> user);
+    List<UserVO> entityToVo(List<UserInfo> user);
 }
