@@ -4,7 +4,7 @@ import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.xuegao.luanqibazao_1.domain.UserInfo;
-import com.xuegao.luanqibazao_1.domain.UserVo;
+import com.xuegao.luanqibazao_1.domain.UserVO;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.BeanUtils;
 
@@ -65,19 +65,19 @@ public class mainmain {
      */
     public static void testBeanUtils(List<UserInfo> userList) {
         long start = System.currentTimeMillis();
-        List<UserVo> userVos = new ArrayList<>();
+        List<UserVO> userVOS = new ArrayList<>();
         userList.forEach(item -> {
-            UserVo userVo = new UserVo();
+            UserVO userVo = new UserVO();
             try {
                 BeanUtils.copyProperties(item, userVo);
-                userVos.add(userVo);
+                userVOS.add(userVo);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
         long end = System.currentTimeMillis();
-        System.out.println(userVos.get(0));
-        System.out.println("集合大小参数验证" + userVos.size() + "Apache的BeanUtils耗时：" + (end - start) + "ms");
+        System.out.println(userVOS.get(0));
+        System.out.println("集合大小参数验证" + userVOS.size() + "Apache的BeanUtils耗时：" + (end - start) + "ms");
     }
 
     /**
@@ -87,19 +87,19 @@ public class mainmain {
      */
     public static void testSpringBeanUtils(List<UserInfo> userList) {
         long start = System.currentTimeMillis();
-        List<UserVo> userVos = new ArrayList<>();
+        List<UserVO> userVOS = new ArrayList<>();
         userList.forEach(item -> {
-            UserVo userVo = new UserVo();
+            UserVO userVo = new UserVO();
             try {
                 org.springframework.beans.BeanUtils.copyProperties(item, userVo);
-                userVos.add(userVo);
+                userVOS.add(userVo);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
         long end = System.currentTimeMillis();
-        System.out.println(userVos.get(0));
-        System.out.println("集合大小参数验证" + userVos.size() + "Spring的BeanUtils耗时：" + (end - start) + "ms");
+        System.out.println(userVOS.get(0));
+        System.out.println("集合大小参数验证" + userVOS.size() + "Spring的BeanUtils耗时：" + (end - start) + "ms");
     }
 
     /**
@@ -109,35 +109,35 @@ public class mainmain {
      */
     public static void testMapStruct(List<UserInfo> userList) {
         long start = System.currentTimeMillis();
-        List<UserVo> userVos = Mappers.getMapper(UserTransfer.class).entityToVo(userList);
+        List<UserVO> userVOS = Mappers.getMapper(UserTransfer.class).entityToVo(userList);
         long end = System.currentTimeMillis();
-        System.out.println(userVos.get(0));
-        System.out.println("集合大小参数验证" + userVos.size() + "mapStruct耗时：" + (end - start) + "ms");
+        System.out.println(userVOS.get(0));
+        System.out.println("集合大小参数验证" + userVOS.size() + "mapStruct耗时：" + (end - start) + "ms");
     }
 
     public static void testFastJson(List<UserInfo> userList) {
-        Type type = new TypeReference<List<UserVo>>() {
+        Type type = new TypeReference<List<UserVO>>() {
         }.getType();
         long start = System.currentTimeMillis();
-        List<UserVo> userVos = JSONObject.parseObject(JSONObject.toJSONString(userList), type);
+        List<UserVO> userVOS = JSONObject.parseObject(JSONObject.toJSONString(userList), type);
         // List<UserVo> userVos = JSON.parseObject(JSONObject.toJSONString(userList), new TypeReference<List<UserInfo>>() {
         // });
         // List<UserVo> userVos = JSONObject.parseObject(JSONObject.toJSONString(userList), new TypeReference<>(UserVo.class));
         long end = System.currentTimeMillis();
-        System.out.println(userVos.get(0));
-        System.out.println("集合大小参数验证 " + userVos.size() + " testFastJson 耗时：" + (end - start) + " ms");
+        System.out.println(userVOS.get(0));
+        System.out.println("集合大小参数验证 " + userVOS.size() + " testFastJson 耗时：" + (end - start) + " ms");
 
     }
 
     public static void testHutool(List<UserInfo> userList) {
 
         long start = System.currentTimeMillis();
-        List<UserVo> userVos = Convert.convert(new cn.hutool.core.lang.TypeReference<List<UserVo>>() {
+        List<UserVO> userVOS = Convert.convert(new cn.hutool.core.lang.TypeReference<List<UserVO>>() {
         }, userList);
 
         long end = System.currentTimeMillis();
-        System.out.println(userVos.get(0));
-        System.out.println("集合大小参数验证 " + userVos.size() + " testHutool 耗时：" + (end - start) + " ms");
+        System.out.println(userVOS.get(0));
+        System.out.println("集合大小参数验证 " + userVOS.size() + " testHutool 耗时：" + (end - start) + " ms");
 
     }
 
