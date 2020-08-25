@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
 
 /**
@@ -30,7 +31,10 @@ public class KmsJettyDeal {
         String unZipfilePath = "E:\\IDE\\jboss-as\\server\\default\\deploy\\kms-mserver.war";
 
         kmsJetty(zipfilePath, unZipfilePath);
-        System.out.println(LocalDateTime.now());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String format = LocalDateTime.now().format(formatter);
+        System.out.println(format);
     }
 
     /**

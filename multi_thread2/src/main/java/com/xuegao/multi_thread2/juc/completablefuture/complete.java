@@ -12,7 +12,7 @@ import java.util.stream.Stream;
  * <br/> @date：2020/8/18 20:16
  */
 public class complete {
-    public static Future<String> calculateAsync() throws InterruptedException {
+    public static Future<String> calculateAsync() {
         CompletableFuture<String> completableFuture = new CompletableFuture<>();
 
         Future<String> hello = Executors.newCachedThreadPool().submit(() -> {
@@ -95,31 +95,8 @@ public class complete {
         // 所以要想对CompletableFuture方法以链的形式呈现，最好使用thenCompose()方法。另外注意，这两个方法之间的不同是和map() 与flatMap()之间的不同是类似的。
 
 
-        // 合并特性
-        // 当我们需要以并行的方式执行多个Futures时，我们通常想要等待他们所有执行完然后处理他们组合的结果。
-        // 以并行的方式运行多个Futures
-        // CompletableFuture的allOf静态方法允许等待所有Futures的完成。
-        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> "Hello");
-        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> "Beautiful");
-        CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> "World");
 
-        CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(future1, future2, future3);
-        Void aVoid = combinedFuture.get();
-        System.out.println(aVoid);
-        System.out.println(" future1.isDone() = " + future1.isDone());
-        System.out.println(" future2.isDone() = " + future2.isDone());
-        System.out.println(" future2.isDone() = " + future2.isDone());
-        // null
-        // future1.isDone() = true
-        // future2.isDone() = true
-        // future2.isDone() = true
 
-        String combined = Stream.of(future1, future2, future3)
-                .map(CompletableFuture::join)
-                .collect(Collectors.joining(" "));
-
-        System.out.println(combined);
-        // Hello Beautiful World
 
         String name = null;
         CompletableFuture<String> completableFuture5 = CompletableFuture.supplyAsync(() -> {
