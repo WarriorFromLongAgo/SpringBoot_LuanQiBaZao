@@ -7,31 +7,19 @@ import java.util.function.Supplier;
 
 /**
  * <br/> @PackageName：com.xuegao.multi_thread2.atomic.completablefuture
- * <br/> @ClassName：test8
+ * <br/> @ClassName：test5
  * <br/> @Description：
  * <br/> @author：xuegao
- * <br/> @date：2020/7/22 20:33
+ * <br/> @date：2020/7/22 20:13
  */
-public class test8 {
+public class thenAccept1 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CompletableFuture<Void> completableFuture = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
             public Integer get() {
-
-                try {
-                    Thread.sleep(12000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
                 return 2;
             }
-        }).acceptEither(CompletableFuture.supplyAsync(new Supplier<Integer>() {
-            @Override
-            public Integer get() {
-                return 1;
-            }
-        }), new Consumer<Integer>() {
+        }).thenAccept(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) {
                 System.out.println("0000 ==== " + integer);

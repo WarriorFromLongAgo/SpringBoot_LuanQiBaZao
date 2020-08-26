@@ -13,16 +13,16 @@ import java.util.function.Supplier;
  * <br/> @author：xuegao
  * <br/> @date：2020/7/22 20:06
  */
-public class test3 {
+public class whenComplete3 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        CompletableFuture<HashMap> completableFuture = CompletableFuture.supplyAsync(new Supplier<HashMap>() {
+        CompletableFuture<HashMap<String, String>> completableFuture = CompletableFuture.supplyAsync(new Supplier<HashMap<String, String>>() {
             @Override
-            public HashMap get() {
-                return new HashMap();
+            public HashMap<String, String> get() {
+                return new HashMap<String, String>();
             }
-        }).whenComplete(new BiConsumer<HashMap, Throwable>() {
+        }).whenComplete(new BiConsumer<HashMap<String, String>, Throwable>() {
             @Override
-            public void accept(HashMap hashMap, Throwable throwable) {
+            public void accept(HashMap<String, String> hashMap, Throwable throwable) {
                 hashMap.put("key1", "value1");
             }
         });

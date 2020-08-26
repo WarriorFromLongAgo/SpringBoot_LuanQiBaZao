@@ -7,34 +7,27 @@ import java.util.function.Supplier;
 
 /**
  * <br/> @PackageName：com.xuegao.multi_thread2.atomic.completablefuture
- * <br/> @ClassName：test9
+ * <br/> @ClassName：test4
  * <br/> @Description：
  * <br/> @author：xuegao
- * <br/> @date：2020/7/22 20:38
+ * <br/> @date：2020/7/22 20:10
  */
-public class test9 {
+public class thenApply1 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
             public Integer get() {
-
-                try {
-                    Thread.sleep(12000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
                 return 2;
             }
-        }).applyToEither(CompletableFuture.supplyAsync(new Supplier<Integer>() {
-            @Override
-            public Integer get() {
-                return 1;
-            }
-        }), new Function<Integer, Integer>() {
+        }).thenApply(new Function<Integer, Integer>() {
             @Override
             public Integer apply(Integer integer) {
-                return integer + 10;
+                return integer + 1;
+            }
+        }).thenApply(new Function<Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer) {
+                return integer + 1;
             }
         });
         System.out.println(completableFuture.get());

@@ -7,25 +7,28 @@ import java.util.function.Supplier;
 
 /**
  * <br/> @PackageName：com.xuegao.multi_thread2.atomic.completablefuture
- * <br/> @ClassName：test4
+ * <br/> @ClassName：exception
  * <br/> @Description：
  * <br/> @author：xuegao
- * <br/> @date：2020/7/22 20:10
+ * <br/> @date：2020/7/22 20:03
  */
-public class test4 {
+public class exceptionally {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
             public Integer get() {
-                return 2;
+                int a = 2 / 0;
+                return 2222222;
             }
-        }).thenApply(new Function<Integer, Integer>() {
+        }).exceptionally(new Function<Throwable, Integer>() {
             @Override
-            public Integer apply(Integer integer) {
-                return integer + 1;
+            public Integer apply(Throwable throwable) {
+                System.out.println(throwable.getMessage());
+                return 0;
             }
         });
-
+        // java.lang.ArithmeticException: / by zero
+        // 0
         System.out.println(completableFuture.get());
     }
 }

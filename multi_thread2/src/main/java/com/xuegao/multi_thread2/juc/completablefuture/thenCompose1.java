@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  * <br/> @author：xuegao
  * <br/> @date：2020/7/22 20:22
  */
-public class test7 {
+public class thenCompose1 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CompletableFuture<Integer> completableFuture = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override

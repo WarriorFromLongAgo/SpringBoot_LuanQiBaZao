@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
  * <br/> @author：80004960
  * <br/> @date：2020/8/18 12:56
  */
-public class CompletableFutureTest2 {
+public class thenApplyAsync {
     public static void main(String[] args) throws InterruptedException {
         CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread().getName() + "-女神：我开始化妆了，好了我叫你。");

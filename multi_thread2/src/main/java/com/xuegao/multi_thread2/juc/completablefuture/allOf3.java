@@ -11,7 +11,7 @@ import java.util.function.Supplier;
  * <br/> @author：xuegao
  * <br/> @date：2020/7/22 20:42
  */
-public class test10 {
+public class allOf3 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CompletableFuture<Integer> completableFuture1 = CompletableFuture.supplyAsync(new Supplier<Integer>() {
             @Override
