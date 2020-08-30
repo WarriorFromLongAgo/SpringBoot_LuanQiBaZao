@@ -31,5 +31,6 @@ public class thenApply1 {
             }
         });
         System.out.println(completableFuture.get());
+
     }
 }

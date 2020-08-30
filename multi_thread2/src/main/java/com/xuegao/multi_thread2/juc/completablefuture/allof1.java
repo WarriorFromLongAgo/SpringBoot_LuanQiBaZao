@@ -30,6 +30,7 @@ public class allof1 {
         System.out.println(" future1.isDone() = " + future1.isDone());
         System.out.println(" future2.isDone() = " + future2.isDone());
         System.out.println(" future2.isDone() = " + future2.isDone());
+
         // null
         // future1.isDone() = true
         // future2.isDone() = true

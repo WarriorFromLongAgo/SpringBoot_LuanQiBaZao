@@ -24,6 +24,10 @@ public class KmsJettyDeal {
     private static final String IDEA_PATH = "kms-mserver\\target\\kms-mserver.war";
 
     public static void main(String[] args) throws InterruptedException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String format = LocalDateTime.now().format(formatter);
+        System.out.println("====================================");
+        System.out.println(format);
 
         // 压缩包所在，也就是 idea 的编译目录
         String zipfilePath = "G:\\kms-80004960\\kms-mserver\\target\\kms-mserver.war";
@@ -32,9 +36,9 @@ public class KmsJettyDeal {
 
         kmsJetty(zipfilePath, unZipfilePath);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String format = LocalDateTime.now().format(formatter);
-        System.out.println(format);
+        String format1 = LocalDateTime.now().format(formatter);
+        System.out.println(format1);
+        System.out.println("====================================");
     }
 
     /**

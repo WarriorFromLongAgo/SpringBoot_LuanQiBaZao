@@ -24,7 +24,6 @@ public class allof2 {
         CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> "Beautiful");
         CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> "World");
 
-        CompletableFuture<Void> combinedFuture = CompletableFuture.allOf(future1, future2, future3);
         CompletableFuture.allOf(future1, future2, future3)
                 .thenApply(v ->
                         Stream.of(future1, future2, future3)
@@ -34,7 +33,6 @@ public class allof2 {
                                         return stringCompletableFuture.join();
                                     }
                                 })
-                                // .map(CompletableFuture::join)
                                 .collect(Collectors.joining(" ")))
                 .thenAccept(new Consumer<String>() {
                     @Override

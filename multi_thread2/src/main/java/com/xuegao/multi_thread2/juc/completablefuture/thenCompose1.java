@@ -26,11 +26,23 @@ public class thenCompose1 {
                 return CompletableFuture.supplyAsync(new Supplier<Integer>() {
                     @Override
                     public Integer get() {
-                        return integer + 1;
+                        return integer + 10;
+                    }
+                });
+            }
+        }).thenCompose(new Function<Integer, CompletionStage<Integer>>() {
+            @Override
+            public CompletionStage<Integer> apply(Integer integer) {
+                return CompletableFuture.supplyAsync(new Supplier<Integer>() {
+                    @Override
+                    public Integer get() {
+                        return integer + 100;
                     }
                 });
             }
         });
+        // 112
         System.out.println(completableFuture.get());
+
     }
 }
