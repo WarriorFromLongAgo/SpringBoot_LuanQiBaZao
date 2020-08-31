@@ -1,14 +1,12 @@
 package com.xuegao.video_conver.ppt;
 
 import com.google.common.collect.Lists;
-import org.apache.poi.sl.draw.DrawFactory;
 import org.apache.poi.sl.usermodel.Slide;
 import org.apache.poi.sl.usermodel.Shape;
 import org.apache.poi.hslf.model.HeadersFooters;
 import org.apache.poi.hslf.record.*;
 import org.apache.poi.hslf.usermodel.*;
 import org.apache.poi.sl.usermodel.SlideShow;
-import org.apache.poi.sl.usermodel.Resources;
 import org.apache.poi.xslf.usermodel.XSLFTextParagraph;
 import org.apache.poi.xslf.usermodel.XSLFTextRun;
 import org.apache.poi.xslf.usermodel.XSLFTextShape;
@@ -68,7 +66,7 @@ public class poi3_17 {
         affineTransform.setToScale(2, 2);
         Graphics2D graphics = img.createGraphics();
         graphics.setPaint(Color.WHITE);
-        DrawFactory.getInstance(graphics).fixFonts(graphics);
+        // DrawFactory.getInstance(graphics).fixFonts(graphics);
         graphics.fill(new Rectangle2D.Float(0, 0, width, height));
         graphics.setTransform(affineTransform);
         // default rendering options
@@ -268,8 +266,8 @@ public class poi3_17 {
             System.out.println("pictureData = " + pictureData);
             System.out.println("=======================================");
 
-            Resources resources = hslfSlideShow.getResources();
-            System.out.println("resources = " + resources);
+            // Resources resources = hslfSlideShow.getResources();
+            // System.out.println("resources = " + resources);
             System.out.println("=======================================");
 
             HSLFSoundData[] soundData = hslfSlideShow.getSoundData();

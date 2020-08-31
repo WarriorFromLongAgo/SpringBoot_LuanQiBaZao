@@ -84,7 +84,7 @@ public abstract class ApachePoiHandle {
     public ByteArrayOutputStream gainBufferdImageStream(Integer width, Integer height, Slide slide) {
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = img.createGraphics();
-        DrawFactory.getInstance(graphics).fixFonts(graphics);
+        // DrawFactory.getInstance(graphics).fixFonts(graphics);
         // default rendering options
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
