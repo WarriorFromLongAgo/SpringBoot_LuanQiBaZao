@@ -2,6 +2,7 @@ package com.xuegao.video_conver.filedeal;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

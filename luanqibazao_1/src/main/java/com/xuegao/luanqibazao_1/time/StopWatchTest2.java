@@ -29,6 +29,6 @@ public class StopWatchTest2 {
         stopWatch.stop();
 
         stopWatch.prettyPrint();
-
+        System.out.println(stopWatch);
     }
 }
