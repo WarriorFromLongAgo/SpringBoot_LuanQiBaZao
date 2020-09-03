@@ -33,7 +33,7 @@ public class JucDownloadPicture {
         System.out.println("========================================================================================");
         System.out.println("========================================================================================");
         startTime = System.currentTimeMillis();
-        download2(map);
+        downloadThreadPoolExecutor(map);
         endTime = System.currentTimeMillis();
         System.out.println("总共耗时 = " + (endTime - startTime));
     }
@@ -45,7 +45,7 @@ public class JucDownloadPicture {
         }
     }
 
-    private static void download2(Map<String, String> map) {
+    private static void downloadThreadPoolExecutor(Map<String, String> map) {
         ThreadPoolExecutor threadPoolExecutor = null;
         try {
             threadPoolExecutor = new ThreadPoolExecutor(2, 4, 30, TimeUnit.SECONDS,
@@ -57,12 +57,12 @@ public class JucDownloadPicture {
                     return thread;
                 }
             }
-            // , new RejectedExecutionHandler() {
-            //     @Override
-            //     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-            //         log.info("rejectedExecution");
-            //     }
-            // }
+                    // , new RejectedExecutionHandler() {
+                    //     @Override
+                    //     public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+                    //         log.info("rejectedExecution");
+                    //     }
+                    // }
             );
 
             for (Map.Entry<String, String> stringStringEntry : map.entrySet()) {
@@ -81,6 +81,15 @@ public class JucDownloadPicture {
             if (threadPoolExecutor != null) {
                 threadPoolExecutor.shutdown();
             }
+        }
+    }
+
+    private static void downloadCompletableFuture(Map<String, String> map) {
+        CompletableFuture<Void> completableFuture = new CompletableFuture<>();
+        for (Map.Entry<String, String> stringStringEntry : map.entrySet()) {
+            String value = stringStringEntry.getValue();
+            DownloadPicture3.download(value);
+            // completableFuture.
         }
     }
 }
