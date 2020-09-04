@@ -2,7 +2,6 @@ package com.xuegao.luanqibazao_1.http;
 
 import java.io.*;
 import java.net.URL;
-import java.net.URLConnection;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.http
@@ -18,10 +17,12 @@ public class DownloadPicture3 {
         download(imgUrl);
     }
 
-    public static void download(String imgUrl) {
+    public static Long download(String imgUrl) {
         InputStream inputStream = null;
         BufferedOutputStream bufferedOutputStream = null;
+        long startTime = System.currentTimeMillis();
         try {
+
             inputStream = new URL(imgUrl).openConnection().getInputStream();
             // 可以使用
             bufferedOutputStream = new BufferedOutputStream(new FileOutputStream("D:\\nfsc\\KMS\\train.homework\\" + System.currentTimeMillis() + ".jpg"));
@@ -48,5 +49,7 @@ public class DownloadPicture3 {
                 }
             }
         }
+        long endTime = System.currentTimeMillis();
+        return endTime - startTime;
     }
 }
