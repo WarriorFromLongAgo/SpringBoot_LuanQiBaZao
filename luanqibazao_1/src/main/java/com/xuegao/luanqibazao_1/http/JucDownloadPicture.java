@@ -2,13 +2,12 @@ package com.xuegao.luanqibazao_1.http;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.LongAdder;
 import java.util.function.Supplier;
@@ -24,13 +23,14 @@ import java.util.stream.Collectors;
 public class JucDownloadPicture {
     private final static Logger log = LoggerFactory.getLogger(JucDownloadPicture.class);
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         String json = "{\"22\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/22.jpg\",\"23\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/23.jpg\",\"24\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/24.jpg\",\"25\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/25.jpg\",\"27\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/27.jpg\",\"28\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/28.jpg\",\"29\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/29.jpg\",\"10\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/10.jpg\",\"11\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/11.jpg\",\"12\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/12.jpg\",\"13\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/13.jpg\",\"14\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/14.jpg\",\"15\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/15.jpg\",\"16\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/16.jpg\",\"17\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/17.jpg\",\"18\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/18.jpg\",\"19\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/19.jpg\",\"0\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/0.jpg\",\"1\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/1.jpg\",\"2\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/2.jpg\",\"3\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/3.jpg\",\"4\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/4.jpg\",\"5\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/5.jpg\",\"6\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/6.jpg\",\"7\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/7.jpg\",\"8\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/8.jpg\",\"9\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/9.jpg\",\"20\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/20.jpg\",\"21\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/21.jpg\"}\n";
-        // String json = "{\"27\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/27.jpg\",\"28\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/28.jpg\",\"29\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/29.jpg\",\"10\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/10.jpg\",\"11\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/11.jpg\",\"12\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/12.jpg\",\"13\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/13.jpg\",\"14\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/14.jpg\",\"15\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/15.jpg\",\"16\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/16.jpg\",\"17\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/17.jpg\",\"18\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/18.jpg\",\"19\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/19.jpg\",\"0\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/0.jpg\",\"1\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/1.jpg\",\"2\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/2.jpg\",\"3\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/3.jpg\",\"4\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/4.jpg\",\"5\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/5.jpg\",\"6\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/6.jpg\",\"7\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/7.jpg\",\"8\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/8.jpg\",\"9\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/9.jpg\",\"20\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/20.jpg\",\"21\":\"http://sfecp-fcs.sit.sf-express.com:1080/office/img/20200902/1599028257600/21.jpg\"}\n";
         Map<String, String> map = JSONObject.parseObject(json, new TypeReference<Map<String, String>>() {
         });
         System.out.println(map);
         System.out.println(map.size());
+
+        map = imageUrlMap();
 
         long startTime = System.currentTimeMillis();
         download(map);
@@ -71,7 +71,7 @@ public class JucDownloadPicture {
 
     }
 
-    private static void download(Map<String, String> map) {
+    private static void download(Map<String, String> map) throws IOException {
         for (Map.Entry<String, String> stringStringEntry : map.entrySet()) {
             String value = stringStringEntry.getValue();
             DownloadPicture3.download(value);
@@ -101,6 +101,7 @@ public class JucDownloadPicture {
             for (Map.Entry<String, String> stringStringEntry : map.entrySet()) {
                 String value = stringStringEntry.getValue();
                 threadPoolExecutor.submit(new Runnable() {
+                    @SneakyThrows
                     @Override
                     public void run() {
                         log.info("下载所花时间 = " + DownloadPicture3.download(value));
@@ -125,6 +126,7 @@ public class JucDownloadPicture {
                 // image Url
                 String imageUrl = stringStringEntry.getValue();
                 CompletableFuture<Void> future = CompletableFuture.runAsync(new Runnable() {
+                    @SneakyThrows
                     @Override
                     public void run() {
                         // download picture
@@ -155,17 +157,27 @@ public class JucDownloadPicture {
                 CompletableFuture<Long> longCompletableFuture = CompletableFuture.supplyAsync(new Supplier<Long>() {
                     @Override
                     public Long get() {
-                        longAdder.increment();
-                        Long downloadTime = DownloadPicture3.download(imageUrl);
-                        log.info(" downloadTime = " + downloadTime);
+                        Long downloadTime = null;
+                        try {
+                            int i = ThreadLocalRandom.current().nextInt(1, 10);
+                            TimeUnit.SECONDS.sleep(i);
+                            longAdder.increment();
+                            log.info("longAdder = {}", longAdder);
+                            downloadTime = DownloadPicture3.download(imageUrl);
+                            log.info(" downloadTime = {}, sleepTime = {}, longAdder = {}", downloadTime, i, longAdder);
+                        } catch (IOException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         return downloadTime;
                     }
+                }).exceptionally(throwable -> {
+                    log.error(throwable.getMessage());
+                    return 0L;
                 });
                 futureList.add(longCompletableFuture);
             }
             // Wait for them all to complete.
             CompletableFuture.allOf(futureList.toArray(new CompletableFuture[0])).get();
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -181,4 +193,12 @@ public class JucDownloadPicture {
                         .collect(Collectors.toList()));
     }
 
+
+    public static Map<String, String> imageUrlMap() {
+        Map<String, String> imageUrlMap = new HashMap<>();
+        for (int i = 0; i < 20; i++) {
+            imageUrlMap.put(Integer.toString(i), "https://img-blog.csdn.net/20180823221048359?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zOTc3ODU3MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70");
+        }
+        return imageUrlMap;
+    }
 }
