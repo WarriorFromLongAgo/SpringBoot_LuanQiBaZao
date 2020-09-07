@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.jdk8_date;
+package com.xuegao.luanqibazao_1.jdk8.date;
 
 import java.time.Instant;
 import java.time.LocalDate;
