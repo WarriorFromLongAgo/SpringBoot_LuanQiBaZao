@@ -181,6 +181,15 @@ public class JucDownloadPicture {
         }
     }
 
+    /**
+     * <br/> @Title:
+     * <br/> @MethodName:  downloadCompletableFuture2
+     * <br/> @param map:
+     * <br/> @Return void
+     * <br/> @Description:
+     * <br/> @author: 80004960
+     * <br/> @date:  2020/9/8 19:10
+     */
     private static void downloadCompletableFuture2(Map<String, String> map) {
         try {
             List<CompletableFuture<?>> futureList = new ArrayList<>();
