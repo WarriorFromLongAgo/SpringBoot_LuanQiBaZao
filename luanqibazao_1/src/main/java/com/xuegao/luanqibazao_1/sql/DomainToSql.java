@@ -22,8 +22,8 @@ import java.util.Map;
  * <br/> @author：花名 xuegao
  * <br/> @date：2020/8/24 11:26
  */
-public class modelToSsqlTabe {
-    private final static Logger logger = LoggerFactory.getLogger(modelToSsqlTabe.class);
+public class DomainToSql {
+    private final static Logger logger = LoggerFactory.getLogger(DomainToSql.class);
 
     private static String table_prefix = "t_";
     private static String classPath = "E:\\GiteeDemo\\SpringBoot_LuanQiBaZao\\luanqibazao_1\\src\\main\\java\\com\\xuegao\\luanqibazao_1\\domain\\UserVO.java";
