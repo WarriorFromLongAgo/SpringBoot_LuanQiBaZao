@@ -19,7 +19,7 @@ import java.util.Map;
  * <br/> @PackageName：com.xuegao.luanqibazao_1.sql
  * <br/> @ClassName：modelToSsqlTabe
  * <br/> @Description：
- * <br/> @author：花名 xuegao
+ * <br/> @author：xuegao
  * <br/> @date：2020/8/24 11:26
  */
 public class DomainToSql {

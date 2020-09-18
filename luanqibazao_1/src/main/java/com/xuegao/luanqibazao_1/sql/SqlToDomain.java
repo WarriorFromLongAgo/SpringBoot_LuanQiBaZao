@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -15,27 +17,34 @@ import java.util.stream.Collectors;
  * <br/> @date：2020/9/17 17:57
  */
 public class SqlToDomain {
-    private static final String PRIMARY = "PRIMARY";
+    private static final String KEY = "KEY";
     private static final String INDEX = "INDEX";
+    private static final String COMMENT = "COMMENT";
+    private static final String AUTHOR = "xuegao";
+    private static String PACKAGE_NAME;
     private static String CLASS_NAME;
     private static String TABLE_NAME;
-    private static StringBuilder CLASS_STR = new StringBuilder();
-    private static final String AUTHOR = "xuegao";
-    private static final Set<String> INT_SET = new HashSet<>();
-    private static final Set<String> LONG_SET = new HashSet<>();
-    private static final Set<String> STRING_SET = new HashSet<>();
-    private static final Set<String> DATE_SET = new HashSet<>();
+    private static final StringBuilder CLASS_STR = new StringBuilder();
+    private static final Map<String, String> INT_MAP = new HashMap<>();
+    private static final Map<String, String> LONG_MAP = new HashMap<>();
+    private static final Map<String, String> STRING_MAP = new HashMap<>();
+    private static final Map<String, String> DATE_MAP = new HashMap<>();
+    private static final Map<String, String> COMMENT_MAP = new LinkedHashMap<>();
+    // 下划线 转 驼峰
+    private static final Pattern LINE_PATTERN = Pattern.compile("_(\\w)");
+    // 驼峰 转 下划线
+    private static final Pattern UNDERLINE_WORDS_PATTERN = Pattern.compile("[A-Z]");
 
     static {
-        INT_SET.add("int");
-        INT_SET.add("tinyint");
+        INT_MAP.put("int", " Integer ");
+        INT_MAP.put("tinyint", " Integer ");
 
-        LONG_SET.add("bigint");
+        LONG_MAP.put("bigint", " Long ");
 
-        STRING_SET.add("char");
-        STRING_SET.add("varchar");
+        STRING_MAP.put("char", " String ");
+        STRING_MAP.put("varchar", " String ");
 
-        DATE_SET.add("datetime");
+        DATE_MAP.put("datetime", " Date ");
     }
 
     public static void main(String[] args) {
@@ -60,13 +69,24 @@ public class SqlToDomain {
                 "  CHARACTER SET = utf8mb4\n" +
                 "  COLLATE = utf8mb4_general_ci\n" +
                 "  ROW_FORMAT = Dynamic comment '对文章的点赞记录';";
+
+        PACKAGE_NAME = "com.xuegao.springboot_tool.model.doo";
+        SqlToDomain(sql);
+    }
+
+    private static void SqlToDomain(String sql) {
         sql = get1(sql);
         System.out.println(sql);
         String[] sqlArr = get2(sql);
         System.out.println(Arrays.toString(sqlArr));
+        // map = id -> bigint
         Map<String, String> map = get3(sqlArr);
-
+        System.out.println(COMMENT_MAP);
+        System.out.println(map);
         generatePrefix();
+        generateAttribute(map);
+        generateSuffix();
+        System.out.println(CLASS_STR);
     }
 
     public static String get1(String sql) {
@@ -105,34 +125,100 @@ public class SqlToDomain {
             // [`id`, bigint(20), NOT, NULL, AUTO_INCREMENT, comment, '文章id']
             spaceSplitList = spaceSplitList.stream().filter(StringUtils::isNotBlank).collect(Collectors.toList());
             System.out.println(spaceSplitList);
-            if (spaceSplitList.contains(PRIMARY) || spaceSplitList.contains(PRIMARY.toLowerCase())) {
+            if (spaceSplitList.contains(KEY) || spaceSplitList.contains(KEY.toLowerCase())) {
                 continue;
             }
             if (spaceSplitList.contains(INDEX) || spaceSplitList.contains(INDEX.toLowerCase())) {
                 continue;
+            }
+            if (spaceSplitList.contains(COMMENT) || spaceSplitList.contains(COMMENT.toLowerCase())) {
+                String key = underlineWordsToCamelCase(spaceSplitList.get(0).replaceAll("`", ""));
+                COMMENT_MAP.put(key, spaceSplitList.get(spaceSplitList.size() - 1).replaceAll("'", ""));
             }
             String key = spaceSplitList.get(0);
             key = key.replaceAll("`", "");
             String value = spaceSplitList.get(1);
             int endIndex = value.indexOf("(");
             value = value.substring(0, endIndex);
-            map.put(key, value.toLowerCase());
+            map.put(underlineWordsToCamelCase(key.toLowerCase()), value.toLowerCase());
         }
-        System.out.println(map);
         return map;
     }
 
-    public static String get4(Map<String, String> map) {
+    public static void generateAttribute(Map<String, String> map) {
         for (Map.Entry<String, String> keyValueEntry : map.entrySet()) {
             String key = keyValueEntry.getKey();
             String value = keyValueEntry.getValue();
 
+            CLASS_STR.append(System.lineSeparator());
 
+            if ("id".equalsIgnoreCase(key)) {
+                CLASS_STR.append("    @TableId(\"").append(COMMENT_MAP.get(key)).append("\")");
+            } else {
+                CLASS_STR.append("    @TableField(\"").append(COMMENT_MAP.get(key)).append("\")");
+            }
+            CLASS_STR.append(System.lineSeparator());
+
+            CLASS_STR.append("    @ApiModelProperty(value = \"").append(COMMENT_MAP.get(key)).append("\")");
+            CLASS_STR.append(System.lineSeparator());
+
+            if (INT_MAP.containsKey(value)) {
+                CLASS_STR.append("    private").append(INT_MAP.get(value)).append(key).append(";");
+            }
+            if (LONG_MAP.containsKey(value)) {
+                CLASS_STR.append("    private").append(LONG_MAP.get(value)).append(key).append(";");
+            }
+            if (STRING_MAP.containsKey(value)) {
+                CLASS_STR.append("    private").append(STRING_MAP.get(value)).append(key).append(";");
+            }
+            if (DATE_MAP.containsKey(value)) {
+                CLASS_STR.append("    private").append(DATE_MAP.get(value)).append(key).append(";");
+            }
+            CLASS_STR.append(System.lineSeparator());
         }
-        return "sql.split(";
+    }
+
+    /**
+     * <br/> @Title: 下划线转驼峰
+     * <br/> @MethodName:  camelCase
+     * <br/> @param underlineWords:
+     * <br/> @Return java.lang.String
+     * <br/> @Description:
+     * <br/> @author: xuegao
+     * <br/> @date:  2020/9/18 10:47
+     */
+    public static String underlineWordsToCamelCase(String underlineWords) {
+        Matcher matcher = LINE_PATTERN.matcher(underlineWords);
+        StringBuffer stringBuffer = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(stringBuffer, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(stringBuffer);
+        return stringBuffer.toString();
+    }
+
+    /**
+     * <br/> @Title: 驼峰 转 下划线
+     * <br/> @MethodName:  underlineWords
+     * <br/> @param camelCase:
+     * <br/> @Return java.lang.String
+     * <br/> @Description:
+     * <br/> @author: xuegao
+     * <br/> @date:  2020/9/18 10:49
+     */
+    public static String camelCaseToUnderlineWords(String camelCase) {
+        Matcher matcher = UNDERLINE_WORDS_PATTERN.matcher(camelCase);
+        StringBuffer stringBuffer = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(stringBuffer, "_" + matcher.group(0).toLowerCase());
+        }
+        matcher.appendTail(stringBuffer);
+        return stringBuffer.toString();
     }
 
     public static void generatePrefix() {
+        CLASS_STR.append(System.lineSeparator());
+        CLASS_STR.append("package").append(" ").append(PACKAGE_NAME).append(";");
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append("import com.baomidou.mybatisplus.annotation.TableId;");
@@ -151,7 +237,7 @@ public class SqlToDomain {
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append("/**");
         CLASS_STR.append(System.lineSeparator());
-        CLASS_STR.append(" * <br/> @PackageName：com.fff.springbootapiseedtest.model.po");
+        CLASS_STR.append(" * <br/> @PackageName：").append(PACKAGE_NAME);
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append(" * <br/> @ClassName：").append(CLASS_NAME);
         CLASS_STR.append(System.lineSeparator());
@@ -167,8 +253,13 @@ public class SqlToDomain {
         CLASS_STR.append("@TableName(\"").append(TABLE_NAME).append("\")");
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append("public class ").append(CLASS_NAME).append(" implements Serializable {");
-        CLASS_STR.append("    private static final long serialVersionUID = 8778430056221728L;");
         CLASS_STR.append(System.lineSeparator());
-        System.out.println(CLASS_STR.toString());
+        CLASS_STR.append("    private static final long serialVersionUID = 1L;");
+        CLASS_STR.append(System.lineSeparator());
+    }
+
+    public static void generateSuffix() {
+        CLASS_STR.append(System.lineSeparator());
+        CLASS_STR.append("}");
     }
 }
