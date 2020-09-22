@@ -14,13 +14,15 @@ import java.lang.annotation.*;
 @Target(value = {ElementType.METHOD, ElementType.FIELD, ElementType.TYPE})
 @Retention(value = RetentionPolicy.RUNTIME)
 public @interface RedisLimit {
+
     /**
      *
      */
     int limit() default 5;
 
     /**
-     *
+     * 几秒钟
      */
-    int sec() default 5;
+    int milliSeconds() default 5000;
 }
+

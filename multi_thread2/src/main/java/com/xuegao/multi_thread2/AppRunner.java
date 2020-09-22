@@ -22,25 +22,25 @@ public class AppRunner implements CommandLineRunner, Order {
         LOGGER.info("=========================================");
         LOGGER.info("=========================================");
 
-        List<String> str = new ArrayList<>();
-        System.out.println("内存 和 CPU分界");
-        new Thread(() -> {
-            int result = 0;
-            while (true) {
-                String s = new byte[100000].toString() + "=" + result;
-                System.out.println(s);
-                str.add(s);
-                System.out.println("str = " + str.size());
-                Runtime rt = Runtime.getRuntime();
-                System.out.println("freeMemory = " + rt.freeMemory() / (1024 * 1024));
-                System.out.println("maxMemory = " + rt.maxMemory() / (1024 * 1024));
-                System.out.println("totalMemory = " + rt.totalMemory() / (1024 * 1024));
-                result++;
-                if (result > Integer.MAX_VALUE / 2) {
-                    result = 0;
-                }
-            }
-        }).start();
+        // List<String> str = new ArrayList<>();
+        // System.out.println("内存 和 CPU分界");
+        // new Thread(() -> {
+        //     int result = 0;
+        //     while (true) {
+        //         String s = new byte[100000].toString() + "=" + result;
+        //         System.out.println(s);
+        //         str.add(s);
+        //         System.out.println("str = " + str.size());
+        //         Runtime rt = Runtime.getRuntime();
+        //         System.out.println("freeMemory = " + rt.freeMemory() / (1024 * 1024));
+        //         System.out.println("maxMemory = " + rt.maxMemory() / (1024 * 1024));
+        //         System.out.println("totalMemory = " + rt.totalMemory() / (1024 * 1024));
+        //         result++;
+        //         if (result > Integer.MAX_VALUE / 2) {
+        //             result = 0;
+        //         }
+        //     }
+        // }).start();
         LOGGER.info("=========================================");
         LOGGER.info("=========================================");
         LOGGER.info("=========================================");

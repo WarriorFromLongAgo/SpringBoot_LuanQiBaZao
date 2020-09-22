@@ -1,2 +1,18 @@
 server:
   port: 9999
+spring:
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    timeout: 10000
+    #    cluster:
+    #      nodes: 192.168.0.203:7000,192.168.0.203:7001,192.168.0.203:7002
+    #      max-redirects: 3
+    lettuce:
+      shutdown-timeout: 10000
+      pool:
+        max-active: 8
+        max-wait: 0
+        min-idle: 0
+        max-idle: 8

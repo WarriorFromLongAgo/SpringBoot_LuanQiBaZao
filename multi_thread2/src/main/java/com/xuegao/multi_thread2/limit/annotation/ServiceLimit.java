@@ -7,33 +7,33 @@ import java.lang.annotation.*;
  * 创建者	张志朋
  * 创建时间	2015年6月3日
  */
-@Target({ElementType.PARAMETER, ElementType.METHOD})    
-@Retention(RetentionPolicy.RUNTIME)    
-@Documented    
-public  @interface ServiceLimit {
-	/**
-	 * 描述
-	 */
-	String description()  default "";
+@Target({ElementType.PARAMETER, ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+public @interface ServiceLimit {
+    /**
+     * 描述
+     */
+    String description() default "";
 
-	/**
-	 * key
-	 */
-	String key() default "";
+    /**
+     * key
+     */
+    String key() default "";
 
-	/**
-	 * 类型
-	 */
-	LimitType limitType() default LimitType.CUSTOMER;
+    /**
+     * 类型
+     */
+    LimitType limitType() default LimitType.CUSTOMER;
 
-	enum LimitType {
-		/**
-		 * 自定义key
-		 */
-		CUSTOMER,
-		/**
-		 * 根据请求者IP
-		 */
-		IP
-	}
+    enum LimitType {
+        /**
+         * 自定义key
+         */
+        CUSTOMER,
+        /**
+         * 根据请求者IP
+         */
+        IP
+    }
 }

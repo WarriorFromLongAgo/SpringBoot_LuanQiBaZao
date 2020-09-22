@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletOutputStream;
@@ -29,6 +30,7 @@ public class RateLimitToGuava {
 
     @Autowired
     private HttpServletResponse response;
+
     /**
      * 限流熔断
      * 并发数设置为 5
@@ -64,7 +66,10 @@ public class RateLimitToGuava {
     }
 
     private void output(HttpServletResponse response, String message) throws IOException {
-        response.setContentType("application/json;charset=UTF-8");
+        // response.setContentType("application/json;charset=UTF-8");
+
+        response.setContentType(MediaType.APPLICATION_JSON.toString());
+
         ServletOutputStream outputStream = null;
         try {
             outputStream = response.getOutputStream();
@@ -75,7 +80,5 @@ public class RateLimitToGuava {
             outputStream.flush();
             outputStream.close();
         }
-
-
     }
 }
