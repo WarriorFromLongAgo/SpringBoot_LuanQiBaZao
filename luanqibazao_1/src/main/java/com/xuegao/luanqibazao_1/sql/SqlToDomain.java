@@ -31,6 +31,7 @@ public class SqlToDomain {
     private static final StringBuilder CLASS_STR = new StringBuilder();
     private static final Map<String, String> INT_MAP = new HashMap<>();
     private static final Map<String, String> LONG_MAP = new HashMap<>();
+    private static final Map<String, String> DOUBLE_MAP = new HashMap<>();
     private static final Map<String, String> STRING_MAP = new HashMap<>();
     private static final Map<String, String> DATE_MAP = new HashMap<>();
     private static final Map<String, String> COMMENT_MAP = new LinkedHashMap<>();
@@ -62,6 +63,8 @@ public class SqlToDomain {
 
         LONG_MAP.put("bigint", "Long");
 
+        DOUBLE_MAP.put("double", "Double");
+
         STRING_MAP.put("char", "String");
         STRING_MAP.put("varchar", "String");
 
@@ -74,23 +77,28 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "create table t_thumbs_up_userinfo\n" +
+        String sql = "CREATE TABLE `t_dic`\n" +
                 "(\n" +
-                "    id           bigint auto_increment comment '主键'\n" +
-                "        primary key,\n" +
-                "    article_id   bigint                    default 0                 not null comment '文章id',\n" +
-                "    give_user_id bigint                    default 0                 not null comment '点赞的用户id',\n" +
-                "    user_id      bigint                    default 0                 not null comment '被点赞的用户id',\n" +
-                "    status       char charset utf8         default ''                not null comment '点赞状态，0取消，1点赞',\n" +
-                "    delete_flag  char charset utf8         default ''                not null comment '0未删除，1已删除',\n" +
-                "    create_id    bigint                    default 0                 not null comment '创建人id',\n" +
-                "    create_name  varchar(100) charset utf8 default '创建人真实名称'         not null comment '创建人真实名称',\n" +
-                "    create_time  datetime                  default CURRENT_TIMESTAMP not null comment '创建时间',\n" +
-                "    update_id    bigint                    default 0                 not null comment '修改人id',\n" +
-                "    update_name  varchar(100) charset utf8 default '创建人真实名称'         not null comment '修改人真实名称',\n" +
-                "    update_time  datetime                  default CURRENT_TIMESTAMP not null comment '修改时间'\n" +
-                ")\n" +
-                "    comment '对文章的点赞记录';";
+                "    `id`          bigint(20)                      NOT NULL PRIMARY KEY AUTO_INCREMENT comment '主键',\n" +
+                "    `pid`         tinyint(2)                      NOT NULL COLLATE utf8_general_ci default 0 comment '0不启用，1草稿，2启用',\n" +
+                "    `type_id`     int(10)                         NOT NULL COLLATE utf8_general_ci default 0 comment '类型id 区分某一类数据',\n" +
+                "    `value`       varchar(100) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '' comment '值',\n" +
+                "    `name`        varchar(100) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '' comment '名称',\n" +
+                "    `describe`    varchar(200) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '' comment '描述',\n" +
+                "    `status`      tinyint(2)                      NOT NULL COLLATE utf8_general_ci default 0 comment '0不启用，1草稿，2启用',\n" +
+                "    `double_ee`   double(5, 2)                    NOT NULL COLLATE utf8_general_ci default 0 comment 'double_ee',\n" +
+                "    `delete_flag` tinyint(1)                      NOT NULL COLLATE utf8_general_ci default 0 comment '0未删除，1已删除',\n" +
+                "    `create_id`   bigint(20)                      NOT NULL COLLATE utf8_general_ci default 0 comment '创建人id',\n" +
+                "    `create_name` varchar(100) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '创建人真实名称' comment '创建人真实名称',\n" +
+                "    `create_time` datetime(0)                     NOT NULL COLLATE utf8_general_ci default now() comment '创建时间',\n" +
+                "    `update_id`   bigint(20)                      NOT NULL COLLATE utf8_general_ci default 0 comment '修改人id',\n" +
+                "    `update_name` varchar(100) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '创建人真实名称' comment '修改人真实名称',\n" +
+                "    `update_time` datetime(0)                     NOT NULL COLLATE utf8_general_ci default now() comment '修改时间'\n" +
+                ") ENGINE = InnoDB\n" +
+                "  AUTO_INCREMENT = 1\n" +
+                "  CHARACTER SET = utf8mb4\n" +
+                "  COLLATE = utf8mb4_general_ci\n" +
+                "  ROW_FORMAT = Dynamic comment '字典表';";
         PACKAGE_NAME = "com.xuegao.springboot_tool.model.doo";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
@@ -105,7 +113,7 @@ public class SqlToDomain {
         get4(sql);
         String[] sqlArr = get2(sqlAttribute);
         // System.out.println(Arrays.toString(sqlArr));
-        get3(sqlArr);
+        get3(Arrays.asList(sqlArr));
         // System.out.println(COMMENT_MAP);
         // System.out.println(ATTRIBUTE_MAP);
         generatePrefix();
@@ -139,8 +147,23 @@ public class SqlToDomain {
         return sql.split(",");
     }
 
-    public static void get3(String[] sqlArr) {
-        for (String sql : sqlArr) {
+    public static void get3(List<String> sqlList) {
+        // Iterator<String> iterator = sqlList.iterator();
+        // while (iterator.hasNext()) {
+        //     String next = iterator.next();
+        //     if (next.toLowerCase().contains("double")) {
+        //         iterator.hasNext();
+        //     }
+        // }
+
+        for (int i = 0; i < sqlList.size(); i++) {
+            String sql = sqlList.get(i);
+            if (sql.toLowerCase().contains("double")) {
+                sqlList.set(i + 1, "");
+            }
+            if (StringUtils.isBlank(sql)) {
+                continue;
+            }
             // 根据空格 切割字符串
             List<String> spaceSplitList = Arrays.asList(sql.split(" "));
             // 如果不是空，返回true，数据保留
@@ -474,6 +497,8 @@ public class SqlToDomain {
             javaType = INT_MAP.get(sqlType);
         } else if (LONG_MAP.containsKey(sqlType)) {
             javaType = LONG_MAP.get(sqlType);
+        } else if (DOUBLE_MAP.containsKey(sqlType)) {
+            javaType = DOUBLE_MAP.get(sqlType);
         } else if (STRING_MAP.containsKey(sqlType)) {
             javaType = STRING_MAP.get(sqlType);
         } else if (DATE_MAP.containsKey(sqlType)) {
