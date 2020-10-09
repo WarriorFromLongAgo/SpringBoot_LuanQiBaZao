@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.http;
+package com.xuegao.luanqibazao_1.http.download;
 
 import java.io.*;
 import java.net.MalformedURLException;

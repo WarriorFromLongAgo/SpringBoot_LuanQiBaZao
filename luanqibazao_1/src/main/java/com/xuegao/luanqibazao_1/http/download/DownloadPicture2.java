@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.http;
+package com.xuegao.luanqibazao_1.http.download;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.http

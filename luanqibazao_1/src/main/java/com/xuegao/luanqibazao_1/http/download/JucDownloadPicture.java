@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.http;
+package com.xuegao.luanqibazao_1.http.download;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;

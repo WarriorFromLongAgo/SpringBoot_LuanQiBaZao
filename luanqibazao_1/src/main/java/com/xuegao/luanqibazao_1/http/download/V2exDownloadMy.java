@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.http;
+package com.xuegao.luanqibazao_1.http.download;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
