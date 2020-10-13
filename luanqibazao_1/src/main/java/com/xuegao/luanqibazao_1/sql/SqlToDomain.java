@@ -77,29 +77,15 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "CREATE TABLE `t_dic`\n" +
+        String sql = "create table t_my_jvm\n" +
                 "(\n" +
-                "    `id`          bigint(20)                      NOT NULL PRIMARY KEY AUTO_INCREMENT comment '主键',\n" +
-                "    `pid`         tinyint(2)                      NOT NULL COLLATE utf8_general_ci default 0 comment '0不启用，1草稿，2启用',\n" +
-                "    `type_id`     int(10)                         NOT NULL COLLATE utf8_general_ci default 0 comment '类型id 区分某一类数据',\n" +
-                "    `value`       varchar(100) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '' comment '值',\n" +
-                "    `name`        varchar(100) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '' comment '名称',\n" +
-                "    `describe`    varchar(200) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '' comment '描述',\n" +
-                "    `status`      tinyint(2)                      NOT NULL COLLATE utf8_general_ci default 0 comment '0不启用，1草稿，2启用',\n" +
-                "    `double_ee`   double(5, 2)                    NOT NULL COLLATE utf8_general_ci default 0 comment 'double_ee',\n" +
-                "    `delete_flag` tinyint(1)                      NOT NULL COLLATE utf8_general_ci default 0 comment '0未删除，1已删除',\n" +
-                "    `create_id`   bigint(20)                      NOT NULL COLLATE utf8_general_ci default 0 comment '创建人id',\n" +
-                "    `create_name` varchar(100) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '创建人真实名称' comment '创建人真实名称',\n" +
-                "    `create_time` datetime(0)                     NOT NULL COLLATE utf8_general_ci default now() comment '创建时间',\n" +
-                "    `update_id`   bigint(20)                      NOT NULL COLLATE utf8_general_ci default 0 comment '修改人id',\n" +
-                "    `update_name` varchar(100) CHARACTER SET utf8 NOT NULL COLLATE utf8_general_ci default '创建人真实名称' comment '修改人真实名称',\n" +
-                "    `update_time` datetime(0)                     NOT NULL COLLATE utf8_general_ci default now() comment '修改时间'\n" +
-                ") ENGINE = InnoDB\n" +
-                "  AUTO_INCREMENT = 1\n" +
-                "  CHARACTER SET = utf8mb4\n" +
-                "  COLLATE = utf8mb4_general_ci\n" +
-                "  ROW_FORMAT = Dynamic comment '字典表';";
-        PACKAGE_NAME = "com.xuegao.springboot_tool.model.doo";
+                "    id            bigint auto_increment\n" +
+                "        primary key,\n" +
+                "    configuration varchar(100) charset utf8 default '' not null comment '配置',\n" +
+                "    description   varchar(100) charset utf8 default '' not null comment '事情的描述'\n" +
+                ")\n" +
+                "    comment 'JVM问题排查';";
+        PACKAGE_NAME = "org.example.domain.do.test";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
     }
@@ -347,7 +333,7 @@ public class SqlToDomain {
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append(" * <br/> @author：").append(AUTHOR);
         CLASS_STR.append(System.lineSeparator());
-        String format = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+        String format = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
         CLASS_STR.append(" * <br/> @date：").append(format);
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append(" */");
