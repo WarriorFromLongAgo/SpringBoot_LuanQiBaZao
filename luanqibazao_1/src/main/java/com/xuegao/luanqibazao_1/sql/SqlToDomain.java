@@ -50,6 +50,8 @@ public class SqlToDomain {
     private static final StringBuilder GENERATE_GET = new StringBuilder();
     private static final Boolean GENERATE_SET_FLAG = true;
     private static final StringBuilder GENERATE_SET = new StringBuilder();
+    private static final Boolean GENERATE_CONSTRUCTOR_FLAG = true;
+    private static final StringBuilder GENERATE_CONSTRUCTOR = new StringBuilder();
     // t_thumbs_up_userinfo
     // activity_push_center_rec
     // 是否保留表名的前缀，默认true。
@@ -77,14 +79,20 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "create table t_my_jvm\n" +
+        String sql = "create table T_TRAIN_CLASS_FILE\n" +
                 "(\n" +
-                "    id            bigint auto_increment\n" +
-                "        primary key,\n" +
-                "    configuration varchar(100) charset utf8 default '' not null comment '配置',\n" +
-                "    description   varchar(100) charset utf8 default '' not null comment '事情的描述'\n" +
-                ")\n" +
-                "    comment 'JVM问题排查';";
+                "    `id`           BIGINT(20)    NOT NULL PRIMARY KEY AUTO_INCREMENT,\n" +
+                "    `file_name`    VARCHAR(1000) NOT NULL COLLATE utf8_general_ci default '' comment '文件名称',\n" +
+                "    `file_path`    VARCHAR(500)  NOT NULL COLLATE utf8_general_ci default '' comment '文件路径',\n" +
+                "    `delete_flag`  TINYINT(2)    NOT NULL COLLATE utf8_general_ci default 0 comment '是否删除',\n" +
+                "    `create_date`  DATETIME      NOT NULL COLLATE utf8_general_ci default NOW() comment '创建时间',\n" +
+                "    `creater_id`   VARCHAR(32)   NOT NULL COLLATE utf8_general_ci default '' comment '创建人工号',\n" +
+                "    `creater_name` VARCHAR(64)   NOT NULL COLLATE utf8_general_ci default '' comment '创建人姓名'\n" +
+                ") ENGINE = InnoDB\n" +
+                "  AUTO_INCREMENT = 1\n" +
+                "  CHARACTER SET = utf8mb4\n" +
+                "  COLLATE = utf8mb4_general_ci\n" +
+                "  ROW_FORMAT = Dynamic comment '班级学习文档';";
         PACKAGE_NAME = "org.example.domain.do.test";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
@@ -273,7 +281,7 @@ public class SqlToDomain {
             CLASS_STR.append(System.lineSeparator());
 
             if ("id".equalsIgnoreCase(attribute)) {
-                CLASS_STR.append(ONE_TAB).append("@TableId(\"").append(TABLE_MAP.get(attribute)).append("\")");
+                CLASS_STR.append(ONE_TAB).append("@TableId(value = \"").append(TABLE_MAP.get(attribute)).append("\", type = IdType.AUTO)");
             } else {
                 CLASS_STR.append(ONE_TAB).append("@TableField(\"").append(TABLE_MAP.get(attribute)).append("\")");
             }
@@ -293,8 +301,14 @@ public class SqlToDomain {
                 generateToString(attribute);
             }
         }
+        if (GENERATE_CONSTRUCTOR_FLAG) {
+            generateConstructor();
+        }
+
+        CLASS_STR.append(GENERATE_CONSTRUCTOR);
         CLASS_STR.append(GENERATE_GET);
         CLASS_STR.append(GENERATE_SET);
+
         GENERATE_TO_STRING.append(System.lineSeparator());
         GENERATE_TO_STRING.append(ONE_TAB).append(ONE_TAB).append(ONE_TAB).append("\"").append("}").append("\"").append(";");
         GENERATE_TO_STRING.append(System.lineSeparator());
@@ -306,6 +320,8 @@ public class SqlToDomain {
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append("package").append(SPACE).append(PACKAGE_NAME).append(";");
         CLASS_STR.append(System.lineSeparator());
+        CLASS_STR.append(System.lineSeparator());
+        CLASS_STR.append("import com.baomidou.mybatisplus.annotation.IdType;");
         CLASS_STR.append(System.lineSeparator());
         CLASS_STR.append("import com.baomidou.mybatisplus.annotation.TableId;");
         CLASS_STR.append(System.lineSeparator());
@@ -410,6 +426,24 @@ public class SqlToDomain {
                 .append("}");
     }
 
+    public static void generateConstructor() {
+        // public CommonController() {
+        // }
+
+        GENERATE_CONSTRUCTOR.append(System.lineSeparator());
+        GENERATE_CONSTRUCTOR.append(ONE_TAB)
+                .append("public")
+                .append(SPACE)
+                .append(CLASS_NAME)
+                .append("(")
+                .append(")")
+                .append(SPACE)
+                .append("{");
+        GENERATE_CONSTRUCTOR.append(System.lineSeparator());
+        GENERATE_CONSTRUCTOR.append(ONE_TAB)
+                .append("}");
+    }
+
     public static void generateToString(String attribute) {
         // "id=" + id +
         GENERATE_TO_STRING.append(System.lineSeparator());
@@ -505,7 +539,7 @@ public class SqlToDomain {
      * <br/> @date:  2020/9/21 14:12
      */
     public static String wordToFirstCapital(String word) {
-        char[] charArr = word.toCharArray();
+        char[] charArr = word.toLowerCase().toCharArray();
         char c = charArr[0];
         if (c >= 'a' && c <= 'z') {
             charArr[0] -= 32;
