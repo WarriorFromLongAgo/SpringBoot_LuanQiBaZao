@@ -20,7 +20,7 @@ import java.util.Enumeration;
  */
 public class KmsJettyDeal {
 
-    private static final String JBOSS_PATH = "jboss-as\\server\\default\\deploy\\kms-mserver.war\\";
+    private static final String JBOSS_PATH = "\\server\\default\\deploy\\kms-mserver.war\\";
     private static final String IDEA_PATH = "kms-mserver\\target\\kms-mserver.war";
 
     public static void main(String[] args) throws InterruptedException {
@@ -32,7 +32,7 @@ public class KmsJettyDeal {
         // 压缩包所在，也就是 idea 的编译目录
         String zipfilePath = "G:\\kms-80004960\\kms-mserver\\target\\kms-mserver.war";
         // Jboss default 目录
-        String unZipfilePath = "E:\\IDE\\jboss-as\\server\\default\\deploy\\kms-mserver.war";
+        String unZipfilePath = "E:\\IDE\\jboss-4.0.0\\server\\default\\deploy\\kms-mserver.war";
 
         kmsJetty(zipfilePath, unZipfilePath);
 

@@ -69,6 +69,7 @@ public class SqlToDomain {
 
         STRING_MAP.put("char", "String");
         STRING_MAP.put("varchar", "String");
+        STRING_MAP.put("text", "String");
 
         DATE_MAP.put("datetime", "Date");
     }
@@ -79,20 +80,34 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "create table T_TRAIN_CLASS_FILE\n" +
+        String sql = "create table t_train_class\n" +
                 "(\n" +
-                "    `id`           BIGINT(20)    NOT NULL PRIMARY KEY AUTO_INCREMENT,\n" +
-                "    `file_name`    VARCHAR(1000) NOT NULL COLLATE utf8_general_ci default '' comment '文件名称',\n" +
-                "    `file_path`    VARCHAR(500)  NOT NULL COLLATE utf8_general_ci default '' comment '文件路径',\n" +
-                "    `delete_flag`  TINYINT(2)    NOT NULL COLLATE utf8_general_ci default 0 comment '是否删除',\n" +
-                "    `create_date`  DATETIME      NOT NULL COLLATE utf8_general_ci default NOW() comment '创建时间',\n" +
-                "    `creater_id`   VARCHAR(32)   NOT NULL COLLATE utf8_general_ci default '' comment '创建人工号',\n" +
-                "    `creater_name` VARCHAR(64)   NOT NULL COLLATE utf8_general_ci default '' comment '创建人姓名'\n" +
-                ") ENGINE = InnoDB\n" +
-                "  AUTO_INCREMENT = 1\n" +
-                "  CHARACTER SET = utf8mb4\n" +
-                "  COLLATE = utf8mb4_general_ci\n" +
-                "  ROW_FORMAT = Dynamic comment '班级学习文档';";
+                "    id              bigint auto_increment comment '主键ID'\n" +
+                "        primary key,\n" +
+                "    name            varchar(200) charset utf8 default ''                not null comment '名称',\n" +
+                "    code            varchar(100) charset utf8 default ''                not null comment '编码',\n" +
+                "    cover_image     varchar(200) charset utf8 default ''                not null comment '封面',\n" +
+                "    teacher_id      varchar(32) charset utf8  default ''                not null comment '班主任工号',\n" +
+                "    teacher_name    varchar(64) charset utf8  default ''                not null comment '班主任姓名',\n" +
+                "    begin_date      datetime                  default CURRENT_TIMESTAMP not null comment '开始时间',\n" +
+                "    end_date        datetime                  default CURRENT_TIMESTAMP not null comment '结束类型',\n" +
+                "    type            tinyint                                             null comment '授课类型： 1 面授， 2 在线， 3 混合',\n" +
+                "    is_open         tinyint(1)                default 0                 not null comment '是否公开： 0  否 ， 1 是',\n" +
+                "    personnel_limit bigint(11)                default 0                 not null comment '人数上限',\n" +
+                "    category        bigint(13)                default 0                 not null comment '分类ID',\n" +
+                "    activity_type   tinyint(2)                                          null comment '活动开启类型： 1 通关， 2 时间',\n" +
+                "    `describe`      text charset utf8                                   null comment '班级描述',\n" +
+                "    create_date     datetime                  default CURRENT_TIMESTAMP not null comment '创建时间',\n" +
+                "    creater_id      varchar(32) charset utf8  default ''                not null comment '创建人工号',\n" +
+                "    creater_name    varchar(64) charset utf8  default ''                not null comment '创建人姓名',\n" +
+                "    update_date     datetime                  default CURRENT_TIMESTAMP not null comment '修改时间',\n" +
+                "    delete_flag     tinyint(1)                default 0                 not null comment '删除标识， 0 否， 1 是',\n" +
+                "    project_id      bigint                    default 0                 not null comment '所属项目ID',\n" +
+                "    status          tinyint(2)                                          null comment '状态 1.草稿 2.发布 3.取消发布',\n" +
+                "    tenant_id       bigint                    default 0                 not null comment '租户ID',\n" +
+                "    secret_level    tinyint(2)                                          null\n" +
+                ")\n" +
+                "    comment '培训班级';";
         PACKAGE_NAME = "org.example.domain.do.test";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
