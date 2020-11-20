@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
@@ -69,13 +70,13 @@ public class KmsJettyDeal {
         try {
             System.out.println(unZipfilePath);
             Boolean aBoolean = deleteAllFile(new File(unZipfilePath));
-            System.out.println(" aBoolean = " + aBoolean);
+            System.out.println(" deleteAllFile aBoolean = " + aBoolean);
             Thread.sleep(1_000);
             unzip2(zipfilePath, unZipfilePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(" 已完成操作 ");
+        System.out.println(" 已完成 unzip2 操作 ");
     }
 
     private static Boolean deleteAllFile(File deleteFile) {
@@ -108,7 +109,7 @@ public class KmsJettyDeal {
         ZipFile zipFile = null;
         try {
             //设置编码格式
-            zipFile = new ZipFile(file, "GBK");
+            zipFile = new ZipFile(file, StandardCharsets.UTF_8.toString());
         } catch (IOException exception) {
             exception.printStackTrace();
             System.out.println("解压文件不存在!");

@@ -80,35 +80,29 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "create table t_train_class\n" +
-                "(\n" +
-                "    id              bigint auto_increment comment '主键ID'\n" +
-                "        primary key,\n" +
-                "    name            varchar(200) charset utf8 default ''                not null comment '名称',\n" +
-                "    code            varchar(100) charset utf8 default ''                not null comment '编码',\n" +
-                "    cover_image     varchar(200) charset utf8 default ''                not null comment '封面',\n" +
-                "    teacher_id      varchar(32) charset utf8  default ''                not null comment '班主任工号',\n" +
-                "    teacher_name    varchar(64) charset utf8  default ''                not null comment '班主任姓名',\n" +
-                "    begin_date      datetime                  default CURRENT_TIMESTAMP not null comment '开始时间',\n" +
-                "    end_date        datetime                  default CURRENT_TIMESTAMP not null comment '结束类型',\n" +
-                "    type            tinyint                                             null comment '授课类型： 1 面授， 2 在线， 3 混合',\n" +
-                "    is_open         tinyint(1)                default 0                 not null comment '是否公开： 0  否 ， 1 是',\n" +
-                "    personnel_limit bigint(11)                default 0                 not null comment '人数上限',\n" +
-                "    category        bigint(13)                default 0                 not null comment '分类ID',\n" +
-                "    activity_type   tinyint(2)                                          null comment '活动开启类型： 1 通关， 2 时间',\n" +
-                "    `describe`      text charset utf8                                   null comment '班级描述',\n" +
-                "    create_date     datetime                  default CURRENT_TIMESTAMP not null comment '创建时间',\n" +
-                "    creater_id      varchar(32) charset utf8  default ''                not null comment '创建人工号',\n" +
-                "    creater_name    varchar(64) charset utf8  default ''                not null comment '创建人姓名',\n" +
-                "    update_date     datetime                  default CURRENT_TIMESTAMP not null comment '修改时间',\n" +
-                "    delete_flag     tinyint(1)                default 0                 not null comment '删除标识， 0 否， 1 是',\n" +
-                "    project_id      bigint                    default 0                 not null comment '所属项目ID',\n" +
-                "    status          tinyint(2)                                          null comment '状态 1.草稿 2.发布 3.取消发布',\n" +
-                "    tenant_id       bigint                    default 0                 not null comment '租户ID',\n" +
-                "    secret_level    tinyint(2)                                          null\n" +
-                ")\n" +
-                "    comment '培训班级';";
-        PACKAGE_NAME = "org.example.domain.do.test";
+        String sql = "create table t_group_message" +
+                "(" +
+                "    `id`             bigint(20)    NOT NULL PRIMARY KEY AUTO_INCREMENT comment '主键'," +
+                "    `msg_type`       tinyint(1)    NOT NULL COLLATE utf8_general_ci default '0' comment '发消息类型 text文本，" +
+                "                                                    image图片，" +
+                "                                                    custom自定义消息（msg_body为json对象即可，服务端不做校验）" +
+                "                                                    voice语音'," +
+                "    `msg_body`       varchar(2000) NOT NULL COLLATE utf8_general_ci comment '消息体'," +
+                "    `from_user_id`   bigint(20)    NOT NULL COLLATE utf8_general_ci default '0' comment '发送者的id'," +
+                "    `from_user_name` varchar(20)   NOT NULL COLLATE utf8_general_ci default '0' comment '发送者的名称'," +
+                "    `group_id`       bigint(20)    NOT NULL COLLATE utf8_general_ci default '0' comment '群组的id'," +
+                "    `group_name`     varchar(20)   NOT NULL COLLATE utf8_general_ci default '0' comment '群组的名称'," +
+                "    `delete_flag`    tinyint(1)    NOT NULL COLLATE utf8_general_ci default '0' comment '是否删除，0未删除，1已删除'," +
+                "    `create_id`      bigint(20)    NOT NULL COLLATE utf8_general_ci comment '创建人id'," +
+                "    `create_time`    datetime(0)   NOT NULL COLLATE utf8_general_ci default now() comment '创建时间'," +
+                "    `update_id`      bigint(20)    NOT NULL COLLATE utf8_general_ci comment '修改人id'," +
+                "    `update_time`    datetime(0)   NOT NULL COLLATE utf8_general_ci default now() comment '修改时间'" +
+                ") ENGINE = InnoDB" +
+                "  AUTO_INCREMENT = 1" +
+                "  CHARACTER SET = utf8mb4" +
+                "  COLLATE = utf8mb4_general_ci" +
+                "  ROW_FORMAT = Dynamic comment '群聊 聊天记录表';";
+        PACKAGE_NAME = "com.xuegao.xuegaoimbase.domain.doo";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
     }
@@ -285,10 +279,24 @@ public class SqlToDomain {
         System.out.println(" ATTRIBUTE_MAP 打印");
         GENERATE_TO_STRING.append(System.lineSeparator());
         GENERATE_TO_STRING.append(System.lineSeparator());
-        GENERATE_TO_STRING.append("" +
-                "    @Override\n" +
-                "    public String toString() {\n" +
-                "        return \"").append(CLASS_NAME).append("{\" +");
+        GENERATE_TO_STRING.append(ONE_TAB)
+                .append("@Override")
+        .append(System.lineSeparator())
+        .append(ONE_TAB).append("public String toString()")
+                .append(SPACE)
+                .append("{")
+                .append(System.lineSeparator())
+        .append(ONE_TAB)
+                .append(ONE_TAB)
+                .append("return")
+                .append(SPACE)
+                .append("\"")
+                .append(CLASS_NAME).append(SPACE)
+                .append("{")
+                .append(SPACE)
+                .append("\"")
+                .append(SPACE)
+                .append("+");
         for (Map.Entry<String, String> keyValueEntry : ATTRIBUTE_MAP.entrySet()) {
             String attribute = keyValueEntry.getKey();
             String sqlType = keyValueEntry.getValue();
