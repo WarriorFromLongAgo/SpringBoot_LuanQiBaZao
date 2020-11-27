@@ -1,5 +1,9 @@
 package com.xuegao.luanqibazao_1.jdk8.lang.StringBuilderTest;
 
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.lang.StringBuilderTest
  * <br/> @ClassName：StringBuilderTest
@@ -9,10 +13,11 @@ package com.xuegao.luanqibazao_1.jdk8.lang.StringBuilderTest;
  */
 public class StringBuilderTest {
     public static void main(String[] args) {
-        add();
-        add2();
-        append();
-        append2();
+        // add();
+        // add2();
+        // append();
+        // append2();
+        subString();
     }
 
     public static void add() {
@@ -61,5 +66,15 @@ public class StringBuilderTest {
             String s = stringBuilder.append(aaaa).toString();
             System.out.println(s);
         }
+    }
+
+    public static void subString() {
+        ArrayList<Integer> arrayList = Lists.newArrayList(1, 2, 3);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Integer integer : arrayList) {
+            stringBuilder.append(integer).append(",");
+        }
+        String substring = stringBuilder.substring(0, stringBuilder.length() - 1);
+        System.out.println(substring);
     }
 }

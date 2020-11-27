@@ -72,6 +72,9 @@ public class SqlToDomain {
         STRING_MAP.put("text", "String");
 
         DATE_MAP.put("datetime", "Date");
+        DATE_MAP.put("date", "Date");
+        DATE_MAP.put("timestamp", "Date");
+
     }
 
     public static void main(String[] args) {
@@ -80,29 +83,23 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "create table t_group_message" +
+        String sql = "create table t_train_review_result" +
                 "(" +
-                "    `id`             bigint(20)    NOT NULL PRIMARY KEY AUTO_INCREMENT comment '主键'," +
-                "    `msg_type`       tinyint(1)    NOT NULL COLLATE utf8_general_ci default '0' comment '发消息类型 text文本，" +
-                "                                                    image图片，" +
-                "                                                    custom自定义消息（msg_body为json对象即可，服务端不做校验）" +
-                "                                                    voice语音'," +
-                "    `msg_body`       varchar(2000) NOT NULL COLLATE utf8_general_ci comment '消息体'," +
-                "    `from_user_id`   bigint(20)    NOT NULL COLLATE utf8_general_ci default '0' comment '发送者的id'," +
-                "    `from_user_name` varchar(20)   NOT NULL COLLATE utf8_general_ci default '0' comment '发送者的名称'," +
-                "    `group_id`       bigint(20)    NOT NULL COLLATE utf8_general_ci default '0' comment '群组的id'," +
-                "    `group_name`     varchar(20)   NOT NULL COLLATE utf8_general_ci default '0' comment '群组的名称'," +
-                "    `delete_flag`    tinyint(1)    NOT NULL COLLATE utf8_general_ci default '0' comment '是否删除，0未删除，1已删除'," +
-                "    `create_id`      bigint(20)    NOT NULL COLLATE utf8_general_ci comment '创建人id'," +
-                "    `create_time`    datetime(0)   NOT NULL COLLATE utf8_general_ci default now() comment '创建时间'," +
-                "    `update_id`      bigint(20)    NOT NULL COLLATE utf8_general_ci comment '修改人id'," +
-                "    `update_time`    datetime(0)   NOT NULL COLLATE utf8_general_ci default now() comment '修改时间'" +
-                ") ENGINE = InnoDB" +
-                "  AUTO_INCREMENT = 1" +
-                "  CHARACTER SET = utf8mb4" +
-                "  COLLATE = utf8mb4_general_ci" +
-                "  ROW_FORMAT = Dynamic comment '群聊 聊天记录表';";
-        PACKAGE_NAME = "com.xuegao.xuegaoimbase.domain.doo";
+                "    id            bigint auto_increment" +
+                "        primary key," +
+                "    review_id     bigint                             null comment '评审活动ID'," +
+                "    user_id       varchar(32) charset utf8           null comment '参与人工号'," +
+                "    user_name     varchar(64) charset utf8           null comment '参与人姓名'," +
+                "    reviewer_id   varchar(32) charset utf8           null comment '审核人工号'," +
+                "    reviewer_name varchar(64) charset utf8           null comment '审核人姓名'," +
+                "    review_status tinyint(1)                         null comment '审核状态： 1 未提交， 2 已提交'," +
+                "    score         tinyint(1)                         null comment '得分'," +
+                "    pass          tinyint(1)                         null comment '是否通过： 1 是， 2 否'," +
+                "    appraise      varchar(2000) charset utf8         null comment '评语'," +
+                "    create_date   datetime default CURRENT_TIMESTAMP not null comment '创建时间'" +
+                ")" +
+                "    comment '评审活动评审表';";
+        PACKAGE_NAME = "com.sf.edu.domain.doo.train";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
     }
@@ -186,20 +183,17 @@ public class SqlToDomain {
             if (spaceSplitList.contains(INDEX) || spaceSplitList.contains(INDEX.toLowerCase())) {
                 continue;
             }
+            String key = underlineWordsToCamelCase(spaceSplitList.get(0).toLowerCase().replaceAll("`", ""));
             if (spaceSplitList.contains(COMMENT) || spaceSplitList.contains(COMMENT.toLowerCase())) {
-                String key = underlineWordsToCamelCase(spaceSplitList.get(0).replaceAll("`", ""));
                 COMMENT_MAP.put(key, spaceSplitList.get(spaceSplitList.size() - 1).replaceAll("'", "").trim());
             }
-            String key = spaceSplitList.get(0);
-            key = key.replaceAll("`", "");
             String value = spaceSplitList.get(1);
             if (value.contains("(")) {
                 int endIndex = value.indexOf("(");
                 value = value.substring(0, endIndex);
             }
-            key = key.toLowerCase();
-            TABLE_MAP.put(underlineWordsToCamelCase(key), key);
-            ATTRIBUTE_MAP.put(underlineWordsToCamelCase(key), value.toLowerCase().trim());
+            TABLE_MAP.put(key, spaceSplitList.get(0));
+            ATTRIBUTE_MAP.put(key, value.toLowerCase().trim());
         }
     }
 
@@ -562,12 +556,11 @@ public class SqlToDomain {
      * <br/> @date:  2020/9/21 14:12
      */
     public static String wordToFirstCapital(String word) {
-        char[] charArr = word.toLowerCase().toCharArray();
-        char c = charArr[0];
-        if (c >= 'a' && c <= 'z') {
-            charArr[0] -= 32;
+        char charAt = word.charAt(0);
+        if (charAt >= 'a' && charAt <= 'z') {
+            charAt -= 32;
         }
-        return String.valueOf(charArr);
+        return charAt + word.substring(1);
     }
 
 }
