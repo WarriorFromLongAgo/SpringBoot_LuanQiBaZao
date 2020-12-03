@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.runtime;
+package com.xuegao.luanqibazao_1.jdk8.lang.runtime;
 
 import java.io.BufferedReader;
 import java.io.IOException;

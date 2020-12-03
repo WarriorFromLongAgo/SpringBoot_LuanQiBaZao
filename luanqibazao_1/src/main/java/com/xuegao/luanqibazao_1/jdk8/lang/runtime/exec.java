@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.runtime;
+package com.xuegao.luanqibazao_1.jdk8.lang.runtime;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * <br/> @PackageName：com.xuegao.luanqibazao_1.runtime
+ * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.lang.runtime
  * <br/> @ClassName：exec
  * <br/> @Description：
  * <br/> @author：花名 xuegao

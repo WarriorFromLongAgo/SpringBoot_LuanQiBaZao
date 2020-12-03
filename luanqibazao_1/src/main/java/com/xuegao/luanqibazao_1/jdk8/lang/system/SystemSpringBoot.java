@@ -1,7 +1,7 @@
-package com.xuegao.luanqibazao_1.system;
+package com.xuegao.luanqibazao_1.jdk8.lang.system;
 
 /**
- * <br/> @PackageName：com.xuegao.luanqibazao_1.system
+ * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.lang.system
  * <br/> @ClassName：SystemSpringBoot
  * <br/> @Description：
  * <br/> @author：xuegao
