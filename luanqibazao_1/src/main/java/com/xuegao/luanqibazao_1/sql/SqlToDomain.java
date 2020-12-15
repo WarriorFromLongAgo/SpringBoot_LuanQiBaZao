@@ -83,22 +83,26 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "create table t_train_review_result" +
+        String sql = "create table t_train_course_catalogue" +
                 "(" +
-                "    id            bigint auto_increment" +
+                "    id                   bigint auto_increment comment '主键ID'" +
                 "        primary key," +
-                "    review_id     bigint                             null comment '评审活动ID'," +
-                "    user_id       varchar(32) charset utf8           null comment '参与人工号'," +
-                "    user_name     varchar(64) charset utf8           null comment '参与人姓名'," +
-                "    reviewer_id   varchar(32) charset utf8           null comment '审核人工号'," +
-                "    reviewer_name varchar(64) charset utf8           null comment '审核人姓名'," +
-                "    review_status tinyint(1)                         null comment '审核状态： 1 未提交， 2 已提交'," +
-                "    score         tinyint(1)                         null comment '得分'," +
-                "    pass          tinyint(1)                         null comment '是否通过： 1 是， 2 否'," +
-                "    appraise      varchar(2000) charset utf8         null comment '评语'," +
-                "    create_date   datetime default CURRENT_TIMESTAMP not null comment '创建时间'" +
+                "    courses_id           bigint                    default 0                 not null comment '课程ID'," +
+                "    courseware_id        bigint                    default 0                 null comment '课件ID'," +
+                "    creater_id           varchar(32) charset utf8  default ''                null comment '创建人编号'," +
+                "    creater_name         varchar(64) charset utf8  default ''                null comment '创建人姓名'," +
+                "    create_date          datetime                  default CURRENT_TIMESTAMP null comment '创建时间'," +
+                "    update_date          datetime                  default CURRENT_TIMESTAMP not null comment '修改时间'," +
+                "    chapter_sort         tinyint(5)                                          null comment '章序号'," +
+                "    chapter_name         varchar(100) charset utf8 default ''                null comment '章节名称'," +
+                "    node_sort            tinyint(5)                                          null comment '节序号'," +
+                "    node_name            varchar(200) charset utf8 default ''                null comment '节名称'," +
+                "    teaching_material_id bigint                                              null comment '教材ID(可能是课件关联的教材ID，也可能是重新选择的教材ID)'," +
+                "    type                 tinyint(2)                                          null comment '章节区分：1 章  2  节'," +
+                "    content              text charset utf8                                   null comment '富文本'," +
+                "    tenant_id            bigint                    default 0                 not null comment '租户ID'" +
                 ")" +
-                "    comment '评审活动评审表';";
+                "    comment '课程目录';";
         PACKAGE_NAME = "com.sf.edu.domain.doo.train";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
