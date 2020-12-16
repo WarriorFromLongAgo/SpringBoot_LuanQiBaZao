@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.lamada;
+package com.xuegao.luanqibazao_1.jdk8.lamada;
 
 public class FunctionTest {
 //    静态方法引用，通过类名::静态方法名， 如 Integer::parseInt

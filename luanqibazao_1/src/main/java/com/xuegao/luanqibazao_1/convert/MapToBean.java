@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.AToB;
+package com.xuegao.luanqibazao_1.convert;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xuegao.luanqibazao_1.domain.UserInfo;

@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.serialization;
+package com.xuegao.luanqibazao_1.convert.serialization;
 
 import com.xuegao.luanqibazao_1.domain.UserInfo;
 import com.xuegao.luanqibazao_1.domain.UserVO;

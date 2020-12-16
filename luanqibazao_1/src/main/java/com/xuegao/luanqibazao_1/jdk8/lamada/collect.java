@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.lamada;
+package com.xuegao.luanqibazao_1.jdk8.lamada;
 
 import java.text.Collator;
 import java.util.*;

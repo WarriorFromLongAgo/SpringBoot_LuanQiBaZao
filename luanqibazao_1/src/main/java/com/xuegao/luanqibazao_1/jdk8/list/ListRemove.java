@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.list;
+package com.xuegao.luanqibazao_1.jdk8.list;
 
 import java.util.ArrayList;
 import java.util.Arrays;

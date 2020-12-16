@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.serialization;
+package com.xuegao.luanqibazao_1.convert.serialization;
 
 import cn.hutool.core.convert.Convert;
 import com.alibaba.fastjson.JSONObject;
