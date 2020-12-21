@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1
@@ -53,6 +54,39 @@ public class CalcUtil {
                 .setScale(2, RoundingMode.UP).doubleValue()) * 100);
 
         returnStr = merchant + "%";
+        return returnStr;
+    }
+
+    /**
+     * <br/> @Title:
+     * <br/> @Description:
+     * <br/> @MethodName: getPercentage2
+     * <br/> @param molecule:
+     * <br/> @param denominator:
+     * <br/> @return: java.lang.String
+     * <br/> @author: xuegao
+     * <br/> @date: 2020/12/21 14:37
+     */
+    public static String getPercentage2(Integer molecule, Integer denominator) {
+        String returnStr = "0%";
+
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        String moleculeStr = decimalFormat.format(molecule);
+        String denominatorStr = decimalFormat.format(denominator);
+        System.out.println(moleculeStr);
+        System.out.println(denominatorStr);
+
+        String format = decimalFormat.format((float) molecule / denominator);
+        System.out.println(format);
+
+
+        double v = Double.parseDouble(moleculeStr);
+        double v1 = Double.parseDouble(denominatorStr);
+        double v2 = v / v1;
+        System.out.println(v);
+        System.out.println(v1);
+        System.out.println(v2);
+
         return returnStr;
     }
 }
