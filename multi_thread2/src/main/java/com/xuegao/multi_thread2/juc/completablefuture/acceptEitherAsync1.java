@@ -1,5 +1,7 @@
 package com.xuegao.multi_thread2.juc.completablefuture;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +22,9 @@ public class acceptEitherAsync1 {
             @Override
             public String get() {
                 try {
+                    System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")));
                     TimeUnit.SECONDS.sleep(10);
+                    System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -34,7 +38,7 @@ public class acceptEitherAsync1 {
         }), new Consumer<String>() {
             @Override
             public void accept(String s) {
-                System.out.println(s);
+                System.out.println("accept = " + s);
             }
         });
         System.out.println(voidCompletableFuture.get());

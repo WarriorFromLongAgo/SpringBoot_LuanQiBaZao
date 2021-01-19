@@ -1,8 +1,6 @@
 package com.xuegao.luanqibazao_1.jdk8.date;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8_date
@@ -13,10 +11,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class date {
     public static void main(String[] args) {
-        Long seconds = 1341855763000L;
-        Date date = new Date(TimeUnit.SECONDS.toMillis(seconds));
-        System.out.println(date);
-        Date date2 = new Date(seconds);
-        System.out.println(date2);
+        jian();
+    }
+
+    // 日期相减
+    public static void jian() {
+        Date date1 = new Date(2021, 1, 19, 15, 34, 11);
+        Date date2 = new Date(2021, 1, 19, 15, 23, 50);
+        long time = date2.getTime() / 1000;
+        System.out.println(time);
+        long time1 = date1.getTime() / 1000;
+        System.out.println(time1);
+        long l = time - time1;
+        System.out.println(l);
+
+        System.out.println(1611041651 - 1611041030);
     }
 }

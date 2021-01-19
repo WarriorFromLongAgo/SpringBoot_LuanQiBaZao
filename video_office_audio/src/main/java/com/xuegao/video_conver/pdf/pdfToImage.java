@@ -24,7 +24,7 @@ public class pdfToImage {
     private final static Logger log = LoggerFactory.getLogger(pdfToImage.class);
 
     private static final String pdfPathPptx = "D:\\nfsc\\KMS\\train.homework\\10 Flink入门.pptx";
-    private static final String pdfPathPpt = "D:\\nfsc\\KMS\\train.homework\\S1206Http协议开发文档V1.4-1.pdf";
+    private static final String pdfPathPpt = "d:\\user\\80004960\\桌面\\户口\\教育部学籍在线验证报告_费久猛.pdf";
     private static final String imagePath = "D:\\nfsc\\KMS\\train.homework\\";
 
     public static void main(String[] args) throws IOException {

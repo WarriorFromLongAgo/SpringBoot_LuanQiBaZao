@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.jdk8.list;
+package com.xuegao.luanqibazao_1.jdk8.util.list;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class ListRemove {
     public static void main(String[] args) {
         // listRemoveTest1();
 
-        listRemoveTest2();
+        // listRemoveTest2();
 
     }
 
