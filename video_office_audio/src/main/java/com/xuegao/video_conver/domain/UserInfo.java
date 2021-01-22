@@ -1,5 +1,7 @@
 package com.xuegao.video_conver.domain;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+
 import java.util.Date;
 
 /**
@@ -10,8 +12,11 @@ import java.util.Date;
  * <br/> @date：2020/7/11 2:21
  */
 public class UserInfo {
+    @ExcelProperty("字符串标题1")
     private String name;
+    @ExcelProperty("字符串标题2")
     private String username;
+    @ExcelProperty("字符串标题3")
     private Date createTime;
 
     public UserInfo() {

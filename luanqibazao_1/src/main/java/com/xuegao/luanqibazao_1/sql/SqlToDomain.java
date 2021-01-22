@@ -84,21 +84,19 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "create table t_train_courses_result" +
+        String sql = "create table t_train_courses_config" +
                 "(" +
-                "    id          bigint auto_increment comment '主键ID'" +
+                "    id           bigint auto_increment comment '主键ID'" +
                 "        primary key," +
-                "    courses_id  bigint                   default 0                 null comment '课程ID'," +
-                "    user_id     varchar(32) charset utf8 default ''                not null comment '用户ID'," +
-                "    user_name   varchar(64) charset utf8 default ''                not null comment '用户姓名'," +
-                "    begin_date  datetime                 default CURRENT_TIMESTAMP not null comment '开始时间'," +
-                "    end_date    datetime                 default CURRENT_TIMESTAMP null comment '结束时间'," +
-                "    create_date datetime                 default CURRENT_TIMESTAMP not null comment '创建时间'," +
-                "    update_date datetime                 default CURRENT_TIMESTAMP not null comment '修改时间'," +
-                "    status      tinyint(3)                                         null comment '状态：1.未开始，2 进行中，3 已完成'," +
-                "    tenant_id   bigint                   default 0                 not null comment '租户ID'" +
+                "    courses_id   bigint                    default 0                 not null comment '课程ID'," +
+                "    config_type  varchar(32) charset utf8  default ''                not null comment '课程配置类型'," +
+                "    config_value varchar(500) charset utf8 default ''                null comment '课程配置 值'," +
+                "    config_name  varchar(500) charset utf8 default ''                null comment '课程配置 名称'," +
+                "    create_date  datetime                  default CURRENT_TIMESTAMP not null comment '创建时间'," +
+                "    update_date  datetime                  default CURRENT_TIMESTAMP not null comment '修改时间'," +
+                "    tenant_id    bigint                    default 0                 not null comment '租户ID'" +
                 ")" +
-                "    comment '课程学习结果';";
+                "    comment '课程相关信息KEY-VALUE形式';";
         PACKAGE_NAME = "com.sf.edu.domain.doo.train";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
