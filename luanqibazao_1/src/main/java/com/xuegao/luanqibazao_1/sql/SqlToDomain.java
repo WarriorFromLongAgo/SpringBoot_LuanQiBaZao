@@ -84,19 +84,24 @@ public class SqlToDomain {
         // 第二步 复制packageName的地址，非必设置项
         // 第三部 设置 SAVE_TABLE_NAME_PREFIX_FLAG （请查看类的变量设置）
 
-        String sql = "create table t_train_courses_config" +
+        String sql = "create table t_stu_user_exam" +
                 "(" +
-                "    id           bigint auto_increment comment '主键ID'" +
+                "    id             bigint auto_increment" +
                 "        primary key," +
-                "    courses_id   bigint                    default 0                 not null comment '课程ID'," +
-                "    config_type  varchar(32) charset utf8  default ''                not null comment '课程配置类型'," +
-                "    config_value varchar(500) charset utf8 default ''                null comment '课程配置 值'," +
-                "    config_name  varchar(500) charset utf8 default ''                null comment '课程配置 名称'," +
-                "    create_date  datetime                  default CURRENT_TIMESTAMP not null comment '创建时间'," +
-                "    update_date  datetime                  default CURRENT_TIMESTAMP not null comment '修改时间'," +
-                "    tenant_id    bigint                    default 0                 not null comment '租户ID'" +
+                "    EXAM_ID        bigint                              null comment '考试ID'," +
+                "    EXAM_NAME      varchar(512) charset utf8           null comment '考试名称'," +
+                "    EMP_NUMBER     varchar(32) charset utf8 default '' not null comment '学员工号'," +
+                "    EMP_NAME       varchar(64) charset utf8 default '' not null comment '学员名称'," +
+                "    EMP_SCORE      double(8, 1)                        null comment '学员成绩'," +
+                "    EMP_STATUS     tinyint(2)                          null comment '学员状态 1 考试通过   2 考试不通过'," +
+                "    EMP_START_TIME datetime                            null comment '学员考试开始时间'," +
+                "    EMP_END_TIME   datetime                            null comment '学员考试结束时间'," +
+                "    EMP_EXAM_STATE tinyint(2)                          null comment '学员考试状态 0 未考试 1 进行中  2 已结束 4未阅卷'," +
+                "    CREATE_ID      varchar(32) charset utf8            null comment '创建人ID'," +
+                "    CREATE_NAME    varchar(64) charset utf8            null comment '创建人名称'," +
+                "    CREATE_DATE    datetime                            null comment '创建时间'" +
                 ")" +
-                "    comment '课程相关信息KEY-VALUE形式';";
+                "    comment '考试学员表';";
         PACKAGE_NAME = "com.sf.edu.domain.doo.train";
         SAVE_TABLE_NAME_PREFIX_FLAG = false;
         SqlToDomain(sql);
