@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.jdk8.lamada;
+package com.xuegao.luanqibazao_1.jdk8.lamada_stream;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
