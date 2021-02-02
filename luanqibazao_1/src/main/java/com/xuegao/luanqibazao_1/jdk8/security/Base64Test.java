@@ -23,13 +23,11 @@ public class Base64Test {
     public static String base64ToString(String str){
         byte[] decode = Base64.getDecoder().decode(str);
         String s = new String(decode);
-        System.out.println(s);
         return s;
     }
 
     public static String stringToBase64(String str){
         String s = Base64.getEncoder().encodeToString(str.getBytes());
-        System.out.println(s);
         return s;
     }
 }
