@@ -1,6 +1,7 @@
 package com.xuegao.luanqibazao_1.jdk8.lang.system;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -28,6 +29,18 @@ public class ArrayCopy {
         String[] strings5 = copyOf(strings, 2);
         System.out.println(Lists.newArrayList(strings5));
 
+        String[] strings8 = new String[]{null, "1"};
+        String[] strings7 = copyOf(strings8, 2);
+        System.out.println(Lists.newArrayList(strings7));
+
+        Object[] object1 = new Object[]{"1"};
+        Object[] object2 = copyOf(object1, 2);
+        System.out.println(Lists.newArrayList(object2));
+
+        Object[] object3 = new Object[]{null, "1"};
+        Object[] object4 = copyOf(object3, 2);
+        System.out.println(Lists.newArrayList(object4));
+
     }
 
     private static String[] copyOf(String[] original, int newLength) {
@@ -42,5 +55,19 @@ public class ArrayCopy {
             }
         }
         return returnStr;
+    }
+
+    private static Object[] copyOf(Object[] original, int newLength) {
+        Object[] returnObj = new Object[newLength];
+        System.arraycopy(original, 0, returnObj, 0, original.length);
+        System.out.println(Lists.newArrayList(returnObj));
+
+        for (int i = 0; i < returnObj.length; i++) {
+            Object s = returnObj[i];
+            if (ObjectUtils.isEmpty(s)) {
+                returnObj[i] = "";
+            }
+        }
+        return returnObj;
     }
 }
