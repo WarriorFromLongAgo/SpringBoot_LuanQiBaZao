@@ -8,9 +8,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * <br/> @PackageName：com.xuegao.multi_thread2.java代码模拟并发
@@ -20,11 +20,11 @@ import java.util.concurrent.TimeUnit;
  * <br/> @date：2021/02/24 18:38
  */
 public class ThreadPool {
-    public static void main(String[] args) throws MalformedURLException {
-
+    public static void main(String[] args) throws MalformedURLException, InterruptedException, ExecutionException {
+        init();
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
-                5,
                 10,
+                50,
                 10, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(),
                 r -> {
@@ -32,23 +32,50 @@ public class ThreadPool {
                     thread.setName("ThreadPool");
                     return thread;
                 });
-
+        List<Future<String>> futures = new ArrayList<>();
         long begin = System.currentTimeMillis();
-        for (int i = 0; i < 545605506; i++) {
-            threadPool.execute(ThreadPool::send2);
-            System.out.println(i);
+        for (int i = 0; i < 1000; i++) {
+            futures.add(threadPool.submit(ThreadPool::send3));
         }
         long end = System.currentTimeMillis();
+
+        List<String> str = new ArrayList<>();
+        for (Future<String> future : futures) {
+            str.add(future.get());
+        }
+
         System.out.println(end - begin);
+
+        while (str.size() < 1000) {
+            TimeUnit.SECONDS.sleep(1);
+        }
+        ThreadPool.sout();
         threadPool.shutdown();
+    }
+
+    private static void init() {
+        final String uri = "http://localhost:11112/product/init";
+        RestTemplate restTemplate = new RestTemplate();
+        String forObject = restTemplate.getForObject(uri, String.class);
+    }
+
+    private static void sout() {
+        final String uri = "http://localhost:11112/product/sout";
+        RestTemplate restTemplate = new RestTemplate();
+        String forObject = restTemplate.getForObject(uri, String.class);
+        System.out.println(forObject);
+    }
+
+    private static String send3() {
+        final String uri = "http://localhost:11112/product/decr";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(uri, String.class);
     }
 
     private static void send2() {
         final String uri = "http://localhost:12000/index/234243";
-
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(uri, String.class);
-
+        restTemplate.getForObject(uri, String.class);
     }
 
     private static void send() {
