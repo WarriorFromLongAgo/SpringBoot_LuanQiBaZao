@@ -10,7 +10,7 @@ import org.springframework.util.DigestUtils;
  * <br/> @author：xuegao
  * <br/> @date：2021/03/02 14:21
  */
-public class Wps {
+public class Wps2 {
     public static void main(String[] args) {
         JSONObject jsonObject = new JSONObject();
         String appSecret = "as_sddf2s!@S88";
@@ -19,7 +19,8 @@ public class Wps {
         String ticket = "ST-1429-5XxN9xYeLYd4zC23NuFn-casnode1";
         String fileSize = "1000";
         String fileType = "pptx";
-        String sign = appSecret + "appKey" + appKey + "fileSize" + fileSize + "fileType" + fileType + "md5Code" + md5Code + "timestamp" + System.currentTimeMillis() + appSecret;
+        long timestamp = System.currentTimeMillis();
+        String sign = appSecret + "appKey" + appKey + "fileSize" + fileSize + "fileType" + fileType + "md5Code" + md5Code + "timestamp" + timestamp + appSecret;
         System.out.println(sign);
         String signMd51 = DigestUtils.md5DigestAsHex(sign.getBytes());
         String signMd52 = Md5Test.string2MD5(sign);
@@ -27,11 +28,11 @@ public class Wps {
         System.out.println(signMd52);
         String signMd53 = Md5Test.convertMD5(Md5Test.convertMD5(sign));
         System.out.println(signMd53);
-        System.out.println(sign.equals(signMd52));
+        System.out.println(sign.equals(signMd53));
         jsonObject.put("appKey", appKey);
         jsonObject.put("md5Code", md5Code);
         jsonObject.put("ticket", ticket);
-        jsonObject.put("timestamp", System.currentTimeMillis());
+        jsonObject.put("timestamp", timestamp);
         jsonObject.put("fileSize", fileSize);
         jsonObject.put("fileType", fileType);
         jsonObject.put("sign", signMd51);
