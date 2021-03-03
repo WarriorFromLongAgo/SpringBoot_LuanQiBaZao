@@ -10,13 +10,13 @@ import org.springframework.util.DigestUtils;
  * <br/> @author：xuegao
  * <br/> @date：2021/03/02 14:21
  */
-public class Wps2 {
+public class WpsUpload {
     public static void main(String[] args) {
         JSONObject jsonObject = new JSONObject();
         String appSecret = "as_sddf2s!@S88";
         String appKey = "ak_paperless";
         String md5Code = "a332321ac3146ca3382b9d1e6f6aa633";
-        String ticket = "ST-1429-5XxN9xYeLYd4zC23NuFn-casnode1";
+        String ticket = "ST-9739-rPr3eqSuW2y6NTfODqqe-casnode1";
         String fileSize = "1000";
         String fileType = "pptx";
         long timestamp = System.currentTimeMillis();
