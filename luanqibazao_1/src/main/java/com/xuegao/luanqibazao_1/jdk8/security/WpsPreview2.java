@@ -15,23 +15,17 @@ import java.util.TreeMap;
  */
 public class WpsPreview2 {
     public static void main(String[] args) {
-        String appSecret = "as_sddf2s!@S88";
-        String appKey = "ak_paperless";
-        String md5Code = "a332321ac3146ca3382b9d1e6f6aa633";
-        String ticket = "ST-9739-rPr3eqSuW2y6NTfODqqe-casnode1";
-        String fileSize = "1000";
-        String fileType = "pptx";
-        long timestamp = System.currentTimeMillis();
-
         Map<String, String> map = new HashMap<>(8);
-        map.put("md5Code", md5Code);
-        map.put("fileSize", fileSize);
-        map.put("fileType", fileType);
-        map.put("appKey", appKey);
-        map.put("timestamp", String.valueOf(timestamp));
-        map.put("ticket", ticket);
+        map.put("md5Code", Constant.md5Code);
+        map.put("fileSize", Constant.fileSize);
+        map.put("fileType", Constant.fileType);
+        map.put("appKey", Constant.appKey);
+        String s = String.valueOf(Constant.timestamp);
+        System.out.println(Constant.timestamp);
+        map.put("timestamp", s);
+        map.put("ticket", Constant.ticket);
         System.out.println(map);
-        String md5Sign = md5Sign(map, appSecret);
+        String md5Sign = md5Sign(map, Constant.appSecret);
         System.out.println(md5Sign);
     }
 
