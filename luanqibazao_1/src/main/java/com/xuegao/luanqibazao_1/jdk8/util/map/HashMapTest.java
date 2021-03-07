@@ -1,6 +1,8 @@
 package com.xuegao.luanqibazao_1.jdk8.util.map;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.util.map
@@ -9,13 +11,13 @@ import java.util.Map;
  * <br/> @author：xuegao
  * <br/> @date：2020/12/04 23:03
  */
-public class HashMap {
+public class HashMapTest {
     public static void main(String[] args) {
 
     }
 
     private static void getOrDefault() {
-        Map<Integer, Integer> map = new java.util.HashMap<>(2);
+        Map<Integer, Integer> map = new HashMap<>(2);
         map.put(1, 1);
         Integer orDefault = map.getOrDefault(2, 2);
         System.out.println(orDefault);
@@ -30,5 +32,14 @@ public class HashMap {
         // ======================
         // 1
         // {1=1}
+
+
+        map.put(1, 1);
+        if (Boolean.FALSE.equals(map.containsKey(1))) {
+
+        }
+        if (Boolean.TRUE.equals(map.containsKey(1))) {
+
+        }
     }
 }
