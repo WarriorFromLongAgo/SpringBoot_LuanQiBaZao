@@ -13,14 +13,7 @@ import org.springframework.util.DigestUtils;
 public class WpsUpload {
     public static void main(String[] args) {
         JSONObject jsonObject = new JSONObject();
-        String appSecret = "as_sddf2s!@S88";
-        String appKey = "ak_paperless";
-        String md5Code = "a332321ac3146ca3382b9d1e6f6aa633";
-        String ticket = "ST-9739-rPr3eqSuW2y6NTfODqqe-casnode1";
-        String fileSize = "1000";
-        String fileType = "pptx";
-        long timestamp = System.currentTimeMillis();
-        String sign = appSecret + "appKey" + appKey + "fileSize" + fileSize + "fileType" + fileType + "md5Code" + md5Code + "timestamp" + timestamp + appSecret;
+        String sign = Constant.appSecret + "appKey" + Constant.appKey + "fileSize" + Constant.fileSize + "fileType" + Constant.fileType + "md5Code" + Constant.md5Code + "timestamp" + Constant.timestamp + Constant.appSecret;
         System.out.println(sign);
         String signMd51 = DigestUtils.md5DigestAsHex(sign.getBytes());
         String signMd52 = Md5Test.string2MD5(sign);
@@ -29,12 +22,12 @@ public class WpsUpload {
         String signMd53 = Md5Test.convertMD5(Md5Test.convertMD5(sign));
         System.out.println(signMd53);
         System.out.println(sign.equals(signMd53));
-        jsonObject.put("appKey", appKey);
-        jsonObject.put("md5Code", md5Code);
-        jsonObject.put("ticket", ticket);
-        jsonObject.put("timestamp", timestamp);
-        jsonObject.put("fileSize", fileSize);
-        jsonObject.put("fileType", fileType);
+        jsonObject.put("appKey", Constant.appKey);
+        jsonObject.put("md5Code", Constant.md5Code);
+        jsonObject.put("ticket", Constant.ticket);
+        jsonObject.put("timestamp", Constant.timestamp);
+        jsonObject.put("fileSize", Constant.fileSize);
+        jsonObject.put("fileType", Constant.fileType);
         jsonObject.put("sign", signMd51);
         System.out.println(jsonObject);
     }
