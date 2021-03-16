@@ -4,7 +4,7 @@ package com.xuegao.luanqibazao_1.sql;
  * <br/> @PackageName：com.xuegao.luanqibazao_1.sql
  * <br/> @ClassName：digui_sql
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/8/15 11:42
  */
 public class digui_sql {

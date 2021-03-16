@@ -4,7 +4,7 @@ package com.xuegao.multi_thread2;
  * <br/> @PackageName：com.xuegao.multi_thread2
  * <br/> @ClassName：max
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/8/29 9:26
  */
 public class max {

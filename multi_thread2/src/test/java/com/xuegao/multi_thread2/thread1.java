@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * <br/> @PackageName：com.xuegao.multi_thread2
  * <br/> @ClassName：thread1
  * <br/> @Description：
- * <br/> @author：feijm
+ * <br/> @author：xuegao
  * <br/> @date：2020/7/28 23:42
  */
 public class thread1 {
