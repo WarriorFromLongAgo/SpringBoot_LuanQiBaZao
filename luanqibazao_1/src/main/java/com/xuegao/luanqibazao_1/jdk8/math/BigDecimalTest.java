@@ -1,6 +1,7 @@
 package com.xuegao.luanqibazao_1.jdk8.math;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.math
@@ -11,12 +12,7 @@ import java.math.BigDecimal;
  */
 public class BigDecimalTest {
     public static void main(String[] args) {
-        bigDecimal1();
-        bigDecimal2();
-        bigDecimal3();
-        bigDecimal4();
-        bigDecimal5();
-        bigDecimal6_CompareTo();
+        multiplication();
     }
 
     public static void bigDecimal1() {
@@ -54,4 +50,11 @@ public class BigDecimalTest {
         BigDecimal bigDecimal1 = new BigDecimal("1.0");
         System.out.println(bigDecimal.compareTo(bigDecimal1));
     }
+
+    public static void multiplication() {
+        BigDecimal bigDecimal = new BigDecimal("100.0000");
+        BigDecimal multiply = bigDecimal.multiply(new BigDecimal("1.2"));
+        System.out.println(multiply);
+    }
+
 }
