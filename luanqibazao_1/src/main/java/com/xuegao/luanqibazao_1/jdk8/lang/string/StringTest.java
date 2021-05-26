@@ -15,6 +15,20 @@ import java.util.List;
  */
 public class StringTest {
     public static void main(String[] args) {
+        String join = String.join("-", "a", "b");
+        System.out.println(join);
+    }
+
+    private static void extracted() {
+        String a = "12";
+        if (StringUtils.isBlank(a)) {
+            System.out.println("      aaaaaaa           ");
+        } else {
+            String substring = a.substring(0, a.length() - 1);
+            System.out.println("substring = " + substring);
+        }
+
+
         String strArr = "1,2,3";
 
         List<String> split = split(strArr);

@@ -12,7 +12,9 @@ import java.util.Date;
  */
 public class BigDecimalTest {
     public static void main(String[] args) {
-        multiplication();
+        BigDecimal bigDecimal = new BigDecimal("11.1100");
+        BigDecimal multiply = bigDecimal.multiply(new BigDecimal("1.2"));
+        System.out.println(multiply);
     }
 
     public static void bigDecimal1() {
