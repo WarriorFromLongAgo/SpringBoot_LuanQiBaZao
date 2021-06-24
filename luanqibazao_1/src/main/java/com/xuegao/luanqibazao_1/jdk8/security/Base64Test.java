@@ -11,7 +11,7 @@ import java.util.Base64;
  */
 public class Base64Test {
     public static void main(String[] args) {
-        String s = "fjm";
+        String s = "xuegao";
         System.out.println(s);
         String s1 = stringToBase64(s);
         System.out.println(s1);

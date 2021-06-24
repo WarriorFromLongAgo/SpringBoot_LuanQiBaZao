@@ -1,5 +1,7 @@
 package com.xuegao.luanqibazao_1.jdk8.util.date;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -10,9 +12,20 @@ import java.util.Date;
  * <br/> @date：2020/8/28 20:17
  */
 public class date {
-    public static void main(String[] args) {
-        jian();
+    public static void main(String[] args) throws ParseException {
+        String aaa = "23:59";
+        String bbb = "1";
+        SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+        Date parse1 = format.parse(aaa);
+        System.out.println(parse1);
+        String format1 = format.format(parse1);
+        System.out.println(format1);
+
+        Date parse2 = format.parse(bbb);
+        System.out.println(parse2);
     }
+
+
 
     // 日期相减
     public static void jian() {

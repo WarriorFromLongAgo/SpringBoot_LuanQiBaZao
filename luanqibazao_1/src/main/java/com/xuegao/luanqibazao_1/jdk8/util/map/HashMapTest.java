@@ -1,8 +1,11 @@
 package com.xuegao.luanqibazao_1.jdk8.util.map;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.Set;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.util.map
@@ -13,6 +16,18 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 public class HashMapTest {
     public static void main(String[] args) {
+        Map<String, Set<String>> map = Maps.newHashMap();
+        map.put("1", Sets.newHashSet("value1", "value2"));
+        System.out.println(map);
+
+        if (map.containsKey("1")) {
+            Set<String> strings = map.get("1");
+            strings.add("value3");
+        }
+        System.out.println(map);
+
+        Set<String> keySet = map.keySet();
+        System.out.println(keySet);
 
     }
 
