@@ -2,7 +2,6 @@ package com.xuegao.video_conver.ppt.enums;
 
 /**
  * @ClassName EnumPptFrom
- * @Description TODO
  * @Author Baird Li
  * @Date 2019-09-03 20:14
  **/

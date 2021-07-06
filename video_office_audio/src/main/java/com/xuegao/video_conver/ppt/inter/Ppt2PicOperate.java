@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * @ClassName Ppt2Pic
- * @Description TODO
  * @Author Baird Li
  * @Date 2019-09-02 18:03
  **/

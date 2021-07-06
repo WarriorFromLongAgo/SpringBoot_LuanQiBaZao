@@ -18,7 +18,6 @@ import java.util.List;
 
 /**
  * @ClassName Ppt2PicHandle
- * @Description TODO
  * @Author Baird Li
  * @Date 2019-09-03 15:32
  **/

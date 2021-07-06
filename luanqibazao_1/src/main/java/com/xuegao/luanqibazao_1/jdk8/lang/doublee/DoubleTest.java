@@ -10,10 +10,17 @@ import java.math.BigDecimal;
  */
 public class DoubleTest {
     public static void main(String[] args) {
-        Double bigDecimal1 = new Double("99.99");
+        Double aDouble = Double.valueOf("1");
+        System.out.println(aDouble);
+
+
+    }
+
+    private static void extracted1() {
+        Double bigDecimal1 = new Double("0");
         Double bigDecimal2 = new Double("100.00");
         Double bigDecimal3 = new Double("99.99");
-        Double bigDecimal4 = new Double("99.98");
+        Double bigDecimal4 = new Double("-1");
         System.out.println(bigDecimal1.equals(bigDecimal3));
         System.out.println(bigDecimal1.equals(bigDecimal2));
         System.out.println(bigDecimal1.compareTo(bigDecimal2));

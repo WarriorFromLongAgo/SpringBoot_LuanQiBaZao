@@ -4,7 +4,6 @@ import com.xuegao.video_conver.ppt.exception.Ppt2PicException;
 
 /**
  * @ClassName EnumPptFrom
- * @Description TODO
  * @Author Baird Li
  * @Date 2019-09-03 20:17
  **/

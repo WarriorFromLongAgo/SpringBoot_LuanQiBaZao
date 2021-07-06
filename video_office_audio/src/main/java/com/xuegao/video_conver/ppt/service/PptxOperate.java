@@ -6,7 +6,6 @@ import java.io.InputStream;
 
 /**
  * @ClassName PptxOperate
- * @Description TODO
  * @Author Baird Li
  * @Date 2019-09-03 15:17
  **/

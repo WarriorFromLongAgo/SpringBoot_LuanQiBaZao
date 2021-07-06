@@ -2,7 +2,6 @@ package com.xuegao.video_conver.ppt.enums;
 
 /**
  * @ClassName EnumExceptionCode
- * @Description TODO
  * @Author Baird Li
  * @Date 2019-09-02 17:30
  **/
