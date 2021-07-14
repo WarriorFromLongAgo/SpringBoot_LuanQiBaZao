@@ -12,15 +12,15 @@ import java.util.Date;
  */
 public class BigDecimalTest {
     public static void main(String[] args) {
-        BigDecimal bigDecimal1 = new BigDecimal("99.99");
-        BigDecimal bigDecimal2 = new BigDecimal("100.00");
-        BigDecimal bigDecimal3 = new BigDecimal("99.99");
-        BigDecimal bigDecimal4 = new BigDecimal("99.98");
-        System.out.println(bigDecimal1.equals(bigDecimal3));
-        System.out.println(bigDecimal1.equals(bigDecimal2));
+        BigDecimal bigDecimal1 = new BigDecimal("85.0");
+        BigDecimal bigDecimal2 = new BigDecimal("84.00");
+        BigDecimal bigDecimal3 = new BigDecimal("86.00");
+        // BigDecimal bigDecimal4 = new BigDecimal("99.98");
+        // System.out.println(bigDecimal1.equals(bigDecimal3));
+        // System.out.println(bigDecimal1.equals(bigDecimal2));
         System.out.println(bigDecimal1.compareTo(bigDecimal2));
         System.out.println(bigDecimal1.compareTo(bigDecimal3));
-        System.out.println(bigDecimal1.compareTo(bigDecimal4));
+        // System.out.println(bigDecimal1.compareTo(bigDecimal4));
 
 
     }

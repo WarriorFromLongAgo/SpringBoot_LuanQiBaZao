@@ -2,6 +2,7 @@ package com.xuegao.luanqibazao_1.jdk8.lamada_stream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -20,8 +21,12 @@ public class FilterTest {
         strList.add("2");
         strList.add("2");
         strList.add("2");
-        List<String> collect = strList.stream().filter("2"::equals).collect(Collectors.toList());
+        List<String> collect = strList.stream().filter(new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                return "2".equals(s);
+            }
+        }).collect(Collectors.toList());
         System.out.println(collect);
-
     }
 }
