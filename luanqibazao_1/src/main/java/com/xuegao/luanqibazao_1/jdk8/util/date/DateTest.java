@@ -1,16 +1,13 @@
 package com.xuegao.luanqibazao_1.jdk8.util.date;
 
-import org.springframework.util.ObjectUtils;
-
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -23,8 +20,43 @@ import java.util.stream.Collectors;
  * <br/> @date：2021/5/8 18:12
  */
 public class DateTest {
+    public static final String C_TIME_PATTON_DEFAULT = "yyyy-MM-dd HH:mm:ss";
+
     public static void main(String[] args) {
-        filterList();
+        dateCompare();
+    }
+
+    public static void dateCompare() {
+        String a = "2018-11-05 18:30:00";
+        String b = "2018-11-04 18:30:00";
+        Date aa = parseDate(a);
+        Date bb = parseDate(b);
+        int i = aa.compareTo(bb);
+        System.out.println(i);
+
+    }
+
+    public static Date parseDate(String dateValue) {
+        return parseDate(C_TIME_PATTON_DEFAULT, dateValue);
+    }
+
+    public static Date parseDate(String strFormat, String dateValue) {
+        if (dateValue == null) {
+            return null;
+        }
+        if (strFormat == null) {
+            strFormat = C_TIME_PATTON_DEFAULT;
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(strFormat);
+        Date newDate = null;
+
+        try {
+            newDate = dateFormat.parse(dateValue);
+        } catch (Exception pe) {
+            throw new RuntimeException(pe);
+        }
+
+        return newDate;
     }
 
     public static void String_to_LocalDate() {  // String 转 LocalDate

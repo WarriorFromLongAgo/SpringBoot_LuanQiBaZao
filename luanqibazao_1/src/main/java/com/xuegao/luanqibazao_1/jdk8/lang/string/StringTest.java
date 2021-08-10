@@ -15,9 +15,12 @@ import java.util.List;
  */
 public class StringTest {
     public static void main(String[] args) {
-        String s = "镇北点部、立新点部、庆丰点部、西凌点部、泖港点部、兴塔点部、张堰点部、曹行点部、春辉点部、吴泾点部、闵行北桥点部、江川点部、马桥点部、莘庄点部、惠南点部、书院点部、宣桥点部、六灶点部、鹿园点部、祝东点部、大渡河点部、丰庄点部、富平点部、遵义点部、纪王点部、徐泾点部、援干点部、白鹤点部、大盈点部、七宝点部、仓桥点部、徐汇龙华点部、平吉点部、田林点部、文化点部、徐体点部、豫园点部、南泉点部、羽山点部、北蔡点部、三林点部、孙桥点部、唐行点部";
-        String[] split = s.split("、");
-        System.out.println(split.length);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 490; i++) {
+            stringBuilder.append(1);
+        }
+        System.out.println(stringBuilder);
+        System.out.println(stringBuilder.length());
 
     }
 
