@@ -7,6 +7,10 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 /**
+ *
+ * 此类表示互联网协议 (IP) 地址的抽象，InetAddress对象封装了ip地址。
+ * IP 地址是IP协议使用的32位或128位无符号数字，IP协议是一种更加低级协议，UDP 和 TCP 协议都是在它的基础上构建的。
+ *
  * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.net
  * <br/> @ClassName：InetAddressTest
  * <br/> @Description：
@@ -24,6 +28,8 @@ public class InetAddressTest {
 
         String ipAddress = getIpAddress();
         System.out.println(ipAddress);
+
+
     }
 
     public static String getIpAddress() {
