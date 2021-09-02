@@ -1,7 +1,5 @@
 package com.xuegao.luanqibazao_1.ditu;
 
-import cn.hutool.core.collection.CollectionUtil;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,29 +20,26 @@ public class ditu5 {
         // map.put("startLon", 113.03826);
         // map.put("startLat", 22.93673);
         // 1077
-        map.put("startLon", 113.03926);
-        map.put("startLat", 22.93673);
-        map.put("endLon", 113.028742);
-        map.put("endLat", 22.93656);
+        map.put("startLon", 116.352677);
+        map.put("startLat", 39.409199);
+        map.put("endLon", 116.350393);
+        map.put("endLat", 39.409042);
         mapList.add(map);
         List<Integer> straightLine = getStraightLine(mapList);
         System.out.println(straightLine);
     }
 
-    private static List<Integer> getStraightLine(List<Object> requestParameters){
+    private static List<Integer> getStraightLine(List<Object> requestParameters) {
         List<Integer> result = new ArrayList<>();
-        if(CollectionUtil.isEmpty(requestParameters)) {
-            return result;
-        }
         Integer straightLine = Integer.MAX_VALUE;
-        for(Object ob : requestParameters) {
+        for (Object ob : requestParameters) {
             Map<String, Object> addressMap = (Map<String, Object>) ob;
-            if( Objects.isNull(addressMap.get("endLon")) || Objects.isNull(addressMap.get("endLat"))){
+            if (Objects.isNull(addressMap.get("endLon")) || Objects.isNull(addressMap.get("endLat"))) {
                 result.add(straightLine);
                 continue;
             }
-            Double startLon = (Double)addressMap.get("startLon");
-            Double startLat = (Double)addressMap.get("startLat");
+            Double startLon = (Double) addressMap.get("startLon");
+            Double startLat = (Double) addressMap.get("startLat");
             Double endLon = Double.parseDouble(addressMap.get("endLon").toString());
             Double endLat = Double.parseDouble(addressMap.get("endLat").toString());
             int totallength = (int) MM_GetMapDistance(startLon, startLat, endLon, endLat);
