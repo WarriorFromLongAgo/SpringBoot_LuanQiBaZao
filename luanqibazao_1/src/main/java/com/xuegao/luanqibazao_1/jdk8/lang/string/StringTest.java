@@ -15,13 +15,21 @@ import java.util.List;
  */
 public class StringTest {
     public static void main(String[] args) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < 490; i++) {
-            stringBuilder.append(1);
-        }
-        System.out.println(stringBuilder);
-        System.out.println(stringBuilder.length());
+        subString();
+    }
 
+    private static void subString() {
+        String aaa = "-0755-021-020-022-";
+        System.out.println(aaa);
+        if (aaa.startsWith("-")) {
+            aaa = aaa.substring(1);
+            System.out.println(aaa);
+        }
+
+        if (aaa.endsWith("-")) {
+            aaa = aaa.substring(0, aaa.length() - 1);
+            System.out.println(aaa);
+        }
     }
 
     private static void extracted1() {
