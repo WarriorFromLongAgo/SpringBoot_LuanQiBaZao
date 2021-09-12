@@ -24,12 +24,18 @@ public class StringTest {
         if (aaa.startsWith("-")) {
             aaa = aaa.substring(1);
             System.out.println(aaa);
+            String s = trimAreaCodeSeparator("--0027--");
         }
+    }
 
-        if (aaa.endsWith("-")) {
-            aaa = aaa.substring(0, aaa.length() - 1);
-            System.out.println(aaa);
+    private static void extracted2() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 490; i++) {
+            stringBuilder.append(1);
         }
+        System.out.println(stringBuilder);
+        System.out.println(stringBuilder.length());
+
     }
 
     private static void extracted1() {
@@ -67,4 +73,14 @@ public class StringTest {
         }
         return Arrays.asList(split.split(","));
     }
+
+    private static String trimAreaCodeSeparator(String areaCode){
+        areaCode = areaCode.replaceAll("^-*", "");
+        System.out.println("111 = "+areaCode);
+        areaCode = areaCode.replaceAll("-+$", "");
+
+        System.out.println("222 = "+areaCode);
+        return areaCode;
+    }
+
 }
