@@ -1,11 +1,9 @@
 package com.xuegao.luanqibazao_1.jdk8.util.map;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.util.map
@@ -16,19 +14,21 @@ import java.util.Set;
  */
 public class HashMapTest {
     public static void main(String[] args) {
-        Map<String, Set<String>> map = Maps.newHashMap();
-        map.put("1", Sets.newHashSet("value1", "value2"));
-        System.out.println(map);
+        Map<String, String> map = Maps.newHashMap();
+        map.put("1", "1");
+        map.put("2", "2");
+        map.put("3", "3");
 
-        if (map.containsKey("1")) {
-            Set<String> strings = map.get("1");
-            strings.add("value3");
+        String remove = map.remove("1");
+        System.out.println(remove);
+
+
+        for (Map.Entry<String, String> stringStringEntry : map.entrySet()) {
+            map.remove(stringStringEntry.getKey());
         }
         System.out.println(map);
-
-        Set<String> keySet = map.keySet();
-        System.out.println(keySet);
-
+        map.forEach((s, s2) -> map.remove(s));
+        System.out.println(map);
     }
 
     private static void getOrDefault() {

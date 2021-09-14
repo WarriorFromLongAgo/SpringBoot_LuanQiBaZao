@@ -1,5 +1,6 @@
 package com.xuegao.luanqibazao_1.jdk8.lang.string;
 
+import com.alibaba.druid.sql.visitor.functions.Hex;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class StringTest {
     public static void main(String[] args) {
-        subString();
+
     }
 
     private static void subString() {
