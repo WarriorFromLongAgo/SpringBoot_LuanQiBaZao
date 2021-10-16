@@ -1,6 +1,5 @@
 package com.xuegao.luanqibazao_1.jdk8.lang.string;
 
-import com.alibaba.druid.sql.visitor.functions.Hex;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.List;
  */
 public class StringTest {
     public static void main(String[] args) {
-
+        extracted2();
     }
 
     private static void subString() {
@@ -31,7 +30,7 @@ public class StringTest {
 
     private static void extracted2() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < 490; i++) {
+        for (int i = 0; i < 100; i++) {
             stringBuilder.append(1);
         }
         System.out.println(stringBuilder);
