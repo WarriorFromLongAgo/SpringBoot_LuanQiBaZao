@@ -1,9 +1,12 @@
 package com.xuegao.luanqibazao_1.jdk8.util.list;
 
+import com.xuegao.luanqibazao_1.domain.CoursesDTO;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.list
@@ -17,7 +20,58 @@ public class ListRemove {
         // listRemoveTest1();
 
         // listRemoveTest2();
+        listRemoveTest3();
+        // listRemoveTest4();
 
+
+    }
+
+    private static void listRemoveTest4() {
+        List<String> responseList = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5"));
+        responseList.forEach(new Consumer<String>() {
+            @Override
+            public void accept(String response) {
+                Iterator<String> iterator = responseList.iterator();
+                while (iterator.hasNext()) {
+                    iterator.remove();
+                }
+            }
+        });
+    }
+
+
+    private static void listRemoveTest3() {
+        List<CoursesDTO> coursesDTOList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            CoursesDTO coursesDTO = new CoursesDTO();
+            coursesDTO.setId((long) i);
+            List<String> capableList = new ArrayList<>();
+            for (int j = 0; j < 5; j++) {
+                capableList.add(String.valueOf(j));
+            }
+            coursesDTO.setCapable(capableList);
+            coursesDTOList.add(coursesDTO);
+        }
+
+
+        List<CoursesDTO> responseList = new ArrayList<>();
+        responseList.forEach(new Consumer<CoursesDTO>() {
+            @Override
+            public void accept(CoursesDTO coursesDTO) {
+                List<String> list = new ArrayList<>(Arrays.asList("11", "22", "33", "44", "55"));
+                List<String> strings = conversionStandCustomer(list);
+                coursesDTO.setRecommendedRange(strings);
+            }
+        });
+    }
+
+    private static List<String> conversionStandCustomer(List<String> list) {
+        List<String> sectionValueList = new ArrayList<>();
+        list.forEach(customerSectionValue -> {
+            String value = new String("111");
+            sectionValueList.add(value);
+        });
+        return sectionValueList;
     }
 
     // 1

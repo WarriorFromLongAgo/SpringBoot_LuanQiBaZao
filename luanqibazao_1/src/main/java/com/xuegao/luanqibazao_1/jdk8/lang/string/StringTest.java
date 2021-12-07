@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class StringTest {
     public static void main(String[] args) {
-        subString();
+        extracted2();
     }
 
     private static void subString() {
@@ -30,7 +30,7 @@ public class StringTest {
 
     private static void extracted2() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < 490; i++) {
+        for (int i = 0; i < 100; i++) {
             stringBuilder.append(1);
         }
         System.out.println(stringBuilder);
