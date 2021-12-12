@@ -29,17 +29,6 @@ public class UserInfo implements Serializable {
         this.sex = sex;
     }
 
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", address='" + address + '\'' +
-                ", sex='" + sex + '\'' +
-                '}';
-    }
-
     public String getId() {
         return id;
     }
