@@ -15,6 +15,7 @@ public class ThreadLocalTest2 {
 
     private static final ThreadLocal<String> USER_THREAD_LOCAL = new ThreadLocal<>();
 
+
     public static void main(String[] args) {
         EXECUTOR_SERVICE.submit(() -> {
             //请求进来时，初始化用户信息
@@ -28,6 +29,9 @@ public class ThreadLocalTest2 {
             });
         });
     }
+    // pool-1-thread-1当前登陆用户：李四
+    // 开始异步发送短信
+    // pool-2-thread-1发送短信给：null
 
     // 作者：我有一只喵喵
     // 链接：https://juejin.cn/post/7022529092519985160
