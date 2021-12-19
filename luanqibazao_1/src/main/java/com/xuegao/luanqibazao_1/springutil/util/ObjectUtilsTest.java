@@ -1,4 +1,4 @@
-package com.xuegao.luanqibazao_1.spring.utils;
+package com.xuegao.luanqibazao_1.springutil.util;
 
 import org.springframework.util.ObjectUtils;
 
