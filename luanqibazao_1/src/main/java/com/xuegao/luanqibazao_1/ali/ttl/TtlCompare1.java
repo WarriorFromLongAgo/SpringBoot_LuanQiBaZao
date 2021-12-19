@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TtlCompare1 {
     public static void main(String[] args) throws InterruptedException {
-        inheritable1000();
+        // inheritable1000();
         ttl1000();
     }
 
