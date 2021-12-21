@@ -61,7 +61,7 @@ public class TtlCompare1 {
      * 第一个线程在使用的时候，会获取到这个值，然后进行了修改，
      * 就会影响这个线程在其他地方的使用，也就是context被修改了，导致其他线程在用的时候，出现了不一样的地方
      *
-     * @author fjm
+     * @author xuegao
      * @date 2021/12/18 19:34
      */
     public static void inheritable1000() throws InterruptedException {

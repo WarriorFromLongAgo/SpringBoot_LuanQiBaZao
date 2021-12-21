@@ -24,7 +24,7 @@ public class TtlExplain {
      * 不能直接这样使用
      * 线程池复用还是会有这个现象，只要使用了，上面线程设置的值，会在其他线程继续使用的时候，再次打印出来
      *
-     * @author fjm
+     * @author xuegao
      * @date 2021/12/18 18:19
      */
     public static void ttl2() throws InterruptedException {
@@ -64,7 +64,7 @@ public class TtlExplain {
     /**
      * 不能直接这样使用，这里就是线程池必须包一层
      *
-     * @author fjm
+     * @author xuegao
      * @date 2021/12/18 18:19
      */
     public static void ttl2_2() throws InterruptedException {
