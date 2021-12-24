@@ -2,7 +2,7 @@ package com.xuegao.luanqibazao_1.ali.ttl;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.threadpool.TtlExecutors;
-import com.xuegao.luanqibazao_1.common.ThreadPoolTwo;
+import com.xuegao.luanqibazao_1.common.ThreadPoolBusiness;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +30,7 @@ public class TtlExplain {
     public static void ttl2() throws InterruptedException {
         ThreadLocal<String> threadLocal = new TransmittableThreadLocal<>();
 
-        ThreadPoolTwo.getInstance().execute(new Runnable() {
+        ThreadPoolBusiness.getInstance().execute(new Runnable() {
             @Override
             public void run() {
                 threadLocal.set("11111");
@@ -39,7 +39,7 @@ public class TtlExplain {
         });
 
         for (int i = 0; i < 10; i++) {
-            ThreadPoolTwo.getInstance().execute(new Runnable() {
+            ThreadPoolBusiness.getInstance().execute(new Runnable() {
                 @Override
                 public void run() {
                     System.out.println(Thread.currentThread().getName() + " ddd = " + threadLocal.get());
@@ -47,7 +47,7 @@ public class TtlExplain {
             });
         }
         TimeUnit.SECONDS.sleep(1);
-        ThreadPoolTwo.getInstance().shutdown();
+        ThreadPoolBusiness.getInstance().shutdown();
     }
     // ThreadPoolTwo1 aaa = 11111
     // ThreadPoolTwo1 ddd = 11111
@@ -69,7 +69,7 @@ public class TtlExplain {
      */
     public static void ttl2_2() throws InterruptedException {
         ThreadLocal<String> threadLocal = new TransmittableThreadLocal<>();
-        ExecutorService executorService = TtlExecutors.getTtlExecutorService(ThreadPoolTwo.getInstance());
+        ExecutorService executorService = TtlExecutors.getTtlExecutorService(ThreadPoolBusiness.getInstance());
 
         executorService.execute(new Runnable() {
             @Override

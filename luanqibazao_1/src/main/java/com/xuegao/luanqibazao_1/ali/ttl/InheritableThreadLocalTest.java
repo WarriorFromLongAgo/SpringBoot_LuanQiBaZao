@@ -1,7 +1,7 @@
 package com.xuegao.luanqibazao_1.ali.ttl;
 
 import com.xuegao.luanqibazao_1.common.ThreadPoolOne;
-import com.xuegao.luanqibazao_1.common.ThreadPoolTwo;
+import com.xuegao.luanqibazao_1.common.ThreadPoolBusiness;
 
 import java.util.concurrent.TimeUnit;
 
@@ -51,7 +51,7 @@ public class InheritableThreadLocalTest {
     public static void inheritable2() throws InterruptedException {
         ThreadLocal<String> threadLocal = new InheritableThreadLocal<>();
 
-        ThreadPoolTwo.getInstance().execute(new Runnable() {
+        ThreadPoolBusiness.getInstance().execute(new Runnable() {
             @Override
             public void run() {
                 threadLocal.set("11111");
@@ -60,7 +60,7 @@ public class InheritableThreadLocalTest {
         });
 
         for (int i = 0; i < 10; i++) {
-            ThreadPoolTwo.getInstance().execute(new Runnable() {
+            ThreadPoolBusiness.getInstance().execute(new Runnable() {
                 @Override
                 public void run() {
                     System.out.println(Thread.currentThread().getName() + " ddd = " + threadLocal.get());
@@ -68,7 +68,7 @@ public class InheritableThreadLocalTest {
             });
         }
         TimeUnit.SECONDS.sleep(1);
-        ThreadPoolTwo.getInstance().shutdown();
+        ThreadPoolBusiness.getInstance().shutdown();
     }
 
 }

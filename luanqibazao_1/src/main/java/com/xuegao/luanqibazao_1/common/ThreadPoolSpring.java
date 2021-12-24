@@ -8,15 +8,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @version 1.0
  * @date 2021/12/18 17:38
  */
-public class ThreadPoolTwo {
+public class ThreadPoolSpring {
     private static final AtomicInteger COUNT = new AtomicInteger();
     private static final ThreadPoolExecutor POOL_EXECUTOR = new ThreadPoolExecutor(
-            3,
-            3,
+            10,
+            20,
             1L,
             java.util.concurrent.TimeUnit.MILLISECONDS,
             new java.util.concurrent.LinkedBlockingQueue<>(),
-            r -> new Thread(r, "ThreadPoolTwo" + COUNT.incrementAndGet()));
+            r -> new Thread(r, "ThreadPoolSpring" + COUNT.incrementAndGet()));
 
     public static ThreadPoolExecutor getInstance() {
         return POOL_EXECUTOR;
