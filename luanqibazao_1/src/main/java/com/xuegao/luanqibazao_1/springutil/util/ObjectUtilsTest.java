@@ -19,6 +19,7 @@ public class ObjectUtilsTest {
         String str1 = null;
         String str2 = "";
         String str3 = "s";
+        String str4 = "   ";
         System.out.println("list = " + ObjectUtils.isEmpty(list));
         System.out.println("set = " + ObjectUtils.isEmpty(set));
         System.out.println("map = " + ObjectUtils.isEmpty(map));
@@ -27,5 +28,6 @@ public class ObjectUtilsTest {
         System.out.println("str1 = " + ObjectUtils.isEmpty(str1));
         System.out.println("str2 = " + ObjectUtils.isEmpty(str2));
         System.out.println("str3 = " + ObjectUtils.isEmpty(str3));
+        System.out.println("str4 = " + ObjectUtils.isEmpty(str4));
     }
 }
