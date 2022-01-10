@@ -7,6 +7,7 @@ import org.apache.pdfbox.pdmodel.PDPageTree;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author xuegao
@@ -17,7 +18,7 @@ public class SplitPdf {
     private static final String PDF_PATH = "E:\\我的数据\\书籍PDF\\Spring5核心原理与30个类手写实战.pdf";
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         File file = new File(PDF_PATH);
         PDDocument document = PDDocument.load(file, MemoryUsageSetting.setupTempFileOnly());
         PDPageTree pages = document.getPages();
@@ -28,6 +29,8 @@ public class SplitPdf {
         for (PDPage page : pages) {
             if (pageSize <= 0) {
                 pdDocument.save("E:\\我的数据\\书籍PDF\\Spring5核心原理与30个类手写实战" + index + ".pdf");
+                TimeUnit.SECONDS.sleep(5);
+                pdDocument.close();
                 index++;
                 pdDocument = new PDDocument();
                 pageSize = 50;
