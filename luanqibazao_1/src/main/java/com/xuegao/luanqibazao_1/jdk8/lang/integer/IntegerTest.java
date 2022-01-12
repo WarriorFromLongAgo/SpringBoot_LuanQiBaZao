@@ -9,6 +9,10 @@ package com.xuegao.luanqibazao_1.jdk8.lang.integer;
  */
 public class IntegerTest {
     public static void main(String[] args) {
+        int a = 1 / 2;
+        int b = 1 % 2;
+        System.out.println(a);
+        System.out.println(b);
 
     }
 }
