@@ -33,7 +33,7 @@ public class SectionKeyContain {
      * @param sectionKey:
      * @param input:      重量或者方数
      * @return boolean: true filter的时候需要留下来的
-     * @author fjm
+     * @author xuegao
      * @date 2022/1/14 19:33
      */
     public static boolean filterSectionValueListByInput(String sectionKey, Double input) {
