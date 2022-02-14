@@ -31,6 +31,7 @@ public class ListsTest {
             stringList.add("11");
         }
         System.out.println(partition);
-        System.out.println(partition);
+        List<List<Object>> partition1 = Lists.partition(null, 3);
+        System.out.println(partition1);
     }
 }
