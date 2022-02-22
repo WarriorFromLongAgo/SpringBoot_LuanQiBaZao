@@ -14,10 +14,10 @@ public class ObjectsTest {
         Object o2 = null;
         boolean equals = Objects.equals(o1, o2);
         System.out.println(equals);
-        o1 = new Object();
+        o2 = new Object();
         equals = Objects.equals(o1, o2);
         System.out.println(equals);
-        equals = o1.equals(o2);
+        equals = o2.equals(o1);
         System.out.println(equals);
 
     }
