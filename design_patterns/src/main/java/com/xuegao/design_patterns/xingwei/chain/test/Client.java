@@ -1,4 +1,4 @@
-package com.xuegao.design_patterns.xingwei.chain;
+package com.xuegao.design_patterns.xingwei.chain.test;
 
 public class Client {
     public static void main(String[] args) {
