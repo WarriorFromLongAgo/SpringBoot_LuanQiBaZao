@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class StringTest {
     public static void main(String[] args) {
-        extracted2();
+        String s = trimEndZeroAndSpot("0.00");
+        System.out.println(s);
     }
 
     private static void subString() {
@@ -81,6 +82,12 @@ public class StringTest {
 
         System.out.println("222 = "+areaCode);
         return areaCode;
+    }
+
+    public static String trimEndZeroAndSpot(String str) {
+        str = str.replaceAll(0 + "+$", "");
+        str = str.replaceAll("\\." + "+$", "");
+        return str;
     }
 
 }
