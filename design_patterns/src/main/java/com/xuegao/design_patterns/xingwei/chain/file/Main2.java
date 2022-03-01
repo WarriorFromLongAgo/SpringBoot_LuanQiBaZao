@@ -8,5 +8,7 @@ package com.xuegao.design_patterns.xingwei.chain.file;
 public class Main2 {
     public static void main(String[] args) {
 
+
+
     }
 }
