@@ -18,15 +18,13 @@ public class UserInfo implements Serializable {
     private String address;
     private String sex;
 
-    public UserInfo() {
-    }
+    private String beginTime;
 
-    public UserInfo(String id, String name, Integer age, String address, String sex) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.address = address;
-        this.sex = sex;
+    private String endTime;
+
+    private Integer index;
+
+    public UserInfo() {
     }
 
     public String getId() {
@@ -67,5 +65,29 @@ public class UserInfo implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(String beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 }
