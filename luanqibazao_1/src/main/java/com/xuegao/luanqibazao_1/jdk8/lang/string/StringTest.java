@@ -14,9 +14,43 @@ import java.util.List;
  * <br/> @date：2021/01/20 15:08
  */
 public class StringTest {
+    public static final String MATCHES_CHAR_AND_WORD = "[A-Za-z0-9\\\\u4e00-\\\\u9fa5]+";
+    
     public static void main(String[] args) {
-        String s = trimEndZeroAndSpot("0.00");
-        System.out.println(s);
+        String a = "1.2";
+        String b = "1-2";
+        String c = "1,2";
+        boolean contains = a.contains(".");
+        System.out.println(contains);
+        contains = b.contains(".");
+        System.out.println(contains);
+        contains = c.contains(".");
+        System.out.println(contains);
+
+    }
+
+
+
+
+    private static void extracted3() {
+        boolean match = match("123", MATCHES_CHAR_AND_WORD);
+        System.out.println(match);
+        match = match("aaa", MATCHES_CHAR_AND_WORD);
+        System.out.println(match);
+        match = match("AA", MATCHES_CHAR_AND_WORD);
+        System.out.println(match);
+        match = match("aa!", MATCHES_CHAR_AND_WORD);
+        System.out.println(match);
+        match = match(" ", MATCHES_CHAR_AND_WORD);
+        System.out.println(match);
+    }
+
+    public static boolean match(String str, String regex) {
+        if (StringUtils.isBlank(str)) {
+            return true;
+        } else {
+            return str.matches(regex);
+        }
     }
 
     private static void subString() {
