@@ -14,9 +14,13 @@ import java.util.List;
  * <br/> @date：2021/01/20 15:08
  */
 public class StringTest {
-    public static final String MATCHES_CHAR_AND_WORD = "[A-Za-z0-9\\\\u4e00-\\\\u9fa5]+";
+    public static final String MATCHES_CHAR_AND_WORD = "[A-Za-z0-9\\u4e00-\\u9fa5]+";
     
     public static void main(String[] args) {
+        extracted3();
+    }
+
+    private static void extracted4() {
         String a = "1.2";
         String b = "1-2";
         String c = "1,2";
@@ -26,10 +30,7 @@ public class StringTest {
         System.out.println(contains);
         contains = c.contains(".");
         System.out.println(contains);
-
     }
-
-
 
 
     private static void extracted3() {
@@ -42,6 +43,8 @@ public class StringTest {
         match = match("aa!", MATCHES_CHAR_AND_WORD);
         System.out.println(match);
         match = match(" ", MATCHES_CHAR_AND_WORD);
+        System.out.println(match);
+        match = match("d啊爱德华", MATCHES_CHAR_AND_WORD);
         System.out.println(match);
     }
 
