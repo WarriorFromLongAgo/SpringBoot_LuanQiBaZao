@@ -17,7 +17,7 @@ public class StringTest {
     public static final String MATCHES_CHAR_AND_WORD = "[A-Za-z0-9\\u4e00-\\u9fa5]+";
     
     public static void main(String[] args) {
-        extracted3();
+
     }
 
     private static void extracted4() {

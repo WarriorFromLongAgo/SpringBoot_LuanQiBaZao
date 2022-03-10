@@ -1,9 +1,7 @@
 package com.xuegao.design_patterns.xingwei.chain.file2;
 
-import com.xuegao.design_patterns.xingwei.chain.file.FileHandler;
-import com.xuegao.design_patterns.xingwei.chain.file.FileRequest;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -12,20 +10,34 @@ import java.util.List;
  * @date 2022/2/24 0:17
  */
 public class HandlerChain {
-    List<com.xuegao.design_patterns.xingwei.chain.file.FileHandler> handlerList = new ArrayList<>();
+    private final List<FileHandler> handlerList;
 
-    public void addHandler(com.xuegao.design_patterns.xingwei.chain.file.FileHandler handler) {
+    public HandlerChain(FileHandler handler) {
+        this.handlerList = new ArrayList<>(1);
+        Collections.addAll(this.handlerList, handler);
+    }
+
+    public HandlerChain(FileHandler... handlerArr) {
+        this.handlerList = new ArrayList<>(handlerArr.length);
+        Collections.addAll(this.handlerList, handlerArr);
+    }
+
+    public HandlerChain(List<FileHandler> handlerList) {
+        this.handlerList = handlerList;
+    }
+
+    public void addHandler(FileHandler handler) {
         handlerList.add(handler);
     }
 
-    public void addHandlerList(List<com.xuegao.design_patterns.xingwei.chain.file.FileHandler> list) {
+    public void addHandlerList(List<FileHandler> list) {
         handlerList.addAll(list);
     }
 
-    public boolean handler(FileRequest fileRequest) {
+    public boolean handler() {
         boolean flag = false;
         for (FileHandler fileHandler : handlerList) {
-            if (fileHandler.check(fileRequest.getArea(), fileRequest)) {
+            if (fileHandler.check()) {
                 flag = true;
                 break;
             }

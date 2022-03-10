@@ -13,6 +13,10 @@ import java.util.Date;
  */
 public class date {
     public static void main(String[] args) throws ParseException {
+
+    }
+
+    private static void extracted() throws ParseException {
         String aaa = "23:59";
         String bbb = "1";
         SimpleDateFormat format = new SimpleDateFormat("mm:ss");
@@ -24,7 +28,6 @@ public class date {
         Date parse2 = format.parse(bbb);
         System.out.println(parse2);
     }
-
 
 
     // 日期相减

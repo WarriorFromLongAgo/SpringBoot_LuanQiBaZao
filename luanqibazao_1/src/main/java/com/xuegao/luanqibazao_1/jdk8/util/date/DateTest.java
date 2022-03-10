@@ -1,7 +1,5 @@
 package com.xuegao.luanqibazao_1.jdk8.util.date;
 
-import com.xuegao.luanqibazao_1.jdk8.net.InetAddressTest;
-
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -29,7 +27,7 @@ public class DateTest {
     }
 
     public static void dateCompare() {
-        String a = "2018-11-05 18:30:00";
+        String a = "2018-11-04 18:30:00";
         String b = "2018-11-04 18:30:00";
         Date aa = parseDate(a);
         Date bb = parseDate(b);
