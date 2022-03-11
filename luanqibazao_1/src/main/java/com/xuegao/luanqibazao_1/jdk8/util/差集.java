@@ -18,9 +18,15 @@ public class 差集 {
         stringList.add("b");
         stringList.add("c");
         stringList.add("c");
+        stringList.add("d");
 
         Set<String> stringList3 = new HashSet<>(Arrays.asList("a,b,c".split(",")));
         stringList.removeAll(stringList3);
         System.out.println("差集1: " + stringList);
+
+        stringList3.removeAll(stringList);
+        System.out.println("差集1: " + stringList3);
+        // 差集1: [d]
+        // 差集1: [a, b, c]
     }
 }
