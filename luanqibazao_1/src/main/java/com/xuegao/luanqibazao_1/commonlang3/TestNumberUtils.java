@@ -9,10 +9,10 @@ import org.apache.commons.lang3.math.NumberUtils;
  */
 public class TestNumberUtils {
     public static void main(String[] args) {
-        String str1 = "123.456";
-        String str2 = "-123.456";
-        String str3 = "123";
-        String str4 = "-123";
+        String str1 = "1211111111111111111111111111113.456";
+        String str2 = "-12311111111111111111111111111.456";
+        String str3 = "123111111111111111111111111111";
+        String str4 = "-12311111111111111111111111111";
 
         System.out.println("str1 = " + str1);
         System.out.println("NumberUtils.isCreatable(str1) = " + NumberUtils.isCreatable(str1));
