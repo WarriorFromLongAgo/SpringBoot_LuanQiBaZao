@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * <br/> @PackageName：com.xuegao.luanqibazao_1.jdk8.sql
@@ -30,6 +32,42 @@ public class TimestampTest {
 
         System.out.println(timestamp1.compareTo(timestamp2));
 
+        Timestamp datetime = getTimestamp();
+        Timestamp timestamp20220326 = addDelayHour(datetime, 1.1D);
+        System.out.println(toString(timestamp20220326, "yyyy-MM-dd HH:mm:ss"));
+    }
+
+    /**
+     * 将时间，加上 delayHour
+     *
+     * @param timestamp:
+     * @param delayHourDouble:
+     * @return java.sql.Timestamp
+     * @author fjm
+     * @date 2022/3/16 18:12
+     */
+    public static Timestamp addDelayHour(Timestamp timestamp, Double delayHourDouble) {
+        if (Objects.isNull(delayHourDouble)) {
+            return timestamp;
+        }
+        String delayHourStr = delayHourDouble.toString();
+        if (!delayHourStr.contains(".")) {
+            return addMinute(Integer.parseInt(delayHourStr) * 60, timestamp);
+        }
+        // 如果包含 点
+
+        // 先把小时加上去
+        String[] split = delayHourStr.split("\\.");
+        String tempDelayHour = split[0];
+        timestamp = addMinute(Integer.parseInt(tempDelayHour) * 60, timestamp);
+
+        String tempDelayMinuteStr = split[1];
+        // tempDelayMinuteStr 大于 0
+        if (Integer.valueOf(tempDelayMinuteStr).compareTo(0) > 0) {
+            // 加上分钟
+            timestamp = addMinute(Integer.parseInt(tempDelayMinuteStr) * 6, timestamp);
+        }
+        return timestamp;
     }
 
     public static Timestamp getTimestamp() {
@@ -125,5 +163,12 @@ public class TimestampTest {
         }
 
         return dateStr;
+    }
+
+    public static Timestamp addMinute(int minute, Timestamp time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date(time.getTime()));
+        calendar.add(Calendar.MINUTE, minute);
+        return new Timestamp(calendar.getTime().getTime());
     }
 }
