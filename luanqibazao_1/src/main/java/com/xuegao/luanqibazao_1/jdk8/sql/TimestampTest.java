@@ -39,12 +39,6 @@ public class TimestampTest {
 
     /**
      * 将时间，加上 delayHour
-     *
-     * @param timestamp:
-     * @param delayHourDouble:
-     * @return java.sql.Timestamp
-     * @author fjm
-     * @date 2022/3/16 18:12
      */
     public static Timestamp addDelayHour(Timestamp timestamp, Double delayHourDouble) {
         if (Objects.isNull(delayHourDouble)) {
