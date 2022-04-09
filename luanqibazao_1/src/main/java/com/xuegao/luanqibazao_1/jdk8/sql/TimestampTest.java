@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -35,6 +36,12 @@ public class TimestampTest {
         Timestamp datetime = getTimestamp();
         Timestamp timestamp20220326 = addDelayHour(datetime, 1.1D);
         System.out.println(toString(timestamp20220326, "yyyy-MM-dd HH:mm:ss"));
+
+
+        Timestamp lastYearTime = Timestamp.valueOf(LocalDateTime.now().minusYears(1).withNano(0));
+        System.out.println(toString(lastYearTime, "yyyy-MM-dd HH:mm:ss"));
+        LocalDateTime localDateTime = LocalDateTime.now().minusYears(1).withNano(0);
+        System.out.println(localDateTime);
     }
 
     /**
@@ -165,4 +172,5 @@ public class TimestampTest {
         calendar.add(Calendar.MINUTE, minute);
         return new Timestamp(calendar.getTime().getTime());
     }
+
 }
