@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2022/1/10 0:30
  */
 public class SplitPdf2 {
-    private static final String PDF_PATH = "E:\\我的数据\\书籍PDF\\Spring5核心原理与30个类手写实战.pdf";
+    private static final String PDF_PATH = "D:\\windowss\\deskop\\_1602_《数据密集型应用系统设计》_赵军平等译_2018-09-01.pdf";
     private static int length = 1;
 
     public static void main(String[] args) throws IOException {
@@ -32,7 +32,7 @@ public class SplitPdf2 {
             // pd.save("E:\\我的数据\\书籍PDF\\Spring5核心原理与30个类手写实战" + i++ + ".pdf");
             pdDocument.addPage(tempPd.getPage(0));
             if (i > 100) {
-                pdDocument.save("E:\\我的数据\\书籍PDF\\Spring5核心原理与30个类手写实战" + length++ + ".pdf");
+                pdDocument.save("D:\\windowss\\deskop\\_1602_《数据密集型应用系统设计》_赵军平等译_2018-09-01" + length++ + ".pdf");
                 pdDocument.close();
                 pdDocument = new PDDocument();
                 i = 1;
