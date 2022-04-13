@@ -3,6 +3,7 @@ package com.xuegao.luanqibazao_1.jdk8.lamada_stream;
 import com.google.common.collect.Lists;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author xuegao
@@ -12,11 +13,13 @@ import java.util.List;
 public class ListDeal {
     public static void main(String[] args) {
         List<String> list = Lists.newArrayList("1", "2", "3", "4", "5");
-        list.stream()
+        List<Integer> collect = list.stream()
                 .map(String::toUpperCase)
                 .map(Integer::parseInt)
                 .filter(integer -> integer > 3)
-                .forEach(System.out::println);
+                // .forEach(System.out::println);
+                .collect(Collectors.toList());
+                // .collect(Collectors.g)
     }
 
     // 方法函数传递
