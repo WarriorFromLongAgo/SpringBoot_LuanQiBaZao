@@ -19,6 +19,31 @@ import java.util.stream.Collectors;
  */
 public class AnyMatchTest {
     public static void main(String[] args) {
+        String str1 = "a,b,c";
+        String str2 = "b,d";
+        String[] split1 = str1.split(",");
+        String[] split2 = str2.split(",");
+        boolean anyMatch = Arrays.stream(split1).anyMatch(new Predicate<String>() {
+            @Override
+            public boolean test(String s1) {
+
+                boolean b = Arrays.stream(split2).anyMatch(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s2) {
+                        System.out.println("s1 = " + s1 + ", s2 = " + s2);
+                        System.out.println("s1.equals(s2) = " + s1.equals(s2));
+                        return s1.equals(s2);
+                    }
+                });
+                System.out.println("b == " + b);
+                System.out.println(" ===================== ");
+                return b;
+            }
+        });
+        System.out.println("anyMatch = " + anyMatch);
+    }
+
+    private static void extracted() {
         UserInfo userInfo = new UserInfo();
         userInfo.setId("1");
         userInfo.setBeginTime("2022-01-01 00:00:00");
@@ -94,5 +119,23 @@ public class AnyMatchTest {
         Set<String> dbSet2 = Arrays.stream(str2).collect(Collectors.toSet());
         boolean b = dbSet.stream().anyMatch(dbSet2::contains);
         System.out.println(b);
+    }
+
+    private static void test2() {
+        String[] str1 = {"a", "c", "d", "e", "b"};
+        String[] str2 = {"c", "f", "b"};
+        Set<String> dbSet = Arrays.stream(str1).collect(Collectors.toSet());
+        Set<String> dbSet2 = Arrays.stream(str2).collect(Collectors.toSet());
+        // dbSet.retainAll(dbSet2);
+        // System.out.println(dbSet);
+
+        dbSet2.retainAll(dbSet);
+        System.out.println(dbSet2);
+
+        String collect = dbSet2.stream().collect(Collectors.joining("/"));
+        System.out.println(collect);
+
+        String collect2 = String.join("/", dbSet2);
+        System.out.println(collect2);
     }
 }

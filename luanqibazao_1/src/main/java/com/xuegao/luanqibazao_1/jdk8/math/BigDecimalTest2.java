@@ -17,6 +17,22 @@ public class BigDecimalTest2 {
     private static final Logger log = LoggerFactory.getLogger(BigDecimalTest2.class);
 
     public static void main(String[] args) {
+        BigDecimal bigDecimal = new BigDecimal("11.1111");
+        System.out.println(bigDecimal.setScale(2, RoundingMode.HALF_UP));
+        bigDecimal = new BigDecimal("11.145");
+        System.out.println(bigDecimal.setScale(2, RoundingMode.HALF_UP));
+        bigDecimal = new BigDecimal("11.146");
+        System.out.println(bigDecimal.setScale(2, RoundingMode.HALF_UP));
+        bigDecimal = new BigDecimal("11.155");
+        System.out.println(bigDecimal.setScale(2, RoundingMode.HALF_UP));
+        bigDecimal = new BigDecimal("11.156");
+        System.out.println(bigDecimal.setScale(2, RoundingMode.HALF_UP));
+
+        bigDecimal = new BigDecimal("11.1");
+        System.out.println(bigDecimal.setScale(2, RoundingMode.HALF_UP));
+    }
+
+    private static void extracted() {
         Double customerYkgPrice = 10.0D;
         Double modifiedCustomerYkgPrice = getModifiedCustomerYkgPrice(customerYkgPrice);
         System.out.println(modifiedCustomerYkgPrice);
@@ -26,7 +42,6 @@ public class BigDecimalTest2 {
         } else {
             System.out.println("111满足条件");
         }
-
     }
 
     private static Double getModifiedCustomerYkgPrice(Double ykgPrice) {
