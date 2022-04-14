@@ -20,7 +20,8 @@ public class StringTest {
         String s = "%s ---- %s ----- %s ---- %s";
         String format = String.format(s, "a", "b", "c", "d");
         System.out.println(format);
-        String format2 = String.format(s, "a", "b");
+        String s1 = "%s ---- %s ";
+        String format2 = String.format(s1, "a", "b", "c", "d");
         System.out.println(format2);
     }
 
