@@ -1,5 +1,7 @@
 package com.xuegao.luanqibazao_1.jdk8.util.list;
 
+import org.springframework.util.ObjectUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,9 @@ public class ListTest {
         int batch = (list.size() - 1) / batchNumber + 1;
         System.out.println(batch);
 
+        List<String> stringList = new ArrayList<>(1);
+        System.out.println(ObjectUtils.isEmpty(stringList));
+        System.out.println(org.apache.commons.lang3.ObjectUtils.isEmpty(stringList));
 
     }
 }
