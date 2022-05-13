@@ -10,15 +10,18 @@ public class AreaCodeUtils {
      * 检查区号，一个还是多个
      *
      * @param inputAreaCode:
-     * @param numFlag:       true 一个 false 多个
-     * @return void
+     * @param numsFlag:      true 多个 false 一个
      * @date 2022/5/13 16:44
      */
-    public static void checkAreaCode(String inputAreaCode, String separator) {
+    public static void checkAreaCode(String inputAreaCode, boolean numsFlag, String separator) {
         if (StringUtils.isBlank(inputAreaCode)) {
             throw new RuntimeException("区号不能为空");
         }
-
+        if (!numsFlag) {
+            if (inputAreaCode.length() > 5) {
+                throw new RuntimeException("请输入单个区号");
+            }
+        }
         String[] areaCodeArr = inputAreaCode.split(separator);
         for (String areaCode : areaCodeArr) {
             // 20220513,已经出现了，特殊的区号，指五位数的
@@ -33,6 +36,6 @@ public class AreaCodeUtils {
     }
 
     public static void main(String[] args) {
-        checkAreaCode("0755-0755-0755-", "-");
+        checkAreaCode("-0755-0755-0755-", false, "-");
     }
 }

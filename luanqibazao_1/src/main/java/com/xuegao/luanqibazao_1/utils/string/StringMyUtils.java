@@ -98,4 +98,12 @@ public class StringMyUtils {
         }
         return str;
     }
+
+    public static void main(String[] args) {
+
+        String s = trimSeparator("-0755-0755-0755-", "-");
+        System.out.println(s);
+        s = trimEndSeparator("-0755-0755-0755-", "-");
+        System.out.println(s);
+    }
 }
