@@ -48,6 +48,7 @@ public class AreaCodeUtils {
     public static void main(String[] args) {
         // checkAreaCode("-0755-0755-0755-", false, "-");
         // checkAreaCode("0755");
+        // commit - 21:33
         checkAreaCode("07550");
     }
 
