@@ -35,7 +35,19 @@ public class AreaCodeUtils {
         }
     }
 
+    public static void checkAreaCode(String inputAreaCode) {
+        if (StringUtils.isBlank(inputAreaCode)) {
+            throw new RuntimeException("区号不能为空");
+        }
+        boolean matchFlag = Pattern.matches("^0[0-9]{2,3}(-0[0-9]{2,3}){0,49}$", inputAreaCode);
+        if (!matchFlag) {
+            throw new RuntimeException(inputAreaCode + "区号不合法");
+        }
+    }
+
     public static void main(String[] args) {
-        checkAreaCode("-0755-0755-0755-", false, "-");
+        // checkAreaCode("-0755-0755-0755-", false, "-");
+        // checkAreaCode("0755");
+        checkAreaCode("07550");
     }
 }
