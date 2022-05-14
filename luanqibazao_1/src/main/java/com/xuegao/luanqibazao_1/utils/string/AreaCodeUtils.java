@@ -50,4 +50,5 @@ public class AreaCodeUtils {
         // checkAreaCode("0755");
         checkAreaCode("07550");
     }
+
 }
