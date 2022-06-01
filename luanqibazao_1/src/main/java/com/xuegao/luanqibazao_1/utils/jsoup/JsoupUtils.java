@@ -5,7 +5,6 @@ import com.xuegao.luanqibazao_1.utils.audio.AudioUtils;
 import com.xuegao.luanqibazao_1.utils.document.DocumentUtils;
 import com.xuegao.luanqibazao_1.utils.video.VideoUtils;
 import com.xuegao.luanqibazao_1.utils.zip.ZipUtils;
-import io.micrometer.core.instrument.util.JsonUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -16,10 +15,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class JsoupUtils {
     private static final Logger log = LoggerFactory.getLogger(JsoupUtils.class);
