@@ -1,6 +1,7 @@
 package com.xuegao.luanqibazao_1.utils.jsoup;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Sets;
 import com.xuegao.luanqibazao_1.utils.audio.AudioUtils;
 import com.xuegao.luanqibazao_1.utils.document.DocumentUtils;
 import com.xuegao.luanqibazao_1.utils.video.VideoUtils;
@@ -17,9 +18,12 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class JsoupUtils {
     private static final Logger log = LoggerFactory.getLogger(JsoupUtils.class);
+
+    private Set<String> filterSet = Sets.newHashSet("../", "__MACOSX/");
 
     public static List<FileNameUrl> getHtml(String url) throws IOException {
         List<FileNameUrl> fileNameUrlList = new ArrayList<>(10);
@@ -81,26 +85,5 @@ public class JsoupUtils {
         }
 
         return null;
-    }
-
-    public static class FileNameUrl {
-        private String fileName;
-        private String url;
-
-        public String getFileName() {
-            return fileName;
-        }
-
-        public void setFileName(String fileName) {
-            this.fileName = fileName;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
     }
 }
