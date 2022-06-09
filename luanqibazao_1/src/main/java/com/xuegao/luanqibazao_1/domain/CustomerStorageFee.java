@@ -1,7 +1,6 @@
 package com.xuegao.luanqibazao_1.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.istack.internal.NotNull;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

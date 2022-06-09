@@ -48,7 +48,7 @@ public class JsoupUtilsV2 {
             log.info("[SpringBoot_LuanQiBaZao][JsoupUtilsV2][getUrl][relHref={}][absHref={}]", relHref, absHref);
             if (relHref.endsWith("/")){
                 FileNameUrl fileNameUrl = new FileNameUrl();
-                fileNameUrl
+
                 continue;
             }
         }
