@@ -1,5 +1,6 @@
 package com.xuegao.luanqibazao_1;
 
+import com.alibaba.fastjson.JSON;
 import com.xuegao.luanqibazao_1.domain.UserInfo;
 
 import java.util.ArrayList;
@@ -53,6 +54,6 @@ public class Builder<T> {
         UserInfo userInfo = Builder.of(UserInfo::new)
                 .with(UserInfo::setId, "idid")
                 .with(UserInfo::setName, "namename").build();
-        System.out.println(userInfo);
+        System.out.println(JSON.toJSONString(userInfo));
     }
 }
