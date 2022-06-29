@@ -1,7 +1,6 @@
 package com.xuegao.luanqibazao_1.common;
 
 /**
- *
  * @author xuegao
  * @version 1.0
  * @date 2022/1/14 20:30
@@ -18,4 +17,8 @@ public class Constants {
     public static final String ARRAY_END_STR = "]";
     public static final String DEFAULT_DEFINE_MAX = "+∞";
     public static final int COMMON_INT_1000_0000 = 1000_0000;
+
+    public static final String TIME_PATTERN_1 = "yyyy-MM-dd HH:mm:ss";
+    public static final String TIME_PATTERN_2 = "yyyy-MM-dd HH:mm";
+    public static final String TIME_PATTERN_3 = "yyyy-MM-dd";
 }
