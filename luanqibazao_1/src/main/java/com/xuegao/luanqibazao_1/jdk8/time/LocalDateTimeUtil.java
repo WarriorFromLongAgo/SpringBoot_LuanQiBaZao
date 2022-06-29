@@ -39,6 +39,24 @@ public class LocalDateTimeUtil {
         return l1.compareTo(l2);
     }
 
+    public static LocalDateTime now() {
+        return LocalDateTime.now();
+    }
+
+    /**
+     * 获取一个时间，负数是过去的，正数是现在的
+     * plusDays
+     *
+     * @param days:
+     * @return java.time.LocalDateTime
+     * @author fjm
+     * @date 2022/6/29 15:24
+     */
+    public static LocalDateTime plusDays(long days) {
+        LocalDateTime nowLocalDateTime = LocalDateTime.now();
+        return nowLocalDateTime.plusDays(days);
+    }
+
     public static void main(String[] args) {
         LocalDateTime l1 = strToLocalDateTime("2022-06-29 15:31:00");
         LocalDateTime l2 = strToLocalDateTime("2022-06-30 15:31:00");
@@ -54,5 +72,9 @@ public class LocalDateTimeUtil {
         l2 = strToLocalDateTime("2022-06-30 15:31:00");
         compare = compare(l1, l2);
         System.out.println("3 = " + compare);
+
+
+        LocalDateTime localDateTime = plusDays(-182);
+        System.out.println(LocalDateTimeUtil.localDateTimeToStr(localDateTime));
     }
 }
