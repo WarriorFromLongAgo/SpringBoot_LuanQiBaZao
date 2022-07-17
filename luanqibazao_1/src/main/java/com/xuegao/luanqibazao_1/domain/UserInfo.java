@@ -24,7 +24,17 @@ public class UserInfo implements Serializable {
 
     private Integer index;
 
+    private String cardId;
+
     public UserInfo() {
+    }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
     }
 
     public String getId() {

@@ -24,6 +24,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class JSON {
     private static final ObjectMapper mapper;
@@ -208,7 +209,7 @@ public abstract class JSON {
     @SuppressWarnings("unchecked")
     public static <T> T parse(Object obj, Class<T> type) {
 
-        if (StringUtils.isEmpty(obj) || type == null) return null;
+        if (Objects.isNull(obj) || StringUtils.isEmpty(obj.toString()) || type == null) return null;
         if (type == String.class) return (T) obj;
 
         T result;
