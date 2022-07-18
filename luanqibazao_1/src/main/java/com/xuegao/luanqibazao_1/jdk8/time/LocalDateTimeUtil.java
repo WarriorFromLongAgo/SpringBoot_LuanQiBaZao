@@ -2,8 +2,11 @@ package com.xuegao.luanqibazao_1.jdk8.time;
 
 import com.xuegao.luanqibazao_1.common.Constants;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class LocalDateTimeUtil {
     public static LocalDateTime strToLocalDateTime(String str) {
@@ -41,6 +44,32 @@ public class LocalDateTimeUtil {
 
     public static LocalDateTime now() {
         return LocalDateTime.now();
+    }
+
+    public static Date toDate() {
+        return toDate(now());
+    }
+
+    public static Date toDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static Timestamp toTimestamp() {
+        return toTimestamp(now());
+    }
+
+    public static Timestamp toTimestamp(LocalDateTime localDateTime) {
+        return Timestamp.valueOf(localDateTime);
+    }
+
+    public static LocalDateTime toLocalDateTime() {
+        return toLocalDateTime(new Date());
+    }
+
+    public static LocalDateTime toLocalDateTime(Date date) {
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
     }
 
     /**

@@ -11,7 +11,7 @@ public class Jsoup1 {
     private static final Logger log = LoggerFactory.getLogger(Jsoup1.class);
 
     public static void main(String[] args) throws IOException {
-        String url = "http://soft.kyepm.com/%E4%BA%BA%E6%89%8D%E5%9F%B9%E5%85%BB/";
+        String url = "5%BB/";
         // List<JsoupUtils.FileNameUrl> fileNameUrlList = JsoupUtils.getHtmlV2(url);
 
         // String url = "http://soft.kyepm.com/%E4%BA%BA%E6%89%8D%E5%9F%B9%E5%85%BB/";

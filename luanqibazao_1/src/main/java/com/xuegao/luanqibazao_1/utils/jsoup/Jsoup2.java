@@ -13,7 +13,7 @@ public class Jsoup2 {
     public static void main(String[] args) throws IOException {
         String downKey = "down";
         String folderKey = "folder";
-        String url = "http://soft.kyepm.com/%E4%BA%BA%E6%89%8D%E5%9F%B9%E5%85%BB/";
+        String url = "http://s%E5%9F%B9%E5%85%BB/";
         Map<String, List<FileNameUrl>> resultMap = JsoupUtilsV2.getUrl(url, downKey, folderKey);
         List<FileNameUrl> downList = resultMap.get(downKey);
         List<FileNameUrl> folderList = resultMap.get(folderKey);

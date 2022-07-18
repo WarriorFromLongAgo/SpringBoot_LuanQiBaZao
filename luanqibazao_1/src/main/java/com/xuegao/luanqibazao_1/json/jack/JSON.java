@@ -16,6 +16,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ObjectUtils;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -208,7 +209,7 @@ public abstract class JSON {
     @SuppressWarnings("unchecked")
     public static <T> T parse(Object obj, Class<T> type) {
 
-        if (StringUtils.isEmpty(obj) || type == null) return null;
+        if (ObjectUtils.isEmpty(obj) || StringUtils.isEmpty(obj.toString()) || type == null) return null;
         if (type == String.class) return (T) obj;
 
         T result;
