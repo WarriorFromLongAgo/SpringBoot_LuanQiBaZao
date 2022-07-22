@@ -99,6 +99,13 @@ public class StringMyUtils {
         return str;
     }
 
+    public static String replace(String str, int i) {
+        if (StringUtils.isBlank(str)) {
+            return str;
+        }
+        return str;
+    }
+
     public static void main(String[] args) {
 
         String s = trimSeparator("-0755-0755-0755-", "-");

@@ -10,7 +10,18 @@ public class StringTest2 {
         }
         System.out.println("================================================================");
 
-
+        int i1 = sql.hashCode();
+        System.out.println(i1);
+        int i2 = "30000019".hashCode();
+        System.out.println(i2);
+        int i3 = "3000230".hashCode();
+        System.out.println(i3);
+        int i4 = "000001017231".hashCode();
+        System.out.println(i4);
+        int i5 = i4 % 3;
+        System.out.println(i5);
+        int i6 = i3 % 3;
+        System.out.println(i6);
     }
 
 
