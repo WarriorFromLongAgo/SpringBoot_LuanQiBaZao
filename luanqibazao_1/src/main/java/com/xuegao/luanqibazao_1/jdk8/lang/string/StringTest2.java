@@ -3,28 +3,14 @@ package com.xuegao.luanqibazao_1.jdk8.lang.string;
 public class StringTest2 {
 
     public static void main(String[] args) throws Exception {
-        // String sql = "INSERT INTO crm.fence_price (id, adjust_title, customer_num, begin_time, end_time, fence_status, " +
-        //         "service_type, pay_mode, adjust_type, adjust_amount, exc_amount, customer_generic_query, waybill_generic_query, " +
-        //         " fence_tips, exc_tips, push_finish_time, push_finish_flag, execute_time, other_status, modify_time, run_complete_time, " +
-        //         "trace_id, enabled_flag, created_by, creation_date, updated_by, updation_date, etl_creation_date, etl_updation_date)  " +
-        //         "VALUES (null, '压测专用%s', -1, '2022-05-01 00:00:00', '2022-05-29 23:59:59', 2,  " +
-        //         "'', '', 1, 11.0000,  " +
-        //         "111.0000, null, '{\"generic\": {\"vos\": [{\"values\": [\"312\"], \"operation\": \"contain\", \"columnName\": \"deliveryArea#Free\", \"matchScope\": \"{\\\\\"key\\\\\":\\\\\"deliveryArea\\\\\",\\\\\"propertyName\\\\\":\\\\\"deliveryArea\\\\\",\\\\\"columnName\\\\\":\\\\\"deliveryArea\\\\\",\\\\\"frontBrackets\\\\\":\\\\\"(\\\\\",\\\\\"postBrackets\\\\\":\\\\\")\\\\\",\\\\\"conditionOperation\\\\\":\\\\\"and\\\\\",\\\\\"operation\\\\\":\\\\\"contain\\\\\",\\\\\"columnType\\\\\":\\\\\"areaSelect\\\\\",\\\\\"queryValue\\\\\":\\\\\"Free\\\\\",\\\\\"isSelectError\\\\\":false,\\\\\"isError\\\\\":false,\\\\\"queryValue2\\\\\":{\\\\\"disName\\\\\":\\\\\"\\\\\",\\\\\"disId\\\\\":\\\\\"312\\\\\",\\\\\"dId\\\\\":\\\\\"XZ4-037279\\\\\",\\\\\"resName\\\\\":\\\\\"wlz报关\\\\\"},\\\\\"_queryValue\\\\\":\\\\\"\\\\\",\\\\\"checkedNodes\\\\\":null,\\\\\"levelNodes\\\\\":null,\\\\\"$attr\\\\\":{\\\\\"operations\\\\\":[\\\\\"contain\\\\\"],\\\\\"showList\\\\\":true,\\\\\"lookupCodeList\\\\\":[{\\\\\"label\\\\\":\\\\\"自由画\\\\\",\\\\\"value\\\\\":\\\\\"Free\\\\\"}]},\\\\\"remoteMethod\\\\\":null}\", \"postBrackets\": \")\", \"frontBrackets\": \"(\", \"conditionOperation\": \"and\"}]}}',  " +
-        //         "'因报关入仓原因，需收取服务费：**元/票', '由于收件地址涉及报关入仓服务，若不选择服务将会延时派送，并需支付&&元手续费，风险将由您承担', null, 1, " +
-        //         "'2022-05-02 15:34:45', null, '2022-05-02 15:34:45', null, 'e7ce806b6b744634bf51b74b8f56e90b', 1, '13601', '2022-05-02 15:34:27', " +
-        //         "'13601', '2022-05-02 15:34:45', '2022-05-02 15:34:26', '2022-05-02 15:34:44');";
-        // for (int i = 0; i < 50; i++) {
-        //     String sql1 = sql.replace("%s", String.valueOf(i));
-        //     System.out.println(sql1);
-        // }
-        // System.out.println("================================================================");
-        String way = "17228";
-        Integer integer = Integer.valueOf(way.substring(way.length() - 1));
-        System.out.println(integer);
-        int i = integer / 3;
-        System.out.println(i);
+        String sql = "";
+        for (int i = 0; i < 50; i++) {
+            String sql1 = sql.replace("%s", String.valueOf(i));
+            System.out.println(sql1);
+        }
+        System.out.println("================================================================");
 
-        int i1 = way.hashCode();
+        int i1 = sql.hashCode();
         System.out.println(i1);
         int i2 = "30000019".hashCode();
         System.out.println(i2);
