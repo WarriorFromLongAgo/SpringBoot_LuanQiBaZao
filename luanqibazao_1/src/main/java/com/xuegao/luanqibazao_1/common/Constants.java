@@ -21,4 +21,6 @@ public class Constants {
     public static final String TIME_PATTERN_1 = "yyyy-MM-dd HH:mm:ss";
     public static final String TIME_PATTERN_2 = "yyyy-MM-dd HH:mm";
     public static final String TIME_PATTERN_3 = "yyyy-MM-dd";
+    public static final String TIME_PATTERN_4 = "HH:mm:ss";
+    public static final String TIME_PATTERN_5 = "mm:ss";
 }
