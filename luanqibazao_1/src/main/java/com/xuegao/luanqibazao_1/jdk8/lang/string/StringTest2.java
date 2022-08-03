@@ -8,6 +8,21 @@ public class StringTest2 {
             String sql1 = sql.replace("%s", String.valueOf(i));
             System.out.println(sql1);
         }
+
+        StringBuilder stringBuilderV1 = new StringBuilder();
+        for (int i = 0; i < 20; i++) {
+            stringBuilderV1.append("加拿大" + i + "/");
+        }
+        System.out.println(stringBuilderV1);
+        System.out.println(stringBuilderV1.length());
+        System.out.println("================================================================");
+
+        StringBuilder stringBuilderV2 = new StringBuilder();
+        for (int i = 0; i < 500; i++) {
+            stringBuilderV2.append("1");
+        }
+        System.out.println(stringBuilderV2);
+        System.out.println(stringBuilderV2.length());
         System.out.println("================================================================");
 
         int i1 = sql.hashCode();
