@@ -14,6 +14,19 @@ public class LocalDateTimeUtil {
     public static final String PATTERN_HH_MM_SS = "HH:mm:ss";
     public static final String PATTERN_MM_SS = "mm:ss";
 
+    // region long interconversion LocalDateTime
+
+    public static LocalDateTime longToLocalDateTime(long l) {
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(l), ZoneId.systemDefault());
+    }
+
+    public static long localDateTimeToLong(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+    }
+
+    // endregion
+
+
     // region str interconversion LocalDateTime
 
     public static LocalDateTime strToLocalDateTime(String str) {
@@ -180,6 +193,7 @@ public class LocalDateTimeUtil {
         //返回两个时间点的月数差
         return (year2 - year1) * 12 + (month2 - month1);
     }
+
     /**
      * 获取两个时间点的月份差
      *
@@ -263,6 +277,7 @@ public class LocalDateTimeUtil {
 
 
     // region 获取当天，当月，当年，开始结束时间
+
     /**
      * 今天开始时间
      *
