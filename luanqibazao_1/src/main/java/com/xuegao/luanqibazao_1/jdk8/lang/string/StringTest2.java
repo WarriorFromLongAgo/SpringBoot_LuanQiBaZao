@@ -8,15 +8,17 @@ public class StringTest2 {
         String sql = "";
         for (int i = 0; i < 50; i++) {
             String sql1 = sql.replace("%s", String.valueOf(i));
-            System.out.println(sql1);
         }
 
         StringBuilder stringBuilderV1 = new StringBuilder();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             stringBuilderV1.append("加拿大" + i + "/");
         }
         System.out.println(stringBuilderV1);
         System.out.println(stringBuilderV1.length());
+        String substring = stringBuilderV1.substring(0, 500);
+        System.out.println(substring);
+        System.out.println(substring.length());
         System.out.println("================================================================");
 
         StringBuilder stringBuilderV2 = new StringBuilder();
