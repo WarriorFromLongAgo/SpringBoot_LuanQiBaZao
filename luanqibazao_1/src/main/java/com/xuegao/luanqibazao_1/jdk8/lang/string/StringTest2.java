@@ -1,5 +1,7 @@
 package com.xuegao.luanqibazao_1.jdk8.lang.string;
 
+import java.text.DecimalFormat;
+
 public class StringTest2 {
 
     public static void main(String[] args) throws Exception {
@@ -23,6 +25,15 @@ public class StringTest2 {
         }
         System.out.println(stringBuilderV2);
         System.out.println(stringBuilderV2.length());
+        System.out.println("================================================================");
+
+        StringBuilder stringBuilderV3 = new StringBuilder();
+        DecimalFormat decimalFormat = new DecimalFormat("0000");
+        for (int i = 0; i < 100; i++) {
+            stringBuilderV3.append(decimalFormat.format(i)).append("-");
+        }
+        System.out.println(stringBuilderV3);
+        System.out.println(stringBuilderV3.length());
         System.out.println("================================================================");
 
         int i1 = sql.hashCode();

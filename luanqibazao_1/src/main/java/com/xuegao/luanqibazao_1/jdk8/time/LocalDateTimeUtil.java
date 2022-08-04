@@ -289,7 +289,7 @@ public class LocalDateTimeUtil {
 
         long months = differentMonths("2022-06-30 15:31:00", "2022-07-31 15:31:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
         System.out.println(months);
-        months = differentMonths("2020-04-23", "2021-04-23", PATTERN_YYYY_MM_DD);
-        System.out.println(months);
+        l = differentDays("2022-07-13", "2023-07-12", PATTERN_YYYY_MM_DD);
+        System.out.println(l);
     }
 }
