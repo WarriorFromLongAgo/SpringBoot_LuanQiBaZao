@@ -1,5 +1,7 @@
 package com.xuegao.luanqibazao_1.jdk8.io;
 
+import com.xuegao.luanqibazao_1.jdk8.time.LocalDateTimeUtil;
+
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  * <br/> @date：2020/12/28 14:30
  */
 public class FileTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // File file = new File("D:\\user\\6565.545");
         // String file11 = createFile1(file);
         // System.out.println(file11);
@@ -20,8 +22,20 @@ public class FileTest {
         // String file2 = createFile2(file1);
         // System.out.println(file2);
 
-        String path = "D:\\user\\6565.545\\sdadas";
-        fileIsExists2(path);
+        // String path = "D:\\user\\6565.545\\sdadas";
+        // fileIsExists2(path);
+
+        File lastModifiedFile = new File("C:\\Users\\65126\\Desktop\\es java.java");
+        long l = lastModified(lastModifiedFile);
+        LocalDateTime localDateTime = LocalDateTimeUtil.longToLocalDateTime(l);
+        String s = LocalDateTimeUtil.localDateTimeToStr(localDateTime);
+        System.out.println(s);
+    }
+
+    private static long lastModified(File file) {
+        long l = file.lastModified();
+        System.out.println(l);
+        return l;
     }
 
     private static String createFile1(File file) {
