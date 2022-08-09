@@ -17,6 +17,14 @@ public class BigDecimalTest2 {
     private static final Logger log = LoggerFactory.getLogger(BigDecimalTest2.class);
 
     public static void main(String[] args) {
+        BigDecimal defaultDeclared = new BigDecimal("-1");
+        if (new BigDecimal("0").compareTo(defaultDeclared) >= 0 || defaultDeclared.compareTo(new BigDecimal("300000")) > 0) {
+            throw new RuntimeException("默认声明价值输入必须大于0并且小于等于300000");
+        }
+        System.out.println(defaultDeclared);
+    }
+
+    private static void extracted1() {
         BigDecimal bigDecimal = new BigDecimal("11.1111");
         System.out.println(bigDecimal.setScale(2, RoundingMode.HALF_UP));
         bigDecimal = new BigDecimal("11.145");
