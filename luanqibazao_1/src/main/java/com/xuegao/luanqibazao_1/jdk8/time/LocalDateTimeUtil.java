@@ -208,7 +208,9 @@ public class LocalDateTimeUtil {
      * @author xuegao
      */
     public static long differentSeconds(LocalDate date1, LocalDate date2) {
-        return date1.until(date2, ChronoUnit.SECONDS);
+        LocalDateTime localDateTime1 = localDateToLocalDateTime(date1, LocalTime.MIN);
+        LocalDateTime localDateTime2 = localDateToLocalDateTime(date2, LocalTime.MIN);
+        return differentSeconds(localDateTime1, localDateTime2);
     }
 
     public static long differentSeconds(String date1, String date2, String pattern) {
@@ -931,8 +933,6 @@ public class LocalDateTimeUtil {
 
         LocalDateTime localDateTime1 = localDateTimeAddMinutesSetSecond00(localDateTime2, 1);
         System.out.println(localDateTimeToStr(localDateTime1));
-
-
 
 
     }
