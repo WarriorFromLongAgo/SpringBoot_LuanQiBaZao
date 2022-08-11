@@ -72,7 +72,59 @@ public class LocalDateTimeUtil {
 
     // endregion
 
-    // region 增加减少天数，秒数，周，月，年，等等
+    // region 增加减少 秒数，分钟数，小时数，天数，，周，月，年，等等
+    /**
+     * 获取一个时间，负数是过去的，正数是现在的
+     * plusDays
+     *
+     * @param seconds:
+     * @return java.time.LocalDateTime
+     * @author xuegao
+     * @date 2022/6/29 15:24
+     */
+    public static LocalDateTime plusSeconds(long seconds) {
+        LocalDateTime nowLocalDateTime = LocalDateTime.now();
+        return plusSeconds(nowLocalDateTime, seconds);
+    }
+
+    /**
+     * 获取一个时间，负数是过去的，正数是现在的
+     * plusDays
+     *
+     * @param seconds:
+     * @return java.time.LocalDateTime
+     * @author xuegao
+     * @date 2022/6/29 15:24
+     */
+    public static LocalDateTime plusSeconds(LocalDateTime localDateTime, long seconds) {
+        return localDateTime.plusSeconds(seconds);
+    }
+    /**
+     * 获取一个时间，负数是过去的，正数是现在的
+     * plusDays
+     *
+     * @param minutes:
+     * @return java.time.LocalDateTime
+     * @author xuegao
+     * @date 2022/6/29 15:24
+     */
+    public static LocalDateTime plusMinutes(long minutes) {
+        LocalDateTime nowLocalDateTime = LocalDateTime.now();
+        return plusMinutes(nowLocalDateTime, minutes);
+    }
+
+    /**
+     * 获取一个时间，负数是过去的，正数是现在的
+     * plusDays
+     *
+     * @param minutes:
+     * @return java.time.LocalDateTime
+     * @author xuegao
+     * @date 2022/6/29 15:24
+     */
+    public static LocalDateTime plusMinutes(LocalDateTime localDateTime, long minutes) {
+        return localDateTime.plusMinutes(minutes);
+    }
 
     /**
      * 获取一个时间，负数是过去的，正数是现在的
@@ -85,8 +137,22 @@ public class LocalDateTimeUtil {
      */
     public static LocalDateTime plusDays(long days) {
         LocalDateTime nowLocalDateTime = LocalDateTime.now();
-        return nowLocalDateTime.plusDays(days);
+        return plusDays(nowLocalDateTime, days);
     }
+
+    /**
+     * 获取一个时间，负数是过去的，正数是现在的
+     * plusDays
+     *
+     * @param days:
+     * @return java.time.LocalDateTime
+     * @author xuegao
+     * @date 2022/6/29 15:24
+     */
+    public static LocalDateTime plusDays(LocalDateTime localDateTime, long days) {
+        return localDateTime.plusDays(days);
+    }
+
     // endregion
 
     // region LocalDateTime interconversion Date Timestamp
@@ -273,8 +339,46 @@ public class LocalDateTimeUtil {
     public static LocalDateTime localDateToLocalDateTime(LocalDate localDate, LocalTime localTime) {
         return localDate.atTime(localTime);
     }
+
     // endregion
 
+    // region 获取入参中，秒的最大值，秒的最小值
+    public static LocalDateTime localDateTimeSetSecond00(LocalDateTime inputLocalDateTime) {
+        LocalDate localDate = inputLocalDateTime.toLocalDate();
+        int hour = inputLocalDateTime.getHour();
+        int minute = inputLocalDateTime.getMinute();
+        String localTimeStr = hour + ":" + minute + ":" + "00";
+        return localDateToLocalDateTime(localDate, strToLocalTime(localTimeStr));
+    }
+
+    public static LocalDateTime localDateTimeSetSecond59(LocalDateTime inputLocalDateTime) {
+        LocalDate localDate = inputLocalDateTime.toLocalDate();
+        int hour = inputLocalDateTime.getHour();
+        int minute = inputLocalDateTime.getMinute();
+        String localTimeStr = hour + ":" + minute + ":" + "59";
+        return localDateToLocalDateTime(localDate, strToLocalTime(localTimeStr));
+    }
+
+    /**
+     * 获取入参时间 + minutes之后，的开始时间
+     * localDateTimeAddMinutesSetSecond00
+     *
+     * @param inputLocalDateTime:
+     * @param minutes:
+     * @return java.time.LocalDateTime
+     * @author xuegao
+     * @date 2022/8/11 13:19
+     */
+    public static LocalDateTime localDateTimeAddMinutesSetSecond00(LocalDateTime inputLocalDateTime, long minutes) {
+        LocalDateTime newLocalDateTime = plusMinutes(inputLocalDateTime, minutes);
+
+        LocalDate localDate = newLocalDateTime.toLocalDate();
+        int hour = newLocalDateTime.getHour();
+        int minute = newLocalDateTime.getMinute();
+        String localTimeStr = hour + ":" + minute + ":" + "00";
+        return localDateToLocalDateTime(localDate, strToLocalTime(localTimeStr));
+    }
+    // endregion
 
     // region 获取当天，当月，当年，开始结束时间
 
@@ -753,5 +857,19 @@ public class LocalDateTimeUtil {
         System.out.println("下一年结束时间：" + nextYearEndTime());
         // 版权声明：本文为CSDN博主「C3Stones」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
         // 原文链接：https://blog.csdn.net/qq_48008521/article/details/116474667
+
+        LocalDate localDate = strToLocalDate("2022-08-11");
+        LocalDateTime localDateToLocalDateTime2359 = localDateToLocalDateTime(localDate, LocalTime.MAX);
+        String localDateTimeToStr = localDateTimeToStr(localDateToLocalDateTime2359);
+        System.out.println(localDateTimeToStr);
+
+        LocalDateTime localDateTime2 = strToLocalDateTime("2022-08-11 12:18:16");
+        LocalDateTime localDateTimeSetSecond00 = localDateTimeSetSecond00(localDateTime2);
+        System.out.println(localDateTimeToStr(localDateTimeSetSecond00));
+        LocalDateTime localDateTimeSetSecond59 = localDateTimeSetSecond59(localDateTime2);
+        System.out.println(localDateTimeToStr(localDateTimeSetSecond59));
+
+        LocalDateTime localDateTime1 = localDateTimeAddMinutesSetSecond00(localDateTime2, 1);
+        System.out.println(localDateTimeToStr(localDateTime1));
     }
 }
