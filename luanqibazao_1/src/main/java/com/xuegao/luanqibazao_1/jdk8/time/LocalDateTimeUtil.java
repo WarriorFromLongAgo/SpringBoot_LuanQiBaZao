@@ -194,7 +194,7 @@ public class LocalDateTimeUtil {
      *
      * @param date1 时间1
      * @param date2 时间2
-     * @author fjm
+     * @author xuegao
      */
     public static long differentSeconds(LocalDateTime date1, LocalDateTime date2) {
         return date1.until(date2, ChronoUnit.SECONDS);
@@ -205,7 +205,7 @@ public class LocalDateTimeUtil {
      *
      * @param date1 时间1
      * @param date2 时间2
-     * @author fjm
+     * @author xuegao
      */
     public static long differentSeconds(LocalDate date1, LocalDate date2) {
         return date1.until(date2, ChronoUnit.SECONDS);
@@ -227,7 +227,7 @@ public class LocalDateTimeUtil {
      *
      * @param date1 时间1
      * @param date2 时间2
-     * @author fjm
+     * @author xuegao
      */
     public static long differentMinutes(LocalDateTime date1, LocalDateTime date2) {
         return date1.until(date2, ChronoUnit.MINUTES);
@@ -238,7 +238,7 @@ public class LocalDateTimeUtil {
      *
      * @param date1 时间1
      * @param date2 时间2
-     * @author fjm
+     * @author xuegao
      */
     public static long differentMinutes(LocalDate date1, LocalDate date2) {
         return date1.until(date2, ChronoUnit.MINUTES);
