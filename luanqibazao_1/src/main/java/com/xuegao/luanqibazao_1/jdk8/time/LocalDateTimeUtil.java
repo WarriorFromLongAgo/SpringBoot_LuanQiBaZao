@@ -73,6 +73,7 @@ public class LocalDateTimeUtil {
     // endregion
 
     // region 增加减少 秒数，分钟数，小时数，天数，，周，月，年，等等
+
     /**
      * 获取一个时间，负数是过去的，正数是现在的
      * plusDays
@@ -99,6 +100,7 @@ public class LocalDateTimeUtil {
     public static LocalDateTime plusSeconds(LocalDateTime localDateTime, long seconds) {
         return localDateTime.plusSeconds(seconds);
     }
+
     /**
      * 获取一个时间，负数是过去的，正数是现在的
      * plusDays
@@ -185,7 +187,73 @@ public class LocalDateTimeUtil {
 
     // endregion
 
-    // region 计算两个时间相差多少天，月，年
+    // region 计算两个时间相差多少秒，分钟，小时，天，月，年
+
+    /**
+     * 计算两个时间相差多少天（date2 - date1）
+     *
+     * @param date1 时间1
+     * @param date2 时间2
+     * @author fjm
+     */
+    public static long differentSeconds(LocalDateTime date1, LocalDateTime date2) {
+        return date1.until(date2, ChronoUnit.SECONDS);
+    }
+
+    /**
+     * 计算两个时间相差多少天（date2 - date1）
+     *
+     * @param date1 时间1
+     * @param date2 时间2
+     * @author fjm
+     */
+    public static long differentSeconds(LocalDate date1, LocalDate date2) {
+        return date1.until(date2, ChronoUnit.SECONDS);
+    }
+
+    public static long differentSeconds(String date1, String date2, String pattern) {
+        if (PATTERN_YYYY_MM_DD.equals(pattern)) {
+            LocalDate localDate1 = strToLocalDate(date1, pattern);
+            LocalDate localDate2 = strToLocalDate(date2, pattern);
+            return differentSeconds(localDate1, localDate2);
+        }
+        LocalDateTime localDateTime1 = strToLocalDateTime(date1, pattern);
+        LocalDateTime localDateTime2 = strToLocalDateTime(date2, pattern);
+        return differentSeconds(localDateTime1, localDateTime2);
+    }
+
+    /**
+     * 计算两个时间相差多少天（date2 - date1）
+     *
+     * @param date1 时间1
+     * @param date2 时间2
+     * @author fjm
+     */
+    public static long differentMinutes(LocalDateTime date1, LocalDateTime date2) {
+        return date1.until(date2, ChronoUnit.MINUTES);
+    }
+
+    /**
+     * 计算两个时间相差多少天（date2 - date1）
+     *
+     * @param date1 时间1
+     * @param date2 时间2
+     * @author fjm
+     */
+    public static long differentMinutes(LocalDate date1, LocalDate date2) {
+        return date1.until(date2, ChronoUnit.MINUTES);
+    }
+
+    public static long differentMinutes(String date1, String date2, String pattern) {
+        if (PATTERN_YYYY_MM_DD.equals(pattern)) {
+            LocalDate localDate1 = strToLocalDate(date1, pattern);
+            LocalDate localDate2 = strToLocalDate(date2, pattern);
+            return differentMinutes(localDate1, localDate2);
+        }
+        LocalDateTime localDateTime1 = strToLocalDateTime(date1, pattern);
+        LocalDateTime localDateTime2 = strToLocalDateTime(date2, pattern);
+        return differentMinutes(localDateTime1, localDateTime2);
+    }
 
     /**
      * 计算两个时间相差多少天（date2 - date1）
@@ -195,7 +263,7 @@ public class LocalDateTimeUtil {
      * @author xuegao
      */
     public static long differentDays(LocalDateTime date1, LocalDateTime date2) {
-        return date2.toLocalDate().toEpochDay() - date1.toLocalDate().toEpochDay();
+        return date1.until(date2, ChronoUnit.DAYS);
     }
 
     /**
@@ -206,7 +274,7 @@ public class LocalDateTimeUtil {
      * @author xuegao
      */
     public static long differentDays(LocalDate date1, LocalDate date2) {
-        return date2.toEpochDay() - date1.toEpochDay();
+        return date1.until(date2, ChronoUnit.DAYS);
     }
 
     public static long differentDays(String date1, String date2, String pattern) {
@@ -223,41 +291,12 @@ public class LocalDateTimeUtil {
     /**
      * 获取两个时间点的月份差
      *
-     * @param dt1 第一个时间点
-     * @param dt2 第二个时间点
+     * @param date1 第一个时间点
+     * @param date2 第二个时间点
      * @return int，即需求的月数差
      */
-    public static int differentMonths(LocalDateTime dt1, LocalDateTime dt2) {
-        //获取第一个时间点的月份
-        int month1 = dt1.getMonthValue();
-        //获取第一个时间点的年份
-        int year1 = dt1.getYear();
-        //获取第一个时间点的月份
-        int month2 = dt2.getMonthValue();
-        //获取第一个时间点的年份
-        int year2 = dt2.getYear();
-        //返回两个时间点的月数差
-        return (year2 - year1) * 12 + (month2 - month1);
-    }
-
-    /**
-     * 获取两个时间点的月份差
-     *
-     * @param dt1 第一个时间点
-     * @param dt2 第二个时间点
-     * @return int，即需求的月数差
-     */
-    public static int differentMonths(LocalDate dt1, LocalDate dt2) {
-        //获取第一个时间点的月份
-        int month1 = dt1.getMonthValue();
-        //获取第一个时间点的年份
-        int year1 = dt1.getYear();
-        //获取第一个时间点的月份
-        int month2 = dt2.getMonthValue();
-        //获取第一个时间点的年份
-        int year2 = dt2.getYear();
-        //返回两个时间点的月数差
-        return (year2 - year1) * 12 + (month2 - month1);
+    public static long differentMonths(LocalDateTime date1, LocalDateTime date2) {
+        return date1.until(date2, ChronoUnit.MONTHS);
     }
 
     /**
@@ -267,7 +306,18 @@ public class LocalDateTimeUtil {
      * @param date2 第二个时间点
      * @return int，即需求的月数差
      */
-    public static int differentMonths(String date1, String date2, String pattern) {
+    public static long differentMonths(LocalDate date1, LocalDate date2) {
+        return date1.until(date2, ChronoUnit.MONTHS);
+    }
+
+    /**
+     * 获取两个时间点的月份差
+     *
+     * @param date1 第一个时间点
+     * @param date2 第二个时间点
+     * @return int，即需求的月数差
+     */
+    public static long differentMonths(String date1, String date2, String pattern) {
         if (PATTERN_YYYY_MM_DD.equals(pattern)) {
             LocalDate localDate1 = strToLocalDate(date1, pattern);
             LocalDate localDate2 = strToLocalDate(date2, pattern);
@@ -805,15 +855,25 @@ public class LocalDateTimeUtil {
         LocalDateTime localDateTime = plusDays(-182);
         System.out.println(LocalDateTimeUtil.localDateTimeToStr(localDateTime));
 
-        long l = differentDays("2022-06-30 15:31:00", "2022-07-29 15:31:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
-        System.out.println(l);
-        l = differentDays("2020-04-23", "2021-04-23", PATTERN_YYYY_MM_DD);
-        System.out.println(l);
+        long differentSeconds = differentSeconds("2022-06-30 15:31:00", "2022-06-30 15:32:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
+        System.out.println(differentSeconds);
+        differentSeconds = differentSeconds("2020-04-23", "2021-04-23", PATTERN_YYYY_MM_DD);
+        System.out.println(differentSeconds);
 
-        long months = differentMonths("2022-06-30 15:31:00", "2022-07-31 15:31:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
-        System.out.println(months);
-        l = differentDays("2022-07-13", "2023-07-12", PATTERN_YYYY_MM_DD);
-        System.out.println(l);
+        long differentMinutes = differentMinutes("2022-06-30 15:31:00", "2022-06-30 15:32:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
+        System.out.println(differentMinutes);
+        differentMinutes = differentMinutes("2020-04-23", "2021-04-23", PATTERN_YYYY_MM_DD);
+        System.out.println(differentMinutes);
+
+        long differentDays = differentDays("2022-06-30 15:31:00", "2022-07-29 15:31:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
+        System.out.println(differentDays);
+        differentDays = differentDays("2020-04-23", "2021-04-23", PATTERN_YYYY_MM_DD);
+        System.out.println(differentDays);
+
+        long differentMonths = differentMonths("2022-06-30 15:31:00", "2022-07-31 15:31:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
+        System.out.println(differentMonths);
+        differentMonths = differentDays("2022-07-13", "2023-07-12", PATTERN_YYYY_MM_DD);
+        System.out.println(differentMonths);
 
         System.out.println("今天开始时间：" + todayStartTime());
         System.out.println("今天结束时间：" + todayEndTime());
@@ -871,5 +931,9 @@ public class LocalDateTimeUtil {
 
         LocalDateTime localDateTime1 = localDateTimeAddMinutesSetSecond00(localDateTime2, 1);
         System.out.println(localDateTimeToStr(localDateTime1));
+
+
+
+
     }
 }
