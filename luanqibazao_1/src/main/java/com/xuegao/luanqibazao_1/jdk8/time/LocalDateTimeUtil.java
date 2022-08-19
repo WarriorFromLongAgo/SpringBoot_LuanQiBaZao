@@ -854,7 +854,9 @@ public class LocalDateTimeUtil {
     // endregion
 
     public static void main(String[] args) {
+        // 测试早上
         LocalDateTime testLocalDateTime1 = strToLocalDateTime("2022-06-29 15:31:00");
+        // 测试下午
         LocalDateTime testLocalDateTime2 = strToLocalDateTime("2022-06-30 05:31:00");
         LocalDate testLocalDate1 = strToLocalDate("2022-06-29");
         // 测试对比
