@@ -85,13 +85,23 @@ public class SectionUtil {
         private static final long serialVersionUID = 1L;
         /**
          * 开始值
+         * 0
+         * 100
+         * 200
          */
         private BigDecimal beginKey;
         /**
          * 结束值
+         * 100
+         * 200
+         * 10000000
          */
         private BigDecimal endKey;
-
+        /**
+         * (0,100]
+         * (100,200]
+         * (200,10000000)
+         */
         private String sectionKey;
 
         private BigDecimal sectionValue;
