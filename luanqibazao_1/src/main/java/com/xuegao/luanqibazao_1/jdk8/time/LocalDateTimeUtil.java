@@ -435,9 +435,15 @@ public class LocalDateTimeUtil {
         LocalDateTime newLocalDateTime = plusMinutes(inputLocalDateTime, minutes);
 
         LocalDate localDate = newLocalDateTime.toLocalDate();
+
         int hour = newLocalDateTime.getHour();
         int minute = newLocalDateTime.getMinute();
-        String localTimeStr = hour + ":" + minute + ":" + "00";
+        // 指定两位整数
+        DecimalFormat df = new DecimalFormat("00");
+        String formatHour = df.format(hour);
+        String formatMinute = df.format(minute);
+        String localTimeStr = formatHour + ":" + formatMinute + ":" + "00";
+
         return localDateToLocalDateTime(localDate, strToLocalTime(localTimeStr));
     }
     // endregion
@@ -848,34 +854,28 @@ public class LocalDateTimeUtil {
     // endregion
 
     public static void main(String[] args) {
-        LocalDateTime l1 = strToLocalDateTime("2022-06-29 15:31:00");
-        LocalDateTime l2 = strToLocalDateTime("2022-06-30 15:31:00");
-        int compare = compare(l1, l2);
+        LocalDateTime testLocalDateTime1 = strToLocalDateTime("2022-06-29 15:31:00");
+        LocalDateTime testLocalDateTime2 = strToLocalDateTime("2022-06-30 05:31:00");
+        LocalDate testLocalDate1 = strToLocalDate("2022-06-29");
+        // 测试对比
+        int compare = compare(testLocalDateTime1, testLocalDateTime2);
         System.out.println("1 = " + compare);
-
-        l1 = strToLocalDateTime("2022-06-30 15:31:00");
-        l2 = strToLocalDateTime("2022-06-29 15:31:00");
-        compare = compare(l1, l2);
+        compare = compare(testLocalDateTime2, testLocalDateTime1);
         System.out.println("2 = " + compare);
-
-        l1 = strToLocalDateTime("2022-06-30 15:31:00");
-        l2 = strToLocalDateTime("2022-06-30 15:31:00");
-        compare = compare(l1, l2);
-        System.out.println("3 = " + compare);
-
-
+        // 测试加减时间
         LocalDateTime localDateTime = plusDays(-182);
         System.out.println(LocalDateTimeUtil.localDateTimeToStr(localDateTime));
 
+        // 测试时间的对比
         long differentSeconds = differentSeconds("2022-06-30 15:31:00", "2022-06-30 15:32:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
         System.out.println(differentSeconds);
         differentSeconds = differentSeconds("2020-04-23", "2021-04-23", PATTERN_YYYY_MM_DD);
         System.out.println(differentSeconds);
 
-        long differentMinutes = differentMinutes("2022-06-30 15:31:00", "2022-06-30 15:32:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
-        System.out.println(differentMinutes);
-        differentMinutes = differentMinutes("2020-04-23", "2021-04-23", PATTERN_YYYY_MM_DD);
-        System.out.println(differentMinutes);
+        // long differentMinutes = differentMinutes("2022-06-30 15:31:00", "2022-06-30 15:32:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
+        // System.out.println(differentMinutes);
+        // differentMinutes = differentMinutes("2020-04-23", "2021-04-23", PATTERN_YYYY_MM_DD);
+        // System.out.println(differentMinutes);
 
         long differentDays = differentDays("2022-06-30 15:31:00", "2022-07-29 15:31:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
         System.out.println(differentDays);
@@ -887,62 +887,29 @@ public class LocalDateTimeUtil {
         differentMonths = differentDays("2022-07-13", "2023-07-12", PATTERN_YYYY_MM_DD);
         System.out.println(differentMonths);
 
-        System.out.println("今天开始时间：" + todayStartTime());
-        System.out.println("今天结束时间：" + todayEndTime());
-        System.out.println("昨天开始时间：" + yesterdayStartTime());
-        System.out.println("昨天结束时间：" + yesterdayEndTime());
-        System.out.println("最近7天开始时间：" + last7DaysStartTime());
-        System.out.println("最近7天结束时间：" + last7DaysEndTime());
-        System.out.println("最近30天开始时间：" + last30DaysStartTime());
-        System.out.println("最近30天天结束时间：" + last30DaysEndTime());
-        System.out.println("最近一年开始时间：" + last1YearStartTime());
-        System.out.println("最近一年结束时间：" + last1YearEndTime());
-        System.out.println("本周开始时间：" + weekStartTime());
-        System.out.println("本周结束时间：" + weekEndTime());
-        System.out.println("本月开始时间：" + monthStartTime());
-        System.out.println("本月结束时间：" + monthEndTime());
-        System.out.println("本季度开始时间：" + quarterStartTime());
-        System.out.println("本季度结束时间：" + quarterEndTime());
-        System.out.println("本半年开始时间：" + halfYearStartTime());
-        System.out.println("本半年结束时间：" + halfYearEndTime());
-        System.out.println("本年开始时间：" + yearStartTime());
-        System.out.println("本年结束时间：" + yearEndTime());
-        System.out.println("上周开始时间：" + lastWeekStartTime());
-        System.out.println("上周结束时间：" + lastWeekEndTime());
-        System.out.println("上月开始时间：" + lastMonthStartTime());
-        System.out.println("上月结束时间：" + lastMonthEndTime());
-        System.out.println("上季度开始时间：" + lastQuarterStartTime());
-        System.out.println("上季度结束时间：" + lastQuarterEndTime());
-        System.out.println("上半年开始时间：" + lastHalfYearStartTime());
-        System.out.println("上半年结束时间：" + lastHalfYearEndTime());
-        System.out.println("上一年开始时间：" + lastYearStartTime());
-        System.out.println("上一年结束时间：" + lastYearEndTime());
-        System.out.println("下周开始时间：" + nextWeekStartTime());
-        System.out.println("下周结束时间：" + nextWeekEndTime());
-        System.out.println("下月开始时间：" + nextMonthStartTime());
-        System.out.println("下月结束时间：" + nextMonthEndTime());
-        System.out.println("下季度开始时间：" + nextQuarterStartTime());
-        System.out.println("下季度结束时间：" + nextQuarterEndTime());
-        System.out.println("下半年开始时间：" + nextHalfYearStartTime());
-        System.out.println("下半年结束时间：" + nextHalfYearEndTime());
-        System.out.println("下一年开始时间：" + nextYearStartTime());
-        System.out.println("下一年结束时间：" + nextYearEndTime());
-        // 版权声明：本文为CSDN博主「C3Stones」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-        // 原文链接：https://blog.csdn.net/qq_48008521/article/details/116474667
+        System.out.println("LocalDate begin ");
+        LocalDateTime localDateToLocalDateTime = localDateToLocalDateTime(testLocalDate1, LocalTime.MAX);
+        System.out.println(localDateTimeToStr(localDateToLocalDateTime));
+        LocalDateTime localDateToLocalDateTime2359 = localDateToLocalDateTime2359(testLocalDate1);
+        System.out.println(localDateTimeToStr(localDateToLocalDateTime2359));
+        LocalDateTime localDateToLocalDateTime0000 = localDateToLocalDateTime0000(testLocalDate1);
+        System.out.println(localDateTimeToStr(localDateToLocalDateTime0000));
+        System.out.println("LocalDate end ");
 
-        LocalDate localDate = strToLocalDate("2022-08-11");
-        LocalDateTime localDateToLocalDateTime2359 = localDateToLocalDateTime(localDate, LocalTime.MAX);
-        String localDateTimeToStr = localDateTimeToStr(localDateToLocalDateTime2359);
-        System.out.println(localDateTimeToStr);
+        LocalDateTime test1Second00 = localDateTimeSetSecond00(testLocalDateTime1);
+        System.out.println(localDateTimeToStr(test1Second00));
+        LocalDateTime test2Second00 = localDateTimeSetSecond00(testLocalDateTime2);
+        System.out.println(localDateTimeToStr(test2Second00));
 
-        LocalDateTime localDateTime2 = strToLocalDateTime("2022-08-11 12:18:16");
-        LocalDateTime localDateTimeSetSecond00 = localDateTimeSetSecond00(localDateTime2);
-        System.out.println(localDateTimeToStr(localDateTimeSetSecond00));
-        LocalDateTime localDateTimeSetSecond59 = localDateTimeSetSecond59(localDateTime2);
-        System.out.println(localDateTimeToStr(localDateTimeSetSecond59));
+        LocalDateTime test1Second59 = localDateTimeSetSecond59(testLocalDateTime1);
+        System.out.println(localDateTimeToStr(test1Second59));
+        LocalDateTime test2Second59 = localDateTimeSetSecond59(testLocalDateTime2);
+        System.out.println(localDateTimeToStr(test2Second59));
 
-        LocalDateTime localDateTime1 = localDateTimeAddMinutesSetSecond00(localDateTime2, 1);
-        System.out.println(localDateTimeToStr(localDateTime1));
+        LocalDateTime test1AddMinutesSetSecond00 = localDateTimeAddMinutesSetSecond00(testLocalDateTime1, 1);
+        System.out.println(localDateTimeToStr(test1AddMinutesSetSecond00));
+        LocalDateTime test2AddMinutesSetSecond00 = localDateTimeAddMinutesSetSecond00(testLocalDateTime2, 1);
+        System.out.println(localDateTimeToStr(test2AddMinutesSetSecond00));
 
 
     }
