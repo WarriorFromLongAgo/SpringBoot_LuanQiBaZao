@@ -859,14 +859,62 @@ public class LocalDateTimeUtil {
         // 测试下午
         LocalDateTime testLocalDateTime2 = strToLocalDateTime("2022-06-30 05:31:00");
         LocalDate testLocalDate1 = strToLocalDate("2022-06-29");
+
+        // 测试 long date Timestamp LocalDateTime LocalDate localTime
+        LocalDateTime longToLocalDateTime1 = longToLocalDateTime(localDateTimeToLong(testLocalDateTime1));
+        System.out.println(localDateTimeToStr(longToLocalDateTime1));
+        LocalDateTime longToLocalDateTime2 = longToLocalDateTime(localDateTimeToLong(testLocalDateTime2));
+        System.out.println(localDateTimeToStr(longToLocalDateTime2));
+
+        Date date = toDate();
+        System.out.println(toLocalDateTime(date));
+        Date date1 = toDate(testLocalDateTime1);
+        System.out.println(toLocalDateTime(date1));
+        Date date2 = toDate(testLocalDateTime2);
+        System.out.println(toLocalDateTime(date2));
+
+        Timestamp timestamp = toTimestamp();
+        System.out.println(toLocalDateTime(timestamp));
+        Timestamp timestamp1 = toTimestamp(testLocalDateTime1);
+        System.out.println(toLocalDateTime(timestamp1));
+        Timestamp timestamp2 = toTimestamp(testLocalDateTime2);
+        System.out.println(toLocalDateTime(timestamp2));
+
+        // 测试 long date Timestamp LocalDateTime LocalDate localTime
+
         // 测试对比
         int compare = compare(testLocalDateTime1, testLocalDateTime2);
         System.out.println("1 = " + compare);
         compare = compare(testLocalDateTime2, testLocalDateTime1);
         System.out.println("2 = " + compare);
+        // 测试对比
+
+        // 测试 now
+        LocalDateTime now = now();
+        System.out.println(localDateTimeToStr(now));
+        // 测试 now
+
         // 测试加减时间
-        LocalDateTime localDateTime = plusDays(-182);
-        System.out.println(LocalDateTimeUtil.localDateTimeToStr(localDateTime));
+        LocalDateTime plusSeconds1 = plusSeconds(testLocalDateTime1, -1);
+        LocalDateTime plusSeconds2 = plusSeconds(testLocalDateTime1, 1);
+        System.out.println(localDateTimeToStr(testLocalDateTime1));
+        System.out.println(localDateTimeToStr(plusSeconds1));
+        System.out.println(localDateTimeToStr(plusSeconds2));
+
+        LocalDateTime plusMinutes1 = plusMinutes(testLocalDateTime1, -1);
+        LocalDateTime plusMinutes2 = plusMinutes(testLocalDateTime2, 1);
+        System.out.println(localDateTimeToStr(testLocalDateTime1));
+        System.out.println(localDateTimeToStr(plusMinutes1));
+        System.out.println(localDateTimeToStr(plusMinutes2));
+
+        LocalDateTime plusDays1 = plusDays(testLocalDateTime1, -1);
+        LocalDateTime plusDays2 = plusDays(testLocalDateTime2, 1);
+        System.out.println(localDateTimeToStr(testLocalDateTime1));
+        System.out.println(localDateTimeToStr(plusDays1));
+        System.out.println(localDateTimeToStr(plusDays2));
+        // 测试加减时间
+
+
 
         // 测试时间的对比
         long differentSeconds = differentSeconds("2022-06-30 15:31:00", "2022-06-30 15:32:00", PATTERN_YYYY_MM_DD_HH_MM_SS);
