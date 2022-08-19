@@ -1,6 +1,7 @@
 package com.xuegao.luanqibazao_1.jdk8.time;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -397,9 +398,13 @@ public class LocalDateTimeUtil {
     // region 获取入参中，秒的最大值，秒的最小值
     public static LocalDateTime localDateTimeSetSecond00(LocalDateTime inputLocalDateTime) {
         LocalDate localDate = inputLocalDateTime.toLocalDate();
+        // 指定两位整数，
+        DecimalFormat df = new DecimalFormat("00");
         int hour = inputLocalDateTime.getHour();
         int minute = inputLocalDateTime.getMinute();
-        String localTimeStr = hour + ":" + minute + ":" + "00";
+        String formatHour = df.format(hour);
+        String formatMinute = df.format(minute);
+        String localTimeStr = formatHour + ":" + formatMinute + ":" + "00";
         return localDateToLocalDateTime(localDate, strToLocalTime(localTimeStr));
     }
 
@@ -407,7 +412,12 @@ public class LocalDateTimeUtil {
         LocalDate localDate = inputLocalDateTime.toLocalDate();
         int hour = inputLocalDateTime.getHour();
         int minute = inputLocalDateTime.getMinute();
-        String localTimeStr = hour + ":" + minute + ":" + "59";
+        // 指定两位整数
+        DecimalFormat df = new DecimalFormat("00");
+        String formatHour = df.format(hour);
+        String formatMinute = df.format(minute);
+
+        String localTimeStr = formatHour + ":" + formatMinute + ":" + "59";
         return localDateToLocalDateTime(localDate, strToLocalTime(localTimeStr));
     }
 
