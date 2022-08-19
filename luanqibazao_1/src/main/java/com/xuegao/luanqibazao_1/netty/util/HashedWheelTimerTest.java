@@ -17,7 +17,6 @@ public class HashedWheelTimerTest {
         hashedWheelTimer.newTimeout(task -> {
             //注意这里使用异步任务线程池或者开启线程进行订单取消任务的处理
             cancelOrder();
-            hashedWheelTimer.stop();
         }, 10, TimeUnit.SECONDS);
         System.out.println("客户操作结束了");
     }
