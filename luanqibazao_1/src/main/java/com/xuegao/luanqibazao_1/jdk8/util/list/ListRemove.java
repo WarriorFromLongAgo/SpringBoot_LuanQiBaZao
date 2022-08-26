@@ -20,10 +20,22 @@ public class ListRemove {
         // listRemoveTest1();
 
         // listRemoveTest2();
-        listRemoveTest3();
+        // listRemoveTest3();
         // listRemoveTest4();
 
-
+        // List<String> areaList = Lists.newArrayList("1", "2", "3", "4", "5");
+        String a = "1,2,3,4,5";
+        List<String> areaList = Arrays.asList(a.split(","));
+        Iterator<String> iterator = areaList.iterator();
+        int i = 0;
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+            if (i == 1) {
+                iterator.remove();
+                continue;
+            }
+            i++;
+        }
     }
 
     private static void listRemoveTest4() {
