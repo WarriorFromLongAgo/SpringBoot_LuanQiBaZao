@@ -13,6 +13,7 @@ public class TestNumberUtils {
     public static void main(String[] args) {
         extracted2();
         extracted();
+        isDigits();
     }
 
     private static void extracted2() {
@@ -68,5 +69,15 @@ public class TestNumberUtils {
         System.out.println("NumberUtils.toInt(str4) = " + NumberUtils.toInt(str4));
         System.out.println("NumberUtils.isDigits(str4) = " + NumberUtils.isDigits(str4));
         System.out.println("NumberUtils.isParsable(str4) = " + NumberUtils.isParsable(str4));
+    }
+
+
+    private static void isDigits() {
+        System.out.println("======================================");
+        System.out.println("NumberUtils.isDigits(0) = " + NumberUtils.isDigits("0"));
+        System.out.println("NumberUtils.isDigits(-1) = " + NumberUtils.isDigits("-1"));
+        System.out.println("NumberUtils.isDigits(0.1) = " + NumberUtils.isDigits("0.1"));
+        System.out.println("NumberUtils.isDigits(200) = " + NumberUtils.isDigits("200"));
+        System.out.println("NumberUtils.isDigits(200.2) = " + NumberUtils.isDigits("200.2"));
     }
 }
