@@ -47,6 +47,9 @@ public class StringMyUtils {
      * @date 2021/9/12 12:52
      */
     public static String trimSeparatorByMoney(String str) {
+        if (StringUtils.isBlank(str)) {
+            return "0";
+        }
         if (Objects.equals(str, "0")) {
             return "0";
         }
@@ -68,6 +71,9 @@ public class StringMyUtils {
      * @date 2021/9/12 12:52
      */
     public static String trimEndSeparatorByMoney(String str) {
+        if (StringUtils.isBlank(str)) {
+            return "0";
+        }
         if (Objects.equals(str, "0")) {
             return "0";
         }
@@ -141,6 +147,7 @@ public class StringMyUtils {
     }
 
     private static void testTrimSeparatorByMoney() {
+        String money0 = null;
         String money1 = "01";
         String money2 = "001";
         String money3 = "010";
@@ -149,6 +156,7 @@ public class StringMyUtils {
         String money6 = "0100.";
         String money7 = "0100.1";
         String money8 = "0100.10";
+        System.out.println(money0 + " trimSeparatorByMoney = " + trimSeparatorByMoney(money0));
         System.out.println(money1 + " trimSeparatorByMoney = " + trimSeparatorByMoney(money1));
         System.out.println(money2 + " trimSeparatorByMoney = " + trimSeparatorByMoney(money2));
         System.out.println(money3 + " trimSeparatorByMoney = " + trimSeparatorByMoney(money3));
@@ -160,6 +168,7 @@ public class StringMyUtils {
     }
 
     private static void testTrimEndSeparatorByMoney() {
+        String money0 = null;
         String money1 = "1";
         String money2 = "001";
         String money3 = "10";
@@ -168,6 +177,7 @@ public class StringMyUtils {
         String money6 = "100.";
         String money7 = "100.1";
         String money8 = "100.10";
+        System.out.println(money0 + " trimSeparatorByMoney = " + trimSeparatorByMoney(money0));
         System.out.println(money1 + " trimEndSeparatorByMoney = " + trimEndSeparatorByMoney(money1));
         System.out.println(money2 + " trimEndSeparatorByMoney = " + trimEndSeparatorByMoney(money2));
         System.out.println(money3 + " trimEndSeparatorByMoney = " + trimEndSeparatorByMoney(money3));
