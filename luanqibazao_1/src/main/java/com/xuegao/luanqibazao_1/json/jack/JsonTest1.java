@@ -1,12 +1,12 @@
 package com.xuegao.luanqibazao_1.json.jack;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xuegao.luanqibazao_1.domain.JackSonTest;
 
 public class JsonTest1 {
@@ -39,7 +39,7 @@ public class JsonTest1 {
     // 在 getter 上使用 @JsonFormat 注解。
     // GMT+8 是指格林尼治的标准时间，在加上八个小时表示你现在所在时区的时间
     // @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    // 可以通过 configure() 方法忽略掉这些“无法识别”的字段。
+    // 可以通过 configure() 方法忽略掉这些“无法识别”的字段。....json比对象字段多，那么直接过滤掉就行了
     // mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     // 在序列化时忽略值为 null 的属性
 // mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
