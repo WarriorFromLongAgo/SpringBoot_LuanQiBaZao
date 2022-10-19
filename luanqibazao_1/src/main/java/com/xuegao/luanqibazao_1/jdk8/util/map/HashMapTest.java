@@ -18,16 +18,25 @@ public class HashMapTest {
         map.put("1", "1");
         map.put("2", "2");
         map.put("3", "3");
+        Map<String, String> mapRemove = Maps.newHashMap();
+        // mapRemove.put("1", "1");
+        mapRemove.put("2", "2");
+        mapRemove.put("3", "3");
 
         String remove = map.remove("1");
         System.out.println(remove);
 
+        // Exception in thread "main" java.util.ConcurrentModificationException
+        // for (Map.Entry<String, String> stringStringEntry : map.entrySet()) {
+        //     map.remove(stringStringEntry.getKey());
+        // }
 
-        for (Map.Entry<String, String> stringStringEntry : map.entrySet()) {
-            map.remove(stringStringEntry.getKey());
-        }
         System.out.println(map);
-        map.forEach((s, s2) -> map.remove(s));
+        // Exception in thread "main" java.util.ConcurrentModificationException
+        // map.forEach((s, s2) -> map.remove(s));
+
+
+        mapRemove.forEach((s, s2) -> map.remove(s));
         System.out.println(map);
     }
 

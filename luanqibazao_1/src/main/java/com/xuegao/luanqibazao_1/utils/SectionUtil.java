@@ -1,13 +1,17 @@
 package com.xuegao.luanqibazao_1.utils;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SectionUtil {
     public static void main(String[] args) {
@@ -77,6 +81,54 @@ public class SectionUtil {
         }
         // log.info("[SectionUtil][getSectionValue][没有匹配到数据][inputValue={}][sectionDefineList={}]", inputValue, JsonUtils.deserializer(sectionDefineList));
         return BigDecimal.ZERO;
+    }
+
+
+    /**
+     * toRangeList
+     *
+     * @param sectionDefineList:
+     * @return java.util.List<com.google.common.collect.Range < java.math.BigDecimal>>
+     * @author xuegao
+     * @date 2022/9/22 19:34
+     */
+    public static Map<String, Range<BigDecimal>> toRangeMap(List<CheckSectionDefine> sectionDefineList) {
+        if (ObjectUtils.isEmpty(sectionDefineList)) {
+            return Maps.newHashMap();
+        }
+        Map<String, Range<BigDecimal>> rangeMap = new HashMap<>(sectionDefineList.size());
+        for (CheckSectionDefine sectionDefine : sectionDefineList) {
+            String sectionKey = sectionDefine.getSectionKey();
+            // false = (, true = [
+            boolean leftFlag = false;
+            // false = (, true = [
+            boolean rightFlag = false;
+            if (sectionKey.startsWith("[")) {
+                leftFlag = true;
+            }
+            if (sectionKey.endsWith("]")) {
+                rightFlag = true;
+            }
+
+            BigDecimal beginKey = sectionDefine.getBeginKey();
+            BigDecimal endKey = sectionDefine.getEndKey();
+            Range<BigDecimal> range;
+            if (leftFlag && rightFlag) {
+                // [a,b] = { x | a <= x <= b}
+                range = Range.closed(beginKey, endKey);
+            } else if (!leftFlag && !rightFlag) {
+                // (a,b) = { x | a < x < b}
+                range = Range.open(beginKey, endKey);
+            } else if (!leftFlag) {
+                // (a,b] = { x | a < x <= b}
+                range = Range.openClosed(beginKey, endKey);
+            } else {
+                // [a,b) = { x | a <= x < b}
+                range = Range.closedOpen(beginKey, endKey);
+            }
+            rangeMap.put(sectionKey, range);
+        }
+        return rangeMap;
     }
 
     @Getter
