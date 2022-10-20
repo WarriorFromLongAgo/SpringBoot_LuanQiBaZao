@@ -154,6 +154,14 @@
             <artifactId>java-object-diff</artifactId>
             <version>0.95</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.javers/javers-core -->
+        <dependency>
+            <groupId>org.javers</groupId>
+            <artifactId>javers-core</artifactId>
+            <version>6.7.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

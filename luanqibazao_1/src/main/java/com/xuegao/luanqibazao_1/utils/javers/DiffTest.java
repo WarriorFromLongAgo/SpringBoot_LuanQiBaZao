@@ -1,24 +1,17 @@
-package com.xuegao.luanqibazao_1.utils.objectdiff;
+package com.xuegao.luanqibazao_1.utils.javers;
 
 import com.xuegao.luanqibazao_1.domain.ObjectDiff;
 import com.xuegao.luanqibazao_1.domain.UserInfo;
-import de.danielbechler.diff.ObjectDifferBuilder;
-import de.danielbechler.diff.node.DiffNode;
+import org.javers.core.Javers;
+import org.javers.core.JaversBuilder;
+import org.javers.core.diff.Diff;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public class test1 {
-
-    // <dependency>
-    //         <groupId>de.danielbechler</groupId>
-    //         <artifactId>java-object-diff</artifactId>
-    //         <version>0.95</version>
-    //     </dependency>
-
-
+public class DiffTest {
     public static void main(String[] args) {
+
         ObjectDiff workingObject = new ObjectDiff();
         workingObject.setId(1);
         workingObject.setName("1");
@@ -39,11 +32,15 @@ public class test1 {
         userInfoList2.add(userInfo2);
         baseObject.setUserInfoList(userInfoList2);
 
-        DiffNode root = ObjectDifferBuilder.buildDefault().compare(workingObject, baseObject);
-        Set<String> categories = root.getCategories();
-        System.out.println(root);
+
+        Javers javers = JaversBuilder.javers().build();
+
+
+        Diff diff = javers.compare(workingObject, baseObject);
+        boolean b = diff.hasChanges();
+        System.out.println(diff);
+        System.out.println(b);
+
 
     }
-
-
 }
