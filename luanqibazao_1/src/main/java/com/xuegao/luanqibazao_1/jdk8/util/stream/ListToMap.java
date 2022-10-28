@@ -23,7 +23,7 @@ public class ListToMap {
     private static final Logger log = LoggerFactory.getLogger(ListToMap.class);
 
     public static void main(String[] args) {
-        listToMap2();
+        extracted();
     }
 
     private static void extracted() {
@@ -36,9 +36,12 @@ public class ListToMap {
         UserInfo userInfo = new UserInfo();
         userInfo.setId("1");
         userInfoList.add(userInfo);
-        System.out.println(userInfoList);
+        System.out.println(JSON.toJSONString(userInfoList));
         Map<String, UserInfo> collect = userInfoList.stream().collect(Collectors.toMap(UserInfo::getId, a -> a, (k1, k2) -> k1));
-        System.out.println(collect);
+        System.out.println(JSON.toJSONString(collect));
+        // Exception in thread "main" java.lang.IllegalStateException: Duplicate key com.xuegao.luanqibazao_1.domain.UserInfo@6e3c1e69
+        Map<String, UserInfo> collect2 = userInfoList.stream().collect(Collectors.toMap(UserInfo::getId, Function.identity()));
+        System.out.println(JSON.toJSONString(collect2));
     }
 
     public static void listToMap2() {
