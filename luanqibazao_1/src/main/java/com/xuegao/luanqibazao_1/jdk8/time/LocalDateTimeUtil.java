@@ -1,12 +1,12 @@
 package com.xuegao.luanqibazao_1.jdk8.time;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Date;
 
 public class LocalDateTimeUtil {
     public static final String PATTERN_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
@@ -165,7 +165,8 @@ public class LocalDateTimeUtil {
     }
 
     public static Date toDate(LocalDateTime localDateTime) {
-        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        java.util.Date from = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        return new Date(from.getTime());
     }
 
     public static Timestamp toTimestamp() {
@@ -177,13 +178,11 @@ public class LocalDateTimeUtil {
     }
 
     public static LocalDateTime toLocalDateTime() {
-        return toLocalDateTime(new Date());
+        return toLocalDateTime(new Date(System.currentTimeMillis()));
     }
 
     public static LocalDateTime toLocalDateTime(Date date) {
-        return date.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime();
+        return new java.util.Date(date.getTime()).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     // endregion
@@ -873,12 +872,9 @@ public class LocalDateTimeUtil {
         Date date2 = toDate(testLocalDateTime2);
         System.out.println(toLocalDateTime(date2));
 
-        Timestamp timestamp = toTimestamp();
-        System.out.println(toLocalDateTime(timestamp));
-        Timestamp timestamp1 = toTimestamp(testLocalDateTime1);
-        System.out.println(toLocalDateTime(timestamp1));
-        Timestamp timestamp2 = toTimestamp(testLocalDateTime2);
-        System.out.println(toLocalDateTime(timestamp2));
+        System.out.println(toLocalDateTime(date));
+        System.out.println(toLocalDateTime(date1));
+        System.out.println(toLocalDateTime(date2));
 
         // 测试 long date Timestamp LocalDateTime LocalDate localTime
 
@@ -913,7 +909,6 @@ public class LocalDateTimeUtil {
         System.out.println(localDateTimeToStr(plusDays1));
         System.out.println(localDateTimeToStr(plusDays2));
         // 测试加减时间
-
 
 
         // 测试时间的对比
