@@ -8,7 +8,7 @@ import org.apache.commons.lang3.ObjectUtils;
  */
 public class TestObjectUtils {
 
-    public static void (){
+    public static void a(){
         // ObjectUtils.allNotNull()
 
 
